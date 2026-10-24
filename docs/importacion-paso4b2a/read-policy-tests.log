@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: preflight project mismatch is rejected before requests
+ok 1 - preflight project mismatch is rejected before requests
+  ---
+  duration_ms: 1.1103
+  type: 'test'
+  ...
+# Subtest: successful bounded reads never become authorization; no write API is reachable
+ok 2 - successful bounded reads never become authorization; no write API is reachable
+  ---
+  duration_ms: 8.822
+  type: 'test'
+  ...
+# Subtest: insufficient IAM stops immediately without any document requests or writes
+ok 3 - insufficient IAM stops immediately without any document requests or writes
+  ---
+  duration_ms: 0.366
+  type: 'test'
+  ...
+# Subtest: signed-in CLI identity does not bypass email or application profile mismatch
+ok 4 - signed-in CLI identity does not bypass email or application profile mismatch
+  ---
+  duration_ms: 2.1543
+  type: 'test'
+  ...
+# Subtest: USER and conflicting Auth claims stop before inventory sampling
+ok 5 - USER and conflicting Auth claims stop before inventory sampling
+  ---
+  duration_ms: 2.0224
+  type: 'test'
+  ...
+# Subtest: active or malformed control stops without trying to unlock it
+ok 6 - active or malformed control stops without trying to unlock it
+  ---
+  duration_ms: 1.6228
+  type: 'test'
+  ...
+# Subtest: cap prevents broad queries and arbitrary fields, including users listing
+ok 7 - cap prevents broad queries and arbitrary fields, including users listing
+  ---
+  duration_ms: 0.5087
+  type: 'test'
+  ...
+# Subtest: foreign ruleset is not followed and transport errors stop preflight
+ok 8 - foreign ruleset is not followed and transport errors stop preflight
+  ---
+  duration_ms: 0.3697
+  type: 'test'
+  ...
+# Subtest: sample compatibility keeps stock/remaining separate and duplicate checks bounded
+ok 9 - sample compatibility keeps stock/remaining separate and duplicate checks bounded
+  ---
+  duration_ms: 2.5994
+  type: 'test'
+  ...
+# Subtest: malformed schema and legacy formalization never imply reconciled stock
+ok 10 - malformed schema and legacy formalization never imply reconciled stock
+  ---
+  duration_ms: 0.5196
+  type: 'test'
+  ...
+# Subtest: reconciliation PENDIENTE, Excel before confirmation stays blocked
+ok 11 - reconciliation PENDIENTE, Excel before confirmation stays blocked
+  ---
+  duration_ms: 0.4277
+  type: 'test'
+  ...
+# Subtest: reconciliation PENDIENTE, Excel after confirmation stays blocked
+ok 12 - reconciliation PENDIENTE, Excel after confirmation stays blocked
+  ---
+  duration_ms: 0.1153
+  type: 'test'
+  ...
+# Subtest: reconciliation COMPLETADO, Excel before confirmation stays blocked
+ok 13 - reconciliation COMPLETADO, Excel before confirmation stays blocked
+  ---
+  duration_ms: 0.0579
+  type: 'test'
+  ...
+# Subtest: reconciliation COMPLETADO, Excel after confirmation stays blocked
+ok 14 - reconciliation COMPLETADO, Excel after confirmation stays blocked
+  ---
+  duration_ms: 0.055
+  type: 'test'
+  ...
+# Subtest: reconciliation SIN_VERIFICAR, Excel before confirmation stays blocked
+ok 15 - reconciliation SIN_VERIFICAR, Excel before confirmation stays blocked
+  ---
+  duration_ms: 0.0422
+  type: 'test'
+  ...
+# Subtest: reconciliation SIN_VERIFICAR, Excel after confirmation stays blocked
+ok 16 - reconciliation SIN_VERIFICAR, Excel after confirmation stays blocked
+  ---
+  duration_ms: 0.0366
+  type: 'test'
+  ...
+# Subtest: manual/fake verification flags cannot enable reconciliation or arithmetic adjustments
+ok 17 - manual/fake verification flags cannot enable reconciliation or arithmetic adjustments
+  ---
+  duration_ms: 0.093
+  type: 'test'
+  ...
+# Subtest: real 567-issue dossier keeps all rows, source literals and global completeness blocks
+ok 18 - real 567-issue dossier keeps all rows, source literals and global completeness blocks
+  ---
+  duration_ms: 9.8344
+  type: 'test'
+  ...
+# Subtest: issue product scope differs from unidentifiable file scope without authorizing a subset
+ok 19 - issue product scope differs from unidentifiable file scope without authorizing a subset
+  ---
+  duration_ms: 0.2487
+  type: 'test'
+  ...
+# Subtest: proposed IAM grants no destructive privilege and preflight role remains read-only
+ok 20 - proposed IAM grants no destructive privilege and preflight role remains read-only
+  ---
+  duration_ms: 1.4435
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 98.2159

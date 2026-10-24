@@ -1,0 +1,14 @@
+{
+  "productos": {
+    "status": 400,
+    "data": {
+      "error": "INVALID_ARGUMENT"
+    }
+  },
+  "existencias": {
+    "status": 400,
+    "data": {
+      "error": "INVALID_ARGUMENT"
+    }
+  }
+}

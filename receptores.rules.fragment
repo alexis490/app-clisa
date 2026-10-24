@@ -1,0 +1,7 @@
+// Añadir dentro de match /databases/{database}/documents.
+// Usa cuentaActiva(), definida en las reglas existentes de CLISA.
+// No reemplazar las demás reglas con este fragmento.
+match /receptores/{receptorId} {
+  allow read: if cuentaActiva();
+  allow create, update, delete: if false;
+}

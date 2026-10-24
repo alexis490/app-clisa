@@ -1,0 +1,188 @@
+
+> test:http
+> node --test --test-concurrency=1 test/http.test.mjs
+
+TAP version 13
+# Subtest: HTTP configuration rejects write activation, emulator injection, partial credentials and invalid limits
+ok 1 - HTTP configuration rejects write activation, emulator injection, partial credentials and invalid limits
+  ---
+  duration_ms: 1.5701
+  type: 'test'
+  ...
+# Subtest: HTTP health is public, lightweight and does not reveal Firebase configuration or framework
+ok 2 - HTTP health is public, lightweight and does not reveal Firebase configuration or framework
+  ---
+  duration_ms: 34.3194
+  type: 'test'
+  ...
+# Subtest: HTTP status rejects absent token, wrong bearer syntax and query token
+ok 3 - HTTP status rejects absent token, wrong bearer syntax and query token
+  ---
+  duration_ms: 13.2177
+  type: 'test'
+  ...
+# Subtest: HTTP auth/invalid-id-token is rejected without leaking SDK errors
+ok 4 - HTTP auth/invalid-id-token is rejected without leaking SDK errors
+  ---
+  duration_ms: 6.0024
+  type: 'test'
+  ...
+# Subtest: HTTP auth/id-token-expired is rejected without leaking SDK errors
+ok 5 - HTTP auth/id-token-expired is rejected without leaking SDK errors
+  ---
+  duration_ms: 5.5368
+  type: 'test'
+  ...
+# Subtest: HTTP auth/id-token-revoked is rejected without leaking SDK errors
+ok 6 - HTTP auth/id-token-revoked is rejected without leaking SDK errors
+  ---
+  duration_ms: 4.8473
+  type: 'test'
+  ...
+# Subtest: HTTP USER cannot use administrative endpoints
+ok 7 - HTTP USER cannot use administrative endpoints
+  ---
+  duration_ms: 3.9318
+  type: 'test'
+  ...
+# Subtest: HTTP blocked cannot use administrative endpoints
+ok 8 - HTTP blocked cannot use administrative endpoints
+  ---
+  duration_ms: 5.9838
+  type: 'test'
+  ...
+# Subtest: HTTP disabled cannot use administrative endpoints
+ok 9 - HTTP disabled cannot use administrative endpoints
+  ---
+  duration_ms: 4.3359
+  type: 'test'
+  ...
+# Subtest: HTTP stale-role cannot use administrative endpoints
+ok 10 - HTTP stale-role cannot use administrative endpoints
+  ---
+  duration_ms: 4.3862
+  type: 'test'
+  ...
+# Subtest: HTTP missing-profile cannot use administrative endpoints
+ok 11 - HTTP missing-profile cannot use administrative endpoints
+  ---
+  duration_ms: 4.5012
+  type: 'test'
+  ...
+# Subtest: HTTP incomplete-claims cannot use administrative endpoints
+ok 12 - HTTP incomplete-claims cannot use administrative endpoints
+  ---
+  duration_ms: 3.9819
+  type: 'test'
+  ...
+# Subtest: HTTP active ADMIN sees only safe capabilities
+ok 13 - HTTP active ADMIN sees only safe capabilities
+  ---
+  duration_ms: 3.7392
+  type: 'test'
+  ...
+# Subtest: HTTP active SUPER_ADMIN sees only safe capabilities
+ok 14 - HTTP active SUPER_ADMIN sees only safe capabilities
+  ---
+  duration_ms: 4.4321
+  type: 'test'
+  ...
+# Subtest: HTTP execution, recovery, stock and classification writes have no routes
+ok 15 - HTTP execution, recovery, stock and classification writes have no routes
+  ---
+  duration_ms: 11.076
+  type: 'test'
+  ...
+# Subtest: HTTP unconfigured Firebase fails closed while health remains available
+ok 16 - HTTP unconfigured Firebase fails closed while health remains available
+  ---
+  duration_ms: 4.6761
+  type: 'test'
+  ...
+# Subtest: HTTP Firebase backend failure is generic and logs never contain credentials or URLs
+ok 17 - HTTP Firebase backend failure is generic and logs never contain credentials or URLs
+  ---
+  duration_ms: 3.7903
+  type: 'test'
+  ...
+# Subtest: HTTP IP/global rate limits apply before expensive Firebase reads and ignore untrusted forwarded IP
+ok 18 - HTTP IP/global rate limits apply before expensive Firebase reads and ignore untrusted forwarded IP
+  ---
+  duration_ms: 8.9682
+  type: 'test'
+  ...
+# Subtest: HTTP UID rate limit cannot be bypassed using multiple source IPs
+ok 19 - HTTP UID rate limit cannot be bypassed using multiple source IPs
+  ---
+  duration_ms: 4.4919
+  type: 'test'
+  ...
+# Subtest: HTTP requires HTTPS behind the configured proxy and does not trust forwarded protocol without a proxy
+ok 20 - HTTP requires HTTPS behind the configured proxy and does not trust forwarded protocol without a proxy
+  ---
+  duration_ms: 5.4775
+  type: 'test'
+  ...
+# Subtest: HTTP authenticates before reading uploaded documents and rejects unsupported content encoding
+ok 21 - HTTP authenticates before reading uploaded documents and rejects unsupported content encoding
+  ---
+  duration_ms: 10.7431
+  type: 'test'
+  ...
+# Subtest: HTTP reuses the administrative compiler in a worker without writes or persistent upload
+ok 22 - HTTP reuses the administrative compiler in a worker without writes or persistent upload
+  ---
+  duration_ms: 524.1049
+  type: 'test'
+  ...
+# Subtest: HTTP caller cannot prepare a dossier belonging to another authenticated user
+ok 23 - HTTP caller cannot prepare a dossier belonging to another authenticated user
+  ---
+  duration_ms: 510.867
+  type: 'test'
+  ...
+# Subtest: HTTP source hash mismatch, malformed multipart and extra fields are rejected
+ok 24 - HTTP source hash mismatch, malformed multipart and extra fields are rejected
+  ---
+  duration_ms: 508.6503
+  type: 'test'
+  ...
+# Subtest: HTTP maximum Excel/contract upload sizes are enforced while streaming
+ok 25 - HTTP maximum Excel/contract upload sizes are enforced while streaming
+  ---
+  duration_ms: 12.0702
+  type: 'test'
+  ...
+# Subtest: HTTP hung authentication is bounded and maintains pending-work concurrency protection
+ok 26 - HTTP hung authentication is bounded and maintains pending-work concurrency protection
+  ---
+  duration_ms: 45.7025
+  type: 'test'
+  ...
+# Subtest: HTTP CPU-bound preparation has a hard worker timeout without executing inventory
+ok 27 - HTTP CPU-bound preparation has a hard worker timeout without executing inventory
+  ---
+  duration_ms: 30.3655
+  type: 'test'
+  ...
+# Subtest: HTTP only one Excel proposal may occupy memory/CPU concurrently
+ok 28 - HTTP only one Excel proposal may occupy memory/CPU concurrently
+  ---
+  duration_ms: 508.3304
+  type: 'test'
+  ...
+# Subtest: HTTP server uses process PORT, exposes health without secrets and exits when write activation is attempted
+ok 29 - HTTP server uses process PORT, exposes health without secrets and exits when write activation is attempted
+  ---
+  duration_ms: 1569.8796
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4652.8128

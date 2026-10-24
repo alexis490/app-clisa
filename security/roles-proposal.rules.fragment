@@ -1,0 +1,92 @@
+// PROPUESTA PARA REVISAR, NO PUBLICADA. No es un ruleset completo.
+// Basada en Texto pegado.txt, no en las reglas descargadas de producción.
+// Dentro de match /databases/{database}/documents:
+// 1. Conservar autenticado() y miUsuario() existentes.
+// 2. Añadir rolEfectivo() y reemplazar los otros helpers indicados aquí.
+// 3. Reemplazar el bloque /usuarios completo; NO dejar allow read/update antiguos.
+// 4. Conservar TODOS los demás bloques y validaciones atómicas de inventario.
+
+// Sin claim role solo existe acceso básico. Nunca se deduce ADMIN del perfil.
+function rolEfectivo() {
+  return request.auth.token.get("role", "USER");
+}
+
+function rolValido() {
+  return autenticado() && (
+    (rolEfectivo() == "USER" && (
+      request.auth.token.keys().hasAny(["role"])
+      || (request.auth.token.get("admin", false) == false
+        && request.auth.token.get("superAdmin", false) == false)
+    ))
+    || (rolEfectivo() == "ADMIN" && request.auth.token.get("admin", false) == true)
+    || (rolEfectivo() == "SUPER_ADMIN"
+      && request.auth.token.get("admin", false) == true
+      && request.auth.token.get("superAdmin", false) == true)
+  );
+}
+
+function esAdmin() {
+  return autenticado()
+    && rolEfectivo() in ["ADMIN", "SUPER_ADMIN"]
+    && request.auth.token.get("admin", false) == true;
+}
+
+function esSuperAdmin() {
+  return autenticado()
+    && rolEfectivo() == "SUPER_ADMIN"
+    && request.auth.token.get("admin", false) == true
+    && request.auth.token.get("superAdmin", false) == true;
+}
+
+function cuentaActiva() {
+  return rolValido()
+    && miUsuario().data.estado == "ACTIVO"
+    && miUsuario().data.role == rolEfectivo();
+}
+
+match /usuarios/{userId} {
+  // Leer SOLO el perfil propio aunque falte o esté bloqueado no da acceso al inventario.
+  allow get: if (autenticado() && request.auth.uid == userId)
+    || (cuentaActiva() && esSuperAdmin());
+  allow list: if cuentaActiva() && esSuperAdmin();
+
+  // Create solo se aplica si NO existe. Nunca reactiva perfiles existentes.
+  // No reconstruir como USER una identidad administrativa sin perfil.
+  allow create: if rolValido()
+    && rolEfectivo() == "USER"
+    && request.auth.uid == userId
+    && request.resource.data.uid == request.auth.uid
+    && request.resource.data.role == "USER"
+    && request.resource.data.estado == "ACTIVO"
+    && request.resource.data.keys().hasAll([
+      "uid", "email", "displayName", "role", "estado", "creadoEn"
+    ])
+    && request.resource.data.keys().hasOnly([
+      "uid", "email", "displayName", "profileImageUri", "role", "estado", "creadoEn"
+    ])
+    && request.resource.data.email == request.auth.token.get("email", "")
+    && request.resource.data.email is string
+    && request.resource.data.email.size() > 0
+    && request.resource.data.displayName is string
+    && request.resource.data.displayName.size() > 0
+    && request.resource.data.creadoEn == request.time
+    && (!request.resource.data.keys().hasAny(["profileImageUri"])
+      || request.resource.data.profileImageUri is string);
+
+  // Propuesta anterior conservada: Android solo cambia estado de otras cuentas
+  // USER/ADMIN. Roles y cuentas SUPER_ADMIN quedan fuera de esta vía.
+  allow update: if cuentaActiva()
+    && esSuperAdmin()
+    && request.auth.uid != userId
+    && resource.data.role in ["USER", "ADMIN"]
+    && request.resource.data.diff(resource.data).affectedKeys()
+         .hasOnly(["estado", "actualizadoEn"])
+    && request.resource.data.estado in ["ACTIVO", "BLOQUEADO"]
+    && request.resource.data.actualizadoEn == request.time;
+
+  allow delete: if false;
+}
+
+// No modificar SALIDA, getAfter(), stock, ultimaSalidaId ni campos de registros.
+// productos/existencias/registros continúan sujetos a cuentaActiva() y a sus
+// validaciones existentes. USER necesita leerlos para salidas e historial.

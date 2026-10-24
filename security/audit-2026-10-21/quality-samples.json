@@ -1,0 +1,148 @@
+{
+  "ACC00009730": {
+    "status": 200,
+    "data": [
+      {
+        "document": {
+          "name": "projects/empresa-clisa/databases/(default)/documents/existencias/DTX_64GB_ACC00009730_b82775b9b80004",
+          "fields": {
+            "codigo": {
+              "stringValue": "ACC00009730"
+            },
+            "estado": {
+              "stringValue": "SIN_STOCK"
+            },
+            "filaOrigen": {
+              "integerValue": "7137"
+            },
+            "productoId": {
+              "stringValue": "DTX_64GB"
+            },
+            "codigoProducto": {
+              "stringValue": "DTX/64GB"
+            },
+            "nombreProducto": {
+              "stringValue": "Memoria Flash USB Kingston DataTraveler Exodia 64GB, USB 3.2 Gen 1"
+            },
+            "cantidad": {
+              "integerValue": "0"
+            },
+            "actualizadoEn": {
+              "timestampValue": "2026-10-04T04:39:04.617Z"
+            }
+          },
+          "createTime": "2026-09-26T00:48:57.125944Z",
+          "updateTime": "2026-10-04T04:39:04.663287Z"
+        },
+        "readTime": "2026-10-21T19:37:58.216513Z"
+      },
+      {
+        "document": {
+          "name": "projects/empresa-clisa/databases/(default)/documents/existencias/DTX_64GB_ACC00009730_e6759643aaf9c4",
+          "fields": {
+            "codigo": {
+              "stringValue": "ACC00009730"
+            },
+            "estado": {
+              "stringValue": "SIN_STOCK"
+            },
+            "filaOrigen": {
+              "integerValue": "7138"
+            },
+            "productoId": {
+              "stringValue": "DTX_64GB"
+            },
+            "cantidad": {
+              "integerValue": "0"
+            },
+            "codigoProducto": {
+              "stringValue": "DTX/64GB"
+            },
+            "actualizadoEn": {
+              "timestampValue": "2026-09-26T00:48:56.529Z"
+            },
+            "nombreProducto": {
+              "stringValue": "Memoria Flash USB Kingston DataTraveler Exodia 64GB, USB 3.2 Gen 1"
+            }
+          },
+          "createTime": "2026-09-26T00:48:57.125944Z",
+          "updateTime": "2026-09-26T00:48:57.125944Z"
+        },
+        "readTime": "2026-10-21T19:37:58.216513Z"
+      }
+    ]
+  },
+  "ACC00031673": {
+    "status": 200,
+    "data": [
+      {
+        "document": {
+          "name": "projects/empresa-clisa/databases/(default)/documents/existencias/1VV22AL_ACC00031673_7a545a35ae408a",
+          "fields": {
+            "codigo": {
+              "stringValue": "ACC00031673"
+            },
+            "estado": {
+              "stringValue": "DISPONIBLE"
+            },
+            "filaOrigen": {
+              "integerValue": "605"
+            },
+            "productoId": {
+              "stringValue": "1VV22AL"
+            },
+            "cantidad": {
+              "integerValue": "1"
+            },
+            "codigoProducto": {
+              "stringValue": "1VV22AL"
+            },
+            "actualizadoEn": {
+              "timestampValue": "2026-09-26T00:48:42.874Z"
+            },
+            "nombreProducto": {
+              "stringValue": "Botella de Tinta HP GT53, Negro 90ml (1VV22AL) Caja."
+            }
+          },
+          "createTime": "2026-09-26T00:48:43.385237Z",
+          "updateTime": "2026-09-26T00:48:43.385237Z"
+        },
+        "readTime": "2026-10-21T19:37:58.541470Z"
+      },
+      {
+        "document": {
+          "name": "projects/empresa-clisa/databases/(default)/documents/existencias/TE-1314G_ACC00031673_b7f9707133c0f4",
+          "fields": {
+            "codigo": {
+              "stringValue": "ACC00031673"
+            },
+            "estado": {
+              "stringValue": "SIN_STOCK"
+            },
+            "filaOrigen": {
+              "integerValue": "18933"
+            },
+            "productoId": {
+              "stringValue": "TE-1314G"
+            },
+            "cantidad": {
+              "integerValue": "0"
+            },
+            "codigoProducto": {
+              "stringValue": "TE-1314G"
+            },
+            "actualizadoEn": {
+              "timestampValue": "2026-09-26T00:49:21.227Z"
+            },
+            "nombreProducto": {
+              "stringValue": "Case Gamer Teros TE-1314G, Mid Tower, USB 3.0 / USB 2.0, Audio, Ventilador ARGB, Negro."
+            }
+          },
+          "createTime": "2026-09-26T00:49:21.905091Z",
+          "updateTime": "2026-09-26T00:49:21.905091Z"
+        },
+        "readTime": "2026-10-21T19:37:58.541470Z"
+      }
+    ]
+  }
+}

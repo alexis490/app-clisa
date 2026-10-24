@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-10-21T19:32:01.670Z",
+  "project": "empresa-clisa",
+  "authMode": "Firebase CLI OAuth; management metadata only",
+  "release": {
+    "status": 200,
+    "data": {
+      "name": "projects/empresa-clisa/releases/cloud.firestore",
+      "rulesetName": "projects/empresa-clisa/rulesets/fa1be2b3-bfde-47d1-8758-a4ef1c43cf91",
+      "createTime": "2026-04-23T15:08:35.136508Z",
+      "updateTime": "2026-10-20T00:20:39.901234Z"
+    }
+  },
+  "rulesetStatus": 200,
+  "rulesetCreated": "2026-10-20T00:20:39.399183Z",
+  "files": [
+    {
+      "sourceName": "firestore.rules",
+      "savedAs": "deployed-0-firestore.rules",
+      "sha256": "45f9f43640e970f740abfa7588ddbc8dd9b9720720f7da7d620d8481cacd063c"
+    }
+  ],
+  "localCandidates": [
+    {
+      "local": "security/firestore-user-signup.proposed.rules",
+      "sha256": "45f9f43640e970f740abfa7588ddbc8dd9b9720720f7da7d620d8481cacd063c",
+      "matchesDeployed": true
+    },
+    {
+      "local": "security/roles-proposal.rules.fragment",
+      "sha256": "0fba6abcc50a376421e7d067477d6a4adbc9b87c553c14a0bff9e13ecd877a29",
+      "matchesDeployed": false
+    }
+  ],
+  "database": {
+    "status": 200,
+    "data": {
+      "name": "projects/empresa-clisa/databases/(default)",
+      "uid": "728b2d9c-f5b4-4973-8995-b4e895adb663",
+      "createTime": "2026-04-23T15:08:32.272403Z",
+      "updateTime": "2026-04-23T15:08:32.272403Z",
+      "locationId": "nam5",
+      "type": "FIRESTORE_NATIVE",
+      "concurrencyMode": "PESSIMISTIC",
+      "versionRetentionPeriod": "3600s",
+      "earliestVersionTime": "2026-10-21T18:32:04.073734Z",
+      "appEngineIntegrationMode": "DISABLED",
+      "keyPrefix": "s",
+      "pointInTimeRecoveryEnablement": "POINT_IN_TIME_RECOVERY_DISABLED",
+      "deleteProtectionState": "DELETE_PROTECTION_DISABLED",
+      "databaseEdition": "STANDARD",
+      "freeTier": true,
+      "realtimeUpdatesMode": "REALTIME_UPDATES_MODE_ENABLED",
+      "etag": "IJillersy5cDMIWMsuChhJQD"
+    }
+  },
+  "billing": {
+    "status": 200,
+    "data": {
+      "billingEnabled": false
+    }
+  },
+  "indexes": {
+    "status": 400,
+    "data": {
+      "error": "INVALID_ARGUMENT"
+    }
+  }
+}

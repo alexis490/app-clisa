@@ -1,0 +1,369 @@
+i  emulators: Starting emulators: auth, firestore
+i  emulators: Detected demo project ID "demo-clisa-sync-4b1", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
++  firestore: Firestore Emulator was started in standard edition.
++  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: npm.cmd test
+
+> test
+> node --test --test-concurrency=1 test/*.test.mjs
+
+TAP version 13
+# Subtest: 01 creates product + deterministic existence in one unit, with journal/checkpoint
+ok 1 - 01 creates product + deterministic existence in one unit, with journal/checkpoint
+  ---
+  duration_ms: 1963.3155
+  type: 'test'
+  ...
+# Subtest: 02 updates individual quantity and stock together, preserves metadata and cantidadRestante
+ok 2 - 02 updates individual quantity and stock together, preserves metadata and cantidadRestante
+  ---
+  duration_ms: 409.473
+  type: 'test'
+  ...
+# Subtest: 03 unchanged operations cause zero writes and no lock/job
+ok 3 - 03 unchanged operations cause zero writes and no lock/job
+  ---
+  duration_ms: 114.9799
+  type: 'test'
+  ...
+# Subtest: 04 duplicate sku in source is not fused or selected
+ok 4 - 04 duplicate sku in source is not fused or selected
+  ---
+  duration_ms: 86.6186
+  type: 'test'
+  ...
+# Subtest: 04 duplicate serial in source is not fused or selected
+ok 5 - 04 duplicate serial in source is not fused or selected
+  ---
+  duration_ms: 92.1536
+  type: 'test'
+  ...
+# Subtest: 05 deterministic IDs distinguish slash, underscore, leading zeros and unicode
+ok 6 - 05 deterministic IDs distinguish slash, underscore, leading zeros and unicode
+  ---
+  duration_ms: 19.5033
+  type: 'test'
+  ...
+# Subtest: 06 native document version conflict after preparation blocks whole unit
+ok 7 - 06 native document version conflict after preparation blocks whole unit
+  ---
+  duration_ms: 383.231
+  type: 'test'
+  ...
+# Subtest: 07 old plan blocked before touching importaciones
+ok 8 - 07 old plan blocked before touching importaciones
+  ---
+  duration_ms: 108.239
+  type: 'test'
+  ...
+# Subtest: 08 altered plan rejected even if JSON looks valid
+ok 9 - 08 altered plan rejected even if JSON looks valid
+  ---
+  duration_ms: 69.6166
+  type: 'test'
+  ...
+# Subtest: 09 repeated source cannot run under another ID
+ok 10 - 09 repeated source cannot run under another ID
+  ---
+  duration_ms: 380.1791
+  type: 'test'
+  ...
+# Subtest: 10 simultaneous imports acquire one global lock only
+ok 11 - 10 simultaneous imports acquire one global lock only
+  ---
+  duration_ms: 3031.025
+  type: 'test'
+  ...
+# [2026-10-23T17:56:55.136Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x67511d54 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, false for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200
+# Subtest: 11 real client SALIDA succeeds unlocked; same atomic operation denied during import
+ok 12 - 11 real client SALIDA succeeds unlocked; same atomic operation denied during import
+  ---
+  duration_ms: 614.9397
+  type: 'test'
+  ...
+# Subtest: 12 PENDIENTE + manual date is not reconciliation proof
+ok 13 - 12 PENDIENTE + manual date is not reconciliation proof
+  ---
+  duration_ms: 256.6254
+  type: 'test'
+  ...
+# Subtest: 12 COMPLETADO + manual date is not reconciliation proof
+ok 14 - 12 COMPLETADO + manual date is not reconciliation proof
+  ---
+  duration_ms: 203.217
+  type: 'test'
+  ...
+# Subtest: 12 SIN_VERIFICAR + manual date is not reconciliation proof
+ok 15 - 12 SIN_VERIFICAR + manual date is not reconciliation proof
+  ---
+  duration_ms: 217.656
+  type: 'test'
+  ...
+# Subtest: 13 unknown export time blocked
+ok 16 - 13 unknown export time blocked
+  ---
+  duration_ms: 77.0199
+  type: 'test'
+  ...
+# Subtest: 14 fault inside transaction commits neither inventory nor journal
+ok 17 - 14 fault inside transaction commits neither inventory nor journal
+  ---
+  duration_ms: 366.0425
+  type: 'test'
+  ...
+# Subtest: 15 supervised recovery resumes partial commits without reapplying acknowledged or lost-response unit
+ok 18 - 15 supervised recovery resumes partial commits without reapplying acknowledged or lost-response unit
+  ---
+  duration_ms: 637.9972
+  type: 'test'
+  ...
+# Subtest: 16 insufficient quota budget rejects before job creation
+ok 19 - 16 insufficient quota budget rejects before job creation
+  ---
+  duration_ms: 105.4812
+  type: 'test'
+  ...
+# Subtest: 17 deletions remain disabled despite trusted approval and complete claim
+ok 20 - 17 deletions remain disabled despite trusted approval and complete claim
+  ---
+  duration_ms: 123.0789
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized USER cannot execute
+ok 21 - 18 unauthorized USER cannot execute
+  ---
+  duration_ms: 76.3134
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized blocked cannot execute
+ok 22 - 18 unauthorized blocked cannot execute
+  ---
+  duration_ms: 126.0241
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized claims cannot execute
+ok 23 - 18 unauthorized claims cannot execute
+  ---
+  duration_ms: 97.4171
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized disabled cannot execute
+ok 24 - 18 unauthorized disabled cannot execute
+  ---
+  duration_ms: 85.7655
+  type: 'test'
+  ...
+# Subtest: 19 history, payment and formalization are byte-for-byte preserved on successful fixture reconciliation
+ok 25 - 19 history, payment and formalization are byte-for-byte preserved on successful fixture reconciliation
+  ---
+  duration_ms: 340.113
+  type: 'test'
+  ...
+# Subtest: 20 database duplicate SKU blocks, never takes first
+ok 26 - 20 database duplicate SKU blocks, never takes first
+  ---
+  duration_ms: 125.0345
+  type: 'test'
+  ...
+# Subtest: 21 database serial linked to another product blocks
+ok 27 - 21 database serial linked to another product blocks
+  ---
+  duration_ms: 169.5114
+  type: 'test'
+  ...
+# Subtest: 22 valid signature cannot authorize a different quantity than normalized source
+ok 28 - 22 valid signature cannot authorize a different quantity than normalized source
+  ---
+  duration_ms: 173.4784
+  type: 'test'
+  ...
+# Subtest: 23 too many series/writes block entire product without splitting
+ok 29 - 23 too many series/writes block entire product without splitting
+  ---
+  duration_ms: 214.8196
+  type: 'test'
+  ...
+# Subtest: 24 negative source quantity is never converted to zero
+ok 30 - 24 negative source quantity is never converted to zero
+  ---
+  duration_ms: 81.7917
+  type: 'test'
+  ...
+# Subtest: 25 unknown quota balance and forged approval fail closed
+ok 31 - 25 unknown quota balance and forged approval fail closed
+  ---
+  duration_ms: 72.4804
+  type: 'test'
+  ...
+# Subtest: 26 revoked profile before a later unit leaves PARTIAL and lock retained
+ok 32 - 26 revoked profile before a later unit leaves PARTIAL and lock retained
+  ---
+  duration_ms: 389.4412
+  type: 'test'
+  ...
+# Subtest: 27 source with existing 567 issues cannot be authorized by a JSON declaration
+ok 33 - 27 source with existing 567 issues cannot be authorized by a JSON declaration
+  ---
+  duration_ms: 82.6265
+  type: 'test'
+  ...
+# Subtest: 28 source product missing from Excel is not deleted or zeroed
+ok 34 - 28 source product missing from Excel is not deleted or zeroed
+  ---
+  duration_ms: 357.7023
+  type: 'test'
+  ...
+# Subtest: 29 real Kotlin contract canonicalization and ID policy match Node, blockers remain blocked
+ok 35 - 29 real Kotlin contract canonicalization and ID policy match Node, blockers remain blocked
+  ---
+  duration_ms: 19.0532
+  type: 'test'
+  ...
+# Subtest: 30 endpoint guard refuses a production target before SDK IO
+ok 36 - 30 endpoint guard refuses a production target before SDK IO
+  ---
+  duration_ms: 20.2684
+  type: 'test'
+  ...
+# Subtest: 31 expired locks never auto-release; stale worker fails fence
+ok 37 - 31 expired locks never auto-release; stale worker fails fence
+  ---
+  duration_ms: 272.4539
+  type: 'test'
+  ...
+# [2026-10-23T17:56:59.997Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x67511d55 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L1166, false for 'create' @ L1200, false for 'update' @ L1169, false for 'update' @ L1200
+# [2026-10-23T17:57:00.012Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x67511d56 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L369, false for 'create' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, false for 'create' @ L369, false for 'create' @ L1200
+# Subtest: 32 client cannot fabricate global lock/job, or bypass locked product creation
+ok 38 - 32 client cannot fabricate global lock/job, or bypass locked product creation
+  ---
+  duration_ms: 50.1943
+  type: 'test'
+  ...
+# Subtest: 33 partial recovery rejects changed already-applied inventory rather than replaying
+ok 39 - 33 partial recovery rejects changed already-applied inventory rather than replaying
+  ---
+  duration_ms: 416.7482
+  type: 'test'
+  ...
+# Subtest: 34 stock unchanged but serial quantity differences still require atomic stock-consistent proposal
+ok 40 - 34 stock unchanged but serial quantity differences still require atomic stock-consistent proposal
+  ---
+  duration_ms: 192.8445
+  type: 'test'
+  ...
+# Subtest: 35 same run ID returns recorded result without new journal or stock writes
+ok 41 - 35 same run ID returns recorded result without new journal or stock writes
+  ---
+  duration_ms: 412.9613
+  type: 'test'
+  ...
+# Subtest: 36 SALIDA committed after comparison invalidates the plan, no automatic restoration
+ok 42 - 36 SALIDA committed after comparison invalidates the plan, no automatic restoration
+  ---
+  duration_ms: 243.7016
+  type: 'test'
+  ...
+# Subtest: 37 blocked group cannot be smuggled into explicit authorized operation list
+ok 43 - 37 blocked group cannot be smuggled into explicit authorized operation list
+  ---
+  duration_ms: 79.9385
+  type: 'test'
+  ...
+# Subtest: 38 pending group cannot run when only the stock half is authorized
+ok 44 - 38 pending group cannot run when only the stock half is authorized
+  ---
+  duration_ms: 78.4514
+  type: 'test'
+  ...
+# Subtest: 39 missing serial is not interpreted as permission to delete or replace
+ok 45 - 39 missing serial is not interpreted as permission to delete or replace
+  ---
+  duration_ms: 216.3767
+  type: 'test'
+  ...
+# Subtest: 40 unapproved registry or a real-export attestation type is rejected
+ok 46 - 40 unapproved registry or a real-export attestation type is rejected
+  ---
+  duration_ms: 89.6079
+  type: 'test'
+  ...
+# Subtest: 41 immutable history mutation after preparation blocks stock update
+ok 47 - 41 immutable history mutation after preparation blocks stock update
+  ---
+  duration_ms: 275.4107
+  type: 'test'
+  ...
+# Subtest: 42 exhausted recovery attempts retain global lock
+ok 48 - 42 exhausted recovery attempts retain global lock
+  ---
+  duration_ms: 345.9848
+  type: 'test'
+  ...
+# Subtest: 43 creates new existence under real legacy product ID and leaves unchanged series unwritten
+ok 49 - 43 creates new existence under real legacy product ID and leaves unchanged series unwritten
+  ---
+  duration_ms: 443.3131
+  type: 'test'
+  ...
+# Subtest: 44 stock-only discrepancy reconciles to unchanged serial sums without writing the series
+ok 50 - 44 stock-only discrepancy reconciles to unchanged serial sums without writing the series
+  ---
+  duration_ms: 384.9103
+  type: 'test'
+  ...
+# Subtest: 45 supervisor can fence a RUNNING worker left by process interruption
+ok 51 - 45 supervisor can fence a RUNNING worker left by process interruption
+  ---
+  duration_ms: 557.2533
+  type: 'test'
+  ...
+# Subtest: 46 history scope cap blocks rather than silently skipping older/unknown records
+ok 52 - 46 history scope cap blocks rather than silently skipping older/unknown records
+  ---
+  duration_ms: 183.8581
+  type: 'test'
+  ...
+# Subtest: 47 unknown-history identity blocks all affected work, not just timestamp-indexed entries
+ok 53 - 47 unknown-history identity blocks all affected work, not just timestamp-indexed entries
+  ---
+  duration_ms: 178.4735
+  type: 'test'
+  ...
+# Subtest: 48 estimates include quota reservation, audit, bounded retries and zero deletions
+ok 54 - 48 estimates include quota reservation, audit, bounded retries and zero deletions
+  ---
+  duration_ms: 40.5437
+  type: 'test'
+  ...
+# Subtest: 49 inactive product is blocked, without reactivation
+ok 55 - 49 inactive product is blocked, without reactivation
+  ---
+  duration_ms: 156.4603
+  type: 'test'
+  ...
+# Subtest: 50 unchanged informational operations do not force a review lock or get written
+ok 56 - 50 unchanged informational operations do not force a review lock or get written
+  ---
+  duration_ms: 348.0483
+  type: 'test'
+  ...
+1..56
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17281.0381
++  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+!  Firestore Emulator has exited upon receiving signal: SIGINT
+i  auth: Stopping Authentication Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator

@@ -1,0 +1,368 @@
+i  emulators: Starting emulators: firestore
+i  emulators: Detected demo project ID "demo-clisa-4a1", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
++  firestore: Firestore Emulator was started in standard edition.
++  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: npm.cmd run test:4a2
+
+> test:4a2
+> node --test --test-concurrency=1 rules.test.mjs temporal.test.mjs
+
+TAP version 13
+# [2026-10-22T18:01:49.912Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b2b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:49.946Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b2c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# Subtest: USER: direct inventory mutation denied, legitimate atomic SALIDA allowed
+ok 1 - USER: direct inventory mutation denied, legitimate atomic SALIDA allowed
+  ---
+  duration_ms: 1964.3433
+  type: 'test'
+  ...
+# Subtest: ADMIN: explicit metadata and atomic adjustment permitted
+ok 2 - ADMIN: explicit metadata and atomic adjustment permitted
+  ---
+  duration_ms: 126.3326
+  type: 'test'
+  ...
+# [2026-10-22T18:01:50.272Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b32 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.290Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b33 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.304Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b34 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L103, false for 'create' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'create' @ L103, false for 'create' @ L128
+# [2026-10-22T18:01:50.321Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b35 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L113, false for 'create' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# [2026-10-22T18:01:50.330Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b36 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'delete' @ L113, false for 'delete' @ L128
+# [2026-10-22T18:01:50.347Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b37 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L123, false for 'create' @ L128, false for 'update' @ L123, false for 'update' @ L128
+# Subtest: ADMIN: direct stock, legacy counter, creates and deletes denied
+ok 3 - ADMIN: direct stock, legacy counter, creates and deletes denied
+  ---
+  duration_ms: 141.4961
+  type: 'test'
+  ...
+# Subtest: SUPER_ADMIN: explicit metadata and atomic adjustment permitted
+ok 4 - SUPER_ADMIN: explicit metadata and atomic adjustment permitted
+  ---
+  duration_ms: 107.0382
+  type: 'test'
+  ...
+# [2026-10-22T18:01:50.514Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b3b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.539Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b3c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.551Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b3d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L103, false for 'create' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'create' @ L103, false for 'create' @ L128
+# [2026-10-22T18:01:50.566Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b3e error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L113, false for 'create' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# [2026-10-22T18:01:50.579Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b3f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'delete' @ L113, false for 'delete' @ L128
+# [2026-10-22T18:01:50.596Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b40 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L123, false for 'create' @ L128, false for 'update' @ L123, false for 'update' @ L128
+# Subtest: SUPER_ADMIN: direct stock, legacy counter, creates and deletes denied
+ok 5 - SUPER_ADMIN: direct stock, legacy counter, creates and deletes denied
+  ---
+  duration_ms: 141.1392
+  type: 'test'
+  ...
+# [2026-10-22T18:01:50.649Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b42 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# [2026-10-22T18:01:50.662Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b43 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# Subtest: USER cannot perform adjustment or metadata edit
+ok 6 - USER cannot perform adjustment or metadata edit
+  ---
+  duration_ms: 65.852
+  type: 'test'
+  ...
+# [2026-10-22T18:01:50.738Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b46 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.782Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b48 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.832Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b4a error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.858Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b4c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.908Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b4e error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:50.948Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b50 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L104, false for 'update' @ L128
+# Subtest: blocked, unauthenticated, missing profile and contradictory claims denied
+ok 7 - blocked, unauthenticated, missing profile and contradictory claims denied
+  ---
+  duration_ms: 285.6367
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.017Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b53 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L88:24 for 'create' @ L88, false for 'create' @ L128, false for 'update' @ L95, false for 'update' @ L128, false for 'create' @ L88, false for 'create' @ L128
+# [2026-10-22T18:01:51.049Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b54 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L95, false for 'update' @ L128
+# [2026-10-22T18:01:51.068Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b55 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L95, false for 'update' @ L128
+# Subtest: initial USER self profile creation allowed without role claim; escalation/reactivation denied
+ok 8 - initial USER self profile creation allowed without role claim; escalation/reactivation denied
+  ---
+  duration_ms: 119.9656
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.166Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b58 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L95, false for 'update' @ L128
+# [2026-10-22T18:01:51.174Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b59 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L95, false for 'update' @ L128
+# [2026-10-22T18:01:51.227Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b5b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L95, false for 'update' @ L128
+# [2026-10-22T18:01:51.233Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b5c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L95, false for 'update' @ L128
+# [2026-10-22T18:01:51.295Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b5e error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L95:24 for 'update' @ L95, false for 'update' @ L128, false for 'update' @ L95, false for 'update' @ L128
+# [2026-10-22T18:01:51.302Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b5f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L95, false for 'update' @ L128
+# Subtest: only SUPER_ADMIN can list and change other USER/ADMIN state; roles/self/SUPER protected
+ok 9 - only SUPER_ADMIN can list and change other USER/ADMIN state; roles/self/SUPER protected
+  ---
+  duration_ms: 234.2929
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.354Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b61 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: partial atomic movement missing product rejected
+ok 10 - partial atomic movement missing product rejected
+  ---
+  duration_ms: 51.7476
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.394Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b63 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: partial atomic movement missing entry rejected
+ok 11 - partial atomic movement missing entry rejected
+  ---
+  duration_ms: 39.4299
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.436Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b65 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, Null value error. for 'update' @ L114, false for 'update' @ L128
+# Subtest: partial atomic movement missing record rejected
+ok 12 - partial atomic movement missing record rejected
+  ---
+  duration_ms: 42.202
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.481Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b67 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# Subtest: invalid SALIDA cantidad=0 rejected
+ok 13 - invalid SALIDA cantidad=0 rejected
+  ---
+  duration_ms: 44.7142
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.525Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b69 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# Subtest: invalid SALIDA cantidad=-1 rejected
+ok 14 - invalid SALIDA cantidad=-1 rejected
+  ---
+  duration_ms: 44.0209
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.577Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b6b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# Subtest: invalid SALIDA cantidad=1.5 rejected
+ok 15 - invalid SALIDA cantidad=1.5 rejected
+  ---
+  duration_ms: 52.4758
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.622Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b6d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA codigoProducto=wrong rejected
+ok 16 - invalid SALIDA codigoProducto=wrong rejected
+  ---
+  duration_ms: 44.4537
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.684Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b6f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA codigoExistencia=wrong rejected
+ok 17 - invalid SALIDA codigoExistencia=wrong rejected
+  ---
+  duration_ms: 62.3486
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.742Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b71 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA nombreProducto=wrong rejected
+ok 18 - invalid SALIDA nombreProducto=wrong rejected
+  ---
+  duration_ms: 57.5625
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.784Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b73 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA estadoPago=Invalid rejected
+ok 19 - invalid SALIDA estadoPago=Invalid rejected
+  ---
+  duration_ms: 41.6046
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.823Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b75 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA recibidoPor= rejected
+ok 20 - invalid SALIDA recibidoPor= rejected
+  ---
+  duration_ms: 38.955
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.866Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b77 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA tiendaOrigenNombre=wrong rejected
+ok 21 - invalid SALIDA tiendaOrigenNombre=wrong rejected
+  ---
+  duration_ms: 43.1489
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.905Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b79 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA tiendaDestinoId=clisa rejected
+ok 22 - invalid SALIDA tiendaDestinoId=clisa rejected
+  ---
+  duration_ms: 38.8039
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.946Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b7b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA registradoPorNombre=wrong rejected
+ok 23 - invalid SALIDA registradoPorNombre=wrong rejected
+  ---
+  duration_ms: 41.6296
+  type: 'test'
+  ...
+# [2026-10-22T18:01:51.998Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b7d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# Subtest: invalid SALIDA registradoPorId=other rejected
+ok 24 - invalid SALIDA registradoPorId=other rejected
+  ---
+  duration_ms: 51.3555
+  type: 'test'
+  ...
+# [2026-10-22T18:01:52.044Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b7f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA registradoPorEmail=wrong rejected
+ok 25 - invalid SALIDA registradoPorEmail=wrong rejected
+  ---
+  duration_ms: 45.8333
+  type: 'test'
+  ...
+# [2026-10-22T18:01:52.081Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b81 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128
+# Subtest: invalid SALIDA fechaHora=Wed Dec 31 1969 19:00:00 GMT-0500 (hora estándar de Perú) rejected
+ok 26 - invalid SALIDA fechaHora=Wed Dec 31 1969 19:00:00 GMT-0500 (hora estándar de Perú) rejected
+  ---
+  duration_ms: 37.3163
+  type: 'test'
+  ...
+# [2026-10-22T18:01:52.126Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b83 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: invalid SALIDA extra=injected rejected
+ok 27 - invalid SALIDA extra=injected rejected
+  ---
+  duration_ms: 45.1599
+  type: 'test'
+  ...
+# [2026-10-22T18:01:52.169Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b85 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128, false for 'create' @ L120, false for 'create' @ L128
+# Subtest: missing estadoPago rejected; corrected SALIDA schema is satisfiable
+ok 28 - missing estadoPago rejected; corrected SALIDA schema is satisfiable
+  ---
+  duration_ms: 63.319
+  type: 'test'
+  ...
+# [2026-10-22T18:01:52.226Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b88 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# [2026-10-22T18:01:52.248Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b89 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# Subtest: negative remaining stock and mismatched deltas rejected
+ok 29 - negative remaining stock and mismatched deltas rejected
+  ---
+  duration_ms: 58.6061
+  type: 'test'
+  ...
+# [2026-10-22T18:01:52.293Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b8b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L121, false for 'update' @ L128
+# [2026-10-22T18:01:52.297Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b8c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'delete' @ L121, false for 'delete' @ L128
+# [2026-10-22T18:01:52.304Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b8d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# [2026-10-22T18:01:52.318Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b8e error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# Subtest: historical records immutable; old record cannot authorize a second deduction
+ok 30 - historical records immutable; old record cannot authorize a second deduction
+  ---
+  duration_ms: 69.6944
+  type: 'test'
+  ...
+# [2026-10-22T18:01:52.345Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b90 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L123, false for 'create' @ L128, false for 'update' @ L123, false for 'update' @ L128
+# [2026-10-22T18:01:52.367Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b92 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'delete' @ L123, false for 'delete' @ L128
+# [2026-10-22T18:01:52.383Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b93 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# [2026-10-22T18:01:52.415Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b94 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L120:24 for 'create' @ L120, false for 'create' @ L128, false for 'update' @ L121, false for 'update' @ L128, evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, evaluation error at L114:24 for 'update' @ L114, false for 'update' @ L128, false for 'update' @ L114, false for 'update' @ L128
+# [2026-10-22T18:01:52.422Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8b95 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L104:24 for 'update' @ L104, false for 'update' @ L128, false for 'update' @ L104, false for 'update' @ L128
+# Subtest: client cannot acquire/remove lock; trusted local fixture lock blocks movements and metadata
+ok 31 - client cannot acquire/remove lock; trusted local fixture lock blocks movements and metadata
+  ---
+  duration_ms: 103.5406
+  type: 'test'
+  ...
+# Subtest: local future-worker lock prototype: two concurrent claims yield one owner; stale fencing rejected
+ok 32 - local future-worker lock prototype: two concurrent claims yield one owner; stale fencing rejected
+  ---
+  duration_ms: 669.6057
+  type: 'test'
+  ...
+# [2026-10-22T18:01:53.302Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8ba2 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L437:24 for 'create' @ L437, false for 'create' @ L1167, false for 'update' @ L444, false for 'update' @ L1167, evaluation error at L384:20 for 'update' @ L384, false for 'update' @ L1167, evaluation error at L414:24 for 'update' @ L414, false for 'update' @ L1167, false for 'update' @ L414, false for 'update' @ L1167, false for 'create' @ L437, false for 'create' @ L1167
+# [2026-10-22T18:01:53.334Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x1a9d8ba3 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L437:24 for 'create' @ L437, false for 'create' @ L1167, false for 'update' @ L444, false for 'update' @ L1167, evaluation error at L384:20 for 'update' @ L384, false for 'update' @ L1167, evaluation error at L414:24 for 'update' @ L414, false for 'update' @ L1167, false for 'update' @ L414, false for 'update' @ L1167, false for 'create' @ L437, false for 'create' @ L1167
+# Subtest: frozen audited rules reproduce contradictory SALIDA/AJUSTE schemas; proposal restores satisfiable schemas
+ok 33 - frozen audited rules reproduce contradictory SALIDA/AJUSTE schemas; proposal restores satisfiable schemas
+  ---
+  duration_ms: 349.3926
+  type: 'test'
+  ...
+# Subtest: temporal range paginates 50 with shared timestamps, exact boundaries and no duplicates
+ok 34 - temporal range paginates 50 with shared timestamps, exact boundaries and no duplicates
+  ---
+  duration_ms: 380.0212
+  type: 'test'
+  ...
+# Subtest: four-page cap reads only 200 and leaves history incomplete rather than scanning again
+ok 35 - four-page cap reads only 200 and leaves history incomplete rather than scanning again
+  ---
+  duration_ms: 148.0607
+  type: 'test'
+  ...
+# Subtest: blocked account cannot read the temporal query; no privileged fallback
+ok 36 - blocked account cannot read the temporal query; no privileged fallback
+  ---
+  duration_ms: 48.0539
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6640.0195
++  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+!  Firestore Emulator has exited upon receiving signal: SIGINT
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator

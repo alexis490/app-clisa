@@ -1,0 +1,131 @@
+i  emulators: Starting emulators: auth, firestore
+i  emulators: Detected demo project ID "demo-clisa-sync-4b1", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
++  firestore: Firestore Emulator was started in standard edition.
++  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: node --test --test-concurrency=1 test/final-pipeline.test.mjs
+TAP version 13
+# Subtest: FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+ok 1 - FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+  ---
+  duration_ms: 1263.0555
+  type: 'test'
+  ...
+# Subtest: FINAL new XLSX product and series are created atomically from Kotlin reader IDs
+ok 2 - FINAL new XLSX product and series are created atomically from Kotlin reader IDs
+  ---
+  duration_ms: 380.1632
+  type: 'test'
+  ...
+# Subtest: FINAL absent positive series remains unchanged and does not block reference stock or next import lock
+ok 3 - FINAL absent positive series remains unchanged and does not block reference stock or next import lock
+  ---
+  duration_ms: 430.844
+  type: 'test'
+  ...
+# Subtest: FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+ok 4 - FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+  ---
+  duration_ms: 326.3094
+  type: 'test'
+  ...
+# Subtest: FINAL proposal is derived from Excel without manual targets and refuses lower historical targets
+ok 5 - FINAL proposal is derived from Excel without manual targets and refuses lower historical targets
+  ---
+  duration_ms: 23.1231
+  type: 'test'
+  ...
+# Subtest: FINAL pending uses Excel 10 without another deduction
+ok 6 - FINAL pending uses Excel 10 without another deduction
+  ---
+  duration_ms: 322.5727
+  type: 'test'
+  ...
+# Subtest: FINAL completed included updates to 8 without second deduction
+ok 7 - FINAL completed included updates to 8 without second deduction
+  ---
+  duration_ms: 305.9614
+  type: 'test'
+  ...
+# Subtest: FINAL ambiguous historical inclusion does not change the reference inventory
+ok 8 - FINAL ambiguous historical inclusion does not change the reference inventory
+  ---
+  duration_ms: 264.6005
+  type: 'test'
+  ...
+# Subtest: FINAL duplicate XLSX is not made complete by preparation
+ok 9 - FINAL duplicate XLSX is not made complete by preparation
+  ---
+  duration_ms: 31.8182
+  type: 'test'
+  ...
+# Subtest: FINAL incomplete XLSX is not made complete by preparation
+ok 10 - FINAL incomplete XLSX is not made complete by preparation
+  ---
+  duration_ms: 30.8098
+  type: 'test'
+  ...
+# Subtest: FINAL independently proven local issues do not block unrelated valid product
+ok 11 - FINAL independently proven local issues do not block unrelated valid product
+  ---
+  duration_ms: 293.1796
+  type: 'test'
+  ...
+# Subtest: FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+ok 12 - FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+  ---
+  duration_ms: 560.5196
+  type: 'test'
+  ...
+# Subtest: FINAL concurrent inventory change still invalidates prepared native versions
+ok 13 - FINAL concurrent inventory change still invalidates prepared native versions
+  ---
+  duration_ms: 203.2538
+  type: 'test'
+  ...
+# Subtest: FINAL QUOTA cannot execute imported plan
+ok 14 - FINAL QUOTA cannot execute imported plan
+  ---
+  duration_ms: 32.4939
+  type: 'test'
+  ...
+# Subtest: FINAL USER cannot execute imported plan
+ok 15 - FINAL USER cannot execute imported plan
+  ---
+  duration_ms: 30.6801
+  type: 'test'
+  ...
+# Subtest: FINAL missing isolation certificate cannot bypass source issues
+ok 16 - FINAL missing isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 31.8245
+  type: 'test'
+  ...
+# Subtest: FINAL changed isolation certificate cannot bypass source issues
+ok 17 - FINAL changed isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 28.2907
+  type: 'test'
+  ...
+# Subtest: FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+ok 18 - FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+  ---
+  duration_ms: 4082.626
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9124.0455
++  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+!  Firestore Emulator has exited upon receiving signal: SIGINT
+i  auth: Stopping Authentication Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator

@@ -1,0 +1,12 @@
+{
+  "sameSourceIssueIdentities": true,
+  "beforeCount": 567,
+  "afterCount": 567,
+  "categoriesAfter": {
+    "DUPLICATE_SKU": 15,
+    "SERIAL_WHITESPACE": 156,
+    "DUPLICATE_SERIAL": 48,
+    "NEGATIVE_QUANTITY": 2,
+    "MISSING_SKU": 346
+  }
+}

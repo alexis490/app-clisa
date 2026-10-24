@@ -1,0 +1,14 @@
+{
+  "title": "CLISA Preflight Read Only - PROPOSAL",
+  "description": "Propuesta local; no creada ni concedida. Sin permisos de escritura.",
+  "stage": "GA",
+  "includedPermissions": [
+    "datastore.databases.getMetadata",
+    "datastore.entities.get",
+    "datastore.entities.list",
+    "datastore.indexes.list",
+    "firebaserules.releases.get",
+    "firebaserules.rulesets.get",
+    "firebaseauth.users.get"
+  ]
+}

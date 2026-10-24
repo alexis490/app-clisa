@@ -1,0 +1,239 @@
+i  emulators: Starting emulators: auth, firestore
+i  emulators: Detected demo project ID "demo-clisa-sync-4b1", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
++  firestore: Firestore Emulator was started in standard edition.
++  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: node --test --test-concurrency=1 test/classification.test.mjs test/final-pipeline.test.mjs
+TAP version 13
+# Subtest: Kotlin and Node share exact rules, catalog digest, suggestions and approval IDs
+ok 1 - Kotlin and Node share exact rules, catalog digest, suggestions and approval IDs
+  ---
+  duration_ms: 1456.6505
+  type: 'test'
+  ...
+# Subtest: recognized product metadata changes never touch counters, series, records or payment
+ok 2 - recognized product metadata changes never touch counters, series, records or payment
+  ---
+  duration_ms: 269.7949
+  type: 'test'
+  ...
+# Subtest: ambiguous name stays REVISAR and cannot be bulk-approved
+ok 3 - ambiguous name stays REVISAR and cannot be bulk-approved
+  ---
+  duration_ms: 131.3995
+  type: 'test'
+  ...
+# Subtest: individual review may resolve conflicting names using an existing active ID
+ok 4 - individual review may resolve conflicting names using an existing active ID
+  ---
+  duration_ms: 148.0591
+  type: 'test'
+  ...
+# Subtest: unknown product stays unclassified and missing description remains pending
+ok 5 - unknown product stays unclassified and missing description remains pending
+  ---
+  duration_ms: 70.1167
+  type: 'test'
+  ...
+# Subtest: valid completed fields remain locked even with contradictory name
+ok 6 - valid completed fields remain locked even with contradictory name
+  ---
+  duration_ms: 89.8214
+  type: 'test'
+  ...
+# Subtest: multiple serials do not cause repeated product writes
+ok 7 - multiple serials do not cause repeated product writes
+  ---
+  duration_ms: 123.7178
+  type: 'test'
+  ...
+# Subtest: similar brand names and substrings do not match incorrectly
+ok 8 - similar brand names and substrings do not match incorrectly
+  ---
+  duration_ms: 39.5646
+  type: 'test'
+  ...
+# Subtest: category absent from catalog is never invented or accepted
+ok 9 - category absent from catalog is never invented or accepted
+  ---
+  duration_ms: 98.7851
+  type: 'test'
+  ...
+# Subtest: same Excel reimport is idempotent without metadata rewrites
+ok 10 - same Excel reimport is idempotent without metadata rewrites
+  ---
+  duration_ms: 204.8414
+  type: 'test'
+  ...
+# Subtest: catalog rename invalidates previous approvals
+ok 11 - catalog rename invalidates previous approvals
+  ---
+  duration_ms: 80.7229
+  type: 'test'
+  ...
+# Subtest: catalog inactive invalidates previous approvals
+ok 12 - catalog inactive invalidates previous approvals
+  ---
+  duration_ms: 103.8359
+  type: 'test'
+  ...
+# Subtest: catalog added invalidates previous approvals
+ok 13 - catalog added invalidates previous approvals
+  ---
+  duration_ms: 92.2072
+  type: 'test'
+  ...
+# Subtest: catalog removed invalidates previous approvals
+ok 14 - catalog removed invalidates previous approvals
+  ---
+  duration_ms: 94.297
+  type: 'test'
+  ...
+# Subtest: USER and blocked administrator cannot approve metadata
+ok 15 - USER and blocked administrator cannot approve metadata
+  ---
+  duration_ms: 57.9116
+  type: 'test'
+  ...
+# Subtest: subsequent product metadata changes invalidate approval and no valid reference is overwritten
+ok 16 - subsequent product metadata changes invalidate approval and no valid reference is overwritten
+  ---
+  duration_ms: 114.4025
+  type: 'test'
+  ...
+# Subtest: SKU duplicated after comparison cannot classify an arbitrarily selected document
+ok 17 - SKU duplicated after comparison cannot classify an arbitrarily selected document
+  ---
+  duration_ms: 145.9135
+  type: 'test'
+  ...
+# Subtest: new product approval is pending creation and does not create inventory
+ok 18 - new product approval is pending creation and does not create inventory
+  ---
+  duration_ms: 137.4247
+  type: 'test'
+  ...
+# Subtest: forged stock field, reviewer, changed rule or source trace is rejected
+ok 19 - forged stock field, reviewer, changed rule or source trace is rejected
+  ---
+  duration_ms: 237.0955
+  type: 'test'
+  ...
+# Subtest: controlled catalog pagination reads beyond first page once
+ok 20 - controlled catalog pagination reads beyond first page once
+  ---
+  duration_ms: 103.4772
+  type: 'test'
+  ...
+# Subtest: actual CLI reads Android dossier and only applies metadata with explicit authenticated flag
+ok 21 - actual CLI reads Android dossier and only applies metadata with explicit authenticated flag
+  ---
+  duration_ms: 7111.2202
+  type: 'test'
+  ...
+# Subtest: FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+ok 22 - FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+  ---
+  duration_ms: 190.5858
+  type: 'test'
+  ...
+# Subtest: FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+ok 23 - FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+  ---
+  duration_ms: 371.9634
+  type: 'test'
+  ...
+# Subtest: FINAL pending NOT included updates to reconciled 8, never official 10
+ok 24 - FINAL pending NOT included updates to reconciled 8, never official 10
+  ---
+  duration_ms: 331.3075
+  type: 'test'
+  ...
+# Subtest: FINAL completed included updates to 8 without second deduction
+ok 25 - FINAL completed included updates to 8 without second deduction
+  ---
+  duration_ms: 306.6054
+  type: 'test'
+  ...
+# Subtest: FINAL ambiguous movement rejects before inventory writes
+ok 26 - FINAL ambiguous movement rejects before inventory writes
+  ---
+  duration_ms: 137.5633
+  type: 'test'
+  ...
+# Subtest: FINAL duplicate XLSX is not made complete by preparation
+ok 27 - FINAL duplicate XLSX is not made complete by preparation
+  ---
+  duration_ms: 30.2448
+  type: 'test'
+  ...
+# Subtest: FINAL incomplete XLSX is not made complete by preparation
+ok 28 - FINAL incomplete XLSX is not made complete by preparation
+  ---
+  duration_ms: 30.6266
+  type: 'test'
+  ...
+# Subtest: FINAL independently proven local issues do not block unrelated valid product
+ok 29 - FINAL independently proven local issues do not block unrelated valid product
+  ---
+  duration_ms: 312.6108
+  type: 'test'
+  ...
+# Subtest: FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+ok 30 - FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+  ---
+  duration_ms: 576.5222
+  type: 'test'
+  ...
+# Subtest: FINAL concurrent SALIDA change invalidates prepared history
+ok 31 - FINAL concurrent SALIDA change invalidates prepared history
+  ---
+  duration_ms: 262.696
+  type: 'test'
+  ...
+# Subtest: FINAL QUOTA cannot execute imported plan
+ok 32 - FINAL QUOTA cannot execute imported plan
+  ---
+  duration_ms: 31.7167
+  type: 'test'
+  ...
+# Subtest: FINAL USER cannot execute imported plan
+ok 33 - FINAL USER cannot execute imported plan
+  ---
+  duration_ms: 30.7661
+  type: 'test'
+  ...
+# Subtest: FINAL missing isolation certificate cannot bypass source issues
+ok 34 - FINAL missing isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 31.5574
+  type: 'test'
+  ...
+# Subtest: FINAL changed isolation certificate cannot bypass source issues
+ok 35 - FINAL changed isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 45.9122
+  type: 'test'
+  ...
+# Subtest: FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+ok 36 - FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+  ---
+  duration_ms: 4024.7231
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18672.0205
++  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+!  Firestore Emulator has exited upon receiving signal: SIGINT
+i  auth: Stopping Authentication Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator

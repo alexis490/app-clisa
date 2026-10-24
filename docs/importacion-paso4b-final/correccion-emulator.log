@@ -1,0 +1,771 @@
+i  emulators: Starting emulators: auth, firestore
+i  emulators: Detected demo project ID "demo-clisa-sync-4b1", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
++  firestore: Firestore Emulator was started in standard edition.
++  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: npm.cmd test
+
+> test
+> node --test --test-concurrency=1 test/*.test.mjs
+
+TAP version 13
+# Subtest: Kotlin and Node share exact rules, catalog digest, suggestions and approval IDs
+ok 1 - Kotlin and Node share exact rules, catalog digest, suggestions and approval IDs
+  ---
+  duration_ms: 2853.5205
+  type: 'test'
+  ...
+# Subtest: recognized product metadata changes never touch counters, series, records or payment
+ok 2 - recognized product metadata changes never touch counters, series, records or payment
+  ---
+  duration_ms: 322.1338
+  type: 'test'
+  ...
+# Subtest: ambiguous name stays REVISAR and cannot be bulk-approved
+ok 3 - ambiguous name stays REVISAR and cannot be bulk-approved
+  ---
+  duration_ms: 142.9453
+  type: 'test'
+  ...
+# Subtest: individual review may resolve conflicting names using an existing active ID
+ok 4 - individual review may resolve conflicting names using an existing active ID
+  ---
+  duration_ms: 143.8222
+  type: 'test'
+  ...
+# Subtest: unknown product stays unclassified and missing description remains pending
+ok 5 - unknown product stays unclassified and missing description remains pending
+  ---
+  duration_ms: 79.2655
+  type: 'test'
+  ...
+# Subtest: valid completed fields remain locked even with contradictory name
+ok 6 - valid completed fields remain locked even with contradictory name
+  ---
+  duration_ms: 104.8554
+  type: 'test'
+  ...
+# Subtest: multiple serials do not cause repeated product writes
+ok 7 - multiple serials do not cause repeated product writes
+  ---
+  duration_ms: 200.6665
+  type: 'test'
+  ...
+# Subtest: similar brand names and substrings do not match incorrectly
+ok 8 - similar brand names and substrings do not match incorrectly
+  ---
+  duration_ms: 41.0164
+  type: 'test'
+  ...
+# Subtest: category absent from catalog is never invented or accepted
+ok 9 - category absent from catalog is never invented or accepted
+  ---
+  duration_ms: 116.4169
+  type: 'test'
+  ...
+# Subtest: same Excel reimport is idempotent without metadata rewrites
+ok 10 - same Excel reimport is idempotent without metadata rewrites
+  ---
+  duration_ms: 241.9573
+  type: 'test'
+  ...
+# Subtest: catalog rename invalidates previous approvals
+ok 11 - catalog rename invalidates previous approvals
+  ---
+  duration_ms: 107.1341
+  type: 'test'
+  ...
+# Subtest: catalog inactive invalidates previous approvals
+ok 12 - catalog inactive invalidates previous approvals
+  ---
+  duration_ms: 108.0747
+  type: 'test'
+  ...
+# Subtest: catalog added invalidates previous approvals
+ok 13 - catalog added invalidates previous approvals
+  ---
+  duration_ms: 117.5197
+  type: 'test'
+  ...
+# Subtest: catalog removed invalidates previous approvals
+ok 14 - catalog removed invalidates previous approvals
+  ---
+  duration_ms: 112.4673
+  type: 'test'
+  ...
+# Subtest: USER and blocked administrator cannot approve metadata
+ok 15 - USER and blocked administrator cannot approve metadata
+  ---
+  duration_ms: 75.6449
+  type: 'test'
+  ...
+# Subtest: subsequent product metadata changes invalidate approval and no valid reference is overwritten
+ok 16 - subsequent product metadata changes invalidate approval and no valid reference is overwritten
+  ---
+  duration_ms: 110.6958
+  type: 'test'
+  ...
+# Subtest: SKU duplicated after comparison cannot classify an arbitrarily selected document
+ok 17 - SKU duplicated after comparison cannot classify an arbitrarily selected document
+  ---
+  duration_ms: 120.5337
+  type: 'test'
+  ...
+# Subtest: new product approval is pending creation and does not create inventory
+ok 18 - new product approval is pending creation and does not create inventory
+  ---
+  duration_ms: 156
+  type: 'test'
+  ...
+# Subtest: forged stock field, reviewer, changed rule or source trace is rejected
+ok 19 - forged stock field, reviewer, changed rule or source trace is rejected
+  ---
+  duration_ms: 252.2304
+  type: 'test'
+  ...
+# Subtest: controlled catalog pagination reads beyond first page once
+ok 20 - controlled catalog pagination reads beyond first page once
+  ---
+  duration_ms: 96.7582
+  type: 'test'
+  ...
+# Subtest: actual CLI reads Android dossier and only applies metadata with explicit authenticated flag
+ok 21 - actual CLI reads Android dossier and only applies metadata with explicit authenticated flag
+  ---
+  duration_ms: 8600.6692
+  type: 'test'
+  ...
+# Subtest: 4B Excel reference refuses an old plan rather than replaying its deductions
+ok 22 - 4B Excel reference refuses an old plan rather than replaying its deductions
+  ---
+  duration_ms: 749.2366
+  type: 'test'
+  ...
+# Subtest: 4B formalization and payment changes do not alter Excel stock
+ok 23 - 4B formalization and payment changes do not alter Excel stock
+  ---
+  duration_ms: 365.7242
+  type: 'test'
+  ...
+# Subtest: 4B2B2 changing reconciliation evidence after signature cannot authorize execution
+ok 24 - 4B2B2 changing reconciliation evidence after signature cannot authorize execution
+  ---
+  duration_ms: 77.4786
+  type: 'test'
+  ...
+# Subtest: 4B2B2 unrelated product adjustments do not silently alter the reviewed product scope
+ok 25 - 4B2B2 unrelated product adjustments do not silently alter the reviewed product scope
+  ---
+  duration_ms: 326.0253
+  type: 'test'
+  ...
+# Subtest: 01 creates product + deterministic existence in one unit, with journal/checkpoint
+ok 26 - 01 creates product + deterministic existence in one unit, with journal/checkpoint
+  ---
+  duration_ms: 371.822
+  type: 'test'
+  ...
+# Subtest: 02 updates individual quantity and stock together, preserves metadata and cantidadRestante
+ok 27 - 02 updates individual quantity and stock together, preserves metadata and cantidadRestante
+  ---
+  duration_ms: 281.2529
+  type: 'test'
+  ...
+# Subtest: 03 unchanged operations cause zero writes and no lock/job
+ok 28 - 03 unchanged operations cause zero writes and no lock/job
+  ---
+  duration_ms: 56.9057
+  type: 'test'
+  ...
+# Subtest: 04 duplicate sku in source is not fused or selected
+ok 29 - 04 duplicate sku in source is not fused or selected
+  ---
+  duration_ms: 55.3899
+  type: 'test'
+  ...
+# Subtest: 04 duplicate serial in source is not fused or selected
+ok 30 - 04 duplicate serial in source is not fused or selected
+  ---
+  duration_ms: 90.6624
+  type: 'test'
+  ...
+# Subtest: 05 deterministic IDs distinguish slash, underscore, leading zeros and unicode
+ok 31 - 05 deterministic IDs distinguish slash, underscore, leading zeros and unicode
+  ---
+  duration_ms: 31.1609
+  type: 'test'
+  ...
+# Subtest: 06 native document version conflict after preparation blocks whole unit
+ok 32 - 06 native document version conflict after preparation blocks whole unit
+  ---
+  duration_ms: 306.2393
+  type: 'test'
+  ...
+# Subtest: 07 old plan blocked before touching importaciones
+ok 33 - 07 old plan blocked before touching importaciones
+  ---
+  duration_ms: 97.5867
+  type: 'test'
+  ...
+# Subtest: 08 altered plan rejected even if JSON looks valid
+ok 34 - 08 altered plan rejected even if JSON looks valid
+  ---
+  duration_ms: 80.7578
+  type: 'test'
+  ...
+# Subtest: 09 repeated source cannot run under another ID
+ok 35 - 09 repeated source cannot run under another ID
+  ---
+  duration_ms: 406.7729
+  type: 'test'
+  ...
+# Subtest: 10 simultaneous imports acquire one global lock only
+ok 36 - 10 simultaneous imports acquire one global lock only
+  ---
+  duration_ms: 2985.9883
+  type: 'test'
+  ...
+# [2026-10-24T03:47:06.521Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x709b305a error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, false for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200
+# Subtest: 11 real client SALIDA succeeds unlocked; same atomic operation denied during import
+ok 37 - 11 real client SALIDA succeeds unlocked; same atomic operation denied during import
+  ---
+  duration_ms: 843.9391
+  type: 'test'
+  ...
+# Subtest: 12 PENDIENTE is never deducted again and needs no inclusion proof
+ok 38 - 12 PENDIENTE is never deducted again and needs no inclusion proof
+  ---
+  duration_ms: 404.4442
+  type: 'test'
+  ...
+# Subtest: 12 COMPLETADO is never deducted again and needs no inclusion proof
+ok 39 - 12 COMPLETADO is never deducted again and needs no inclusion proof
+  ---
+  duration_ms: 357.5115
+  type: 'test'
+  ...
+# Subtest: 12 SIN_VERIFICAR is never deducted again and needs no inclusion proof
+ok 40 - 12 SIN_VERIFICAR is never deducted again and needs no inclusion proof
+  ---
+  duration_ms: 324.2461
+  type: 'test'
+  ...
+# Subtest: 13 no export time or transfer certificate is required
+ok 41 - 13 no export time or transfer certificate is required
+  ---
+  duration_ms: 339.2761
+  type: 'test'
+  ...
+# Subtest: 14 fault inside transaction commits neither inventory nor journal
+ok 42 - 14 fault inside transaction commits neither inventory nor journal
+  ---
+  duration_ms: 264.4955
+  type: 'test'
+  ...
+# Subtest: 15 supervised recovery resumes partial commits without reapplying acknowledged or lost-response unit
+ok 43 - 15 supervised recovery resumes partial commits without reapplying acknowledged or lost-response unit
+  ---
+  duration_ms: 571.3062
+  type: 'test'
+  ...
+# Subtest: 16 insufficient quota budget rejects before job creation
+ok 44 - 16 insufficient quota budget rejects before job creation
+  ---
+  duration_ms: 78.7142
+  type: 'test'
+  ...
+# Subtest: 17 deletions remain disabled despite trusted approval and complete claim
+ok 45 - 17 deletions remain disabled despite trusted approval and complete claim
+  ---
+  duration_ms: 69.1789
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized USER cannot execute
+ok 46 - 18 unauthorized USER cannot execute
+  ---
+  duration_ms: 69.706
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized blocked cannot execute
+ok 47 - 18 unauthorized blocked cannot execute
+  ---
+  duration_ms: 82.8727
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized claims cannot execute
+ok 48 - 18 unauthorized claims cannot execute
+  ---
+  duration_ms: 56.2231
+  type: 'test'
+  ...
+# Subtest: 18 unauthorized disabled cannot execute
+ok 49 - 18 unauthorized disabled cannot execute
+  ---
+  duration_ms: 79.4207
+  type: 'test'
+  ...
+# Subtest: 19 history, payment and formalization are byte-for-byte preserved on successful fixture reconciliation
+ok 50 - 19 history, payment and formalization are byte-for-byte preserved on successful fixture reconciliation
+  ---
+  duration_ms: 312.8166
+  type: 'test'
+  ...
+# Subtest: 20 database duplicate SKU blocks, never takes first
+ok 51 - 20 database duplicate SKU blocks, never takes first
+  ---
+  duration_ms: 152.1655
+  type: 'test'
+  ...
+# Subtest: 21 database serial linked to another product blocks
+ok 52 - 21 database serial linked to another product blocks
+  ---
+  duration_ms: 105.3729
+  type: 'test'
+  ...
+# Subtest: 22 valid signature cannot authorize a different quantity than normalized source
+ok 53 - 22 valid signature cannot authorize a different quantity than normalized source
+  ---
+  duration_ms: 128.3065
+  type: 'test'
+  ...
+# Subtest: 23 too many series/writes block entire product without splitting
+ok 54 - 23 too many series/writes block entire product without splitting
+  ---
+  duration_ms: 164.1088
+  type: 'test'
+  ...
+# Subtest: 24 negative source quantity is never converted to zero
+ok 55 - 24 negative source quantity is never converted to zero
+  ---
+  duration_ms: 47.8003
+  type: 'test'
+  ...
+# Subtest: 25 unknown quota balance and forged approval fail closed
+ok 56 - 25 unknown quota balance and forged approval fail closed
+  ---
+  duration_ms: 46.6224
+  type: 'test'
+  ...
+# Subtest: 26 revoked profile before a later unit leaves PARTIAL and lock retained
+ok 57 - 26 revoked profile before a later unit leaves PARTIAL and lock retained
+  ---
+  duration_ms: 369.8968
+  type: 'test'
+  ...
+# Subtest: 27 source with existing 567 issues cannot be authorized by a JSON declaration
+ok 58 - 27 source with existing 567 issues cannot be authorized by a JSON declaration
+  ---
+  duration_ms: 48.425
+  type: 'test'
+  ...
+# Subtest: 28 source product missing from Excel is not deleted or zeroed
+ok 59 - 28 source product missing from Excel is not deleted or zeroed
+  ---
+  duration_ms: 309.797
+  type: 'test'
+  ...
+# Subtest: 29 real Kotlin contract canonicalization and ID policy match Node, blockers remain blocked
+ok 60 - 29 real Kotlin contract canonicalization and ID policy match Node, blockers remain blocked
+  ---
+  duration_ms: 24.5512
+  type: 'test'
+  ...
+# Subtest: 30 endpoint guard refuses a production target before SDK IO
+ok 61 - 30 endpoint guard refuses a production target before SDK IO
+  ---
+  duration_ms: 24.9292
+  type: 'test'
+  ...
+# Subtest: 31 expired locks never auto-release; stale worker fails fence
+ok 62 - 31 expired locks never auto-release; stale worker fails fence
+  ---
+  duration_ms: 222.0733
+  type: 'test'
+  ...
+# [2026-10-24T03:47:11.393Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x709b305b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L1166, false for 'create' @ L1200, false for 'update' @ L1169, false for 'update' @ L1200
+# [2026-10-24T03:47:11.417Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x709b305c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'create' @ L369, false for 'create' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, false for 'create' @ L369, false for 'create' @ L1200
+# Subtest: 32 client cannot fabricate global lock/job, or bypass locked product creation
+ok 63 - 32 client cannot fabricate global lock/job, or bypass locked product creation
+  ---
+  duration_ms: 88.3134
+  type: 'test'
+  ...
+# Subtest: 33 partial recovery rejects changed already-applied inventory rather than replaying
+ok 64 - 33 partial recovery rejects changed already-applied inventory rather than replaying
+  ---
+  duration_ms: 343.3122
+  type: 'test'
+  ...
+# Subtest: 34 stock unchanged but serial quantity differences still require atomic stock-consistent proposal
+ok 65 - 34 stock unchanged but serial quantity differences still require atomic stock-consistent proposal
+  ---
+  duration_ms: 144.8496
+  type: 'test'
+  ...
+# Subtest: 35 same run ID returns recorded result without new journal or stock writes
+ok 66 - 35 same run ID returns recorded result without new journal or stock writes
+  ---
+  duration_ms: 321.0701
+  type: 'test'
+  ...
+# Subtest: 36 SALIDA committed after comparison invalidates the plan, no automatic restoration
+ok 67 - 36 SALIDA committed after comparison invalidates the plan, no automatic restoration
+  ---
+  duration_ms: 233.7912
+  type: 'test'
+  ...
+# Subtest: 37 blocked group cannot be smuggled into explicit authorized operation list
+ok 68 - 37 blocked group cannot be smuggled into explicit authorized operation list
+  ---
+  duration_ms: 48.4377
+  type: 'test'
+  ...
+# Subtest: 38 pending group cannot run when only the stock half is authorized
+ok 69 - 38 pending group cannot run when only the stock half is authorized
+  ---
+  duration_ms: 33.7332
+  type: 'test'
+  ...
+# Subtest: 39 missing serial is not interpreted as permission to delete or replace
+ok 70 - 39 missing serial is not interpreted as permission to delete or replace
+  ---
+  duration_ms: 336.0689
+  type: 'test'
+  ...
+# Subtest: 40 unapproved registry or a real-export attestation type is rejected
+ok 71 - 40 unapproved registry or a real-export attestation type is rejected
+  ---
+  duration_ms: 48.7637
+  type: 'test'
+  ...
+# Subtest: 41 formalization may change while import uses only inventory concurrency
+ok 72 - 41 formalization may change while import uses only inventory concurrency
+  ---
+  duration_ms: 310.3211
+  type: 'test'
+  ...
+# Subtest: 42 exhausted recovery attempts retain global lock
+ok 73 - 42 exhausted recovery attempts retain global lock
+  ---
+  duration_ms: 276.2388
+  type: 'test'
+  ...
+# Subtest: 43 creates new existence under real legacy product ID and leaves unchanged series unwritten
+ok 74 - 43 creates new existence under real legacy product ID and leaves unchanged series unwritten
+  ---
+  duration_ms: 358.4324
+  type: 'test'
+  ...
+# Subtest: 44 stock-only discrepancy reconciles to unchanged serial sums without writing the series
+ok 75 - 44 stock-only discrepancy reconciles to unchanged serial sums without writing the series
+  ---
+  duration_ms: 406.4795
+  type: 'test'
+  ...
+# Subtest: 45 supervisor can fence a RUNNING worker left by process interruption
+ok 76 - 45 supervisor can fence a RUNNING worker left by process interruption
+  ---
+  duration_ms: 557.8871
+  type: 'test'
+  ...
+# Subtest: 46 historical size and unrecognized formalization fields do not gate import
+ok 77 - 46 historical size and unrecognized formalization fields do not gate import
+  ---
+  duration_ms: 327.7544
+  type: 'test'
+  ...
+# Subtest: 47 malformed historical records remain untouched and are not part of classification
+ok 78 - 47 malformed historical records remain untouched and are not part of classification
+  ---
+  duration_ms: 308.8056
+  type: 'test'
+  ...
+# Subtest: 48 estimates include quota reservation, audit, bounded retries and zero deletions
+ok 79 - 48 estimates include quota reservation, audit, bounded retries and zero deletions
+  ---
+  duration_ms: 45.3053
+  type: 'test'
+  ...
+# Subtest: 49 inactive product is blocked, without reactivation
+ok 80 - 49 inactive product is blocked, without reactivation
+  ---
+  duration_ms: 138.0318
+  type: 'test'
+  ...
+# Subtest: 50 unchanged informational operations do not force a review lock or get written
+ok 81 - 50 unchanged informational operations do not force a review lock or get written
+  ---
+  duration_ms: 280.5055
+  type: 'test'
+  ...
+# Subtest: 51 supervised recovery cannot change the originally approved product scope
+ok 82 - 51 supervised recovery cannot change the originally approved product scope
+  ---
+  duration_ms: 360.5342
+  type: 'test'
+  ...
+# Subtest: Excel policy rejects a signed stock deduction from a historical transfer
+ok 83 - Excel policy rejects a signed stock deduction from a historical transfer
+  ---
+  duration_ms: 153.6731
+  type: 'test'
+  ...
+# Subtest: a serial created concurrently under another product blocks the whole new product unit
+ok 84 - a serial created concurrently under another product blocks the whole new product unit
+  ---
+  duration_ms: 282.173
+  type: 'test'
+  ...
+# Subtest: 52 legacy recovery checkpoint without immutable scope requires explicit review
+ok 85 - 52 legacy recovery checkpoint without immutable scope requires explicit review
+  ---
+  duration_ms: 279.7467
+  type: 'test'
+  ...
+# Subtest: FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+ok 86 - FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+  ---
+  duration_ms: 424.4818
+  type: 'test'
+  ...
+# Subtest: FINAL new XLSX product and series are created atomically from Kotlin reader IDs
+ok 87 - FINAL new XLSX product and series are created atomically from Kotlin reader IDs
+  ---
+  duration_ms: 269.5464
+  type: 'test'
+  ...
+# Subtest: FINAL absent positive series remains unchanged and does not block reference stock or next import lock
+ok 88 - FINAL absent positive series remains unchanged and does not block reference stock or next import lock
+  ---
+  duration_ms: 266.3779
+  type: 'test'
+  ...
+# Subtest: FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+ok 89 - FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+  ---
+  duration_ms: 310.1589
+  type: 'test'
+  ...
+# Subtest: FINAL proposal is derived from Excel without manual targets and refuses lower historical targets
+ok 90 - FINAL proposal is derived from Excel without manual targets and refuses lower historical targets
+  ---
+  duration_ms: 12.9497
+  type: 'test'
+  ...
+# Subtest: FINAL pending uses Excel 10 without another deduction
+ok 91 - FINAL pending uses Excel 10 without another deduction
+  ---
+  duration_ms: 283.0289
+  type: 'test'
+  ...
+# Subtest: FINAL completed included updates to 8 without second deduction
+ok 92 - FINAL completed included updates to 8 without second deduction
+  ---
+  duration_ms: 295.2134
+  type: 'test'
+  ...
+# Subtest: FINAL ambiguous historical inclusion does not change the reference inventory
+ok 93 - FINAL ambiguous historical inclusion does not change the reference inventory
+  ---
+  duration_ms: 284.0247
+  type: 'test'
+  ...
+# Subtest: FINAL duplicate XLSX is not made complete by preparation
+ok 94 - FINAL duplicate XLSX is not made complete by preparation
+  ---
+  duration_ms: 28.8209
+  type: 'test'
+  ...
+# Subtest: FINAL incomplete XLSX is not made complete by preparation
+ok 95 - FINAL incomplete XLSX is not made complete by preparation
+  ---
+  duration_ms: 15.2611
+  type: 'test'
+  ...
+# Subtest: FINAL independently proven local issues do not block unrelated valid product
+ok 96 - FINAL independently proven local issues do not block unrelated valid product
+  ---
+  duration_ms: 249.4308
+  type: 'test'
+  ...
+# Subtest: FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+ok 97 - FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+  ---
+  duration_ms: 450.7036
+  type: 'test'
+  ...
+# Subtest: FINAL concurrent inventory change still invalidates prepared native versions
+ok 98 - FINAL concurrent inventory change still invalidates prepared native versions
+  ---
+  duration_ms: 201.693
+  type: 'test'
+  ...
+# Subtest: FINAL QUOTA cannot execute imported plan
+ok 99 - FINAL QUOTA cannot execute imported plan
+  ---
+  duration_ms: 31.8938
+  type: 'test'
+  ...
+# Subtest: FINAL USER cannot execute imported plan
+ok 100 - FINAL USER cannot execute imported plan
+  ---
+  duration_ms: 29.8792
+  type: 'test'
+  ...
+# Subtest: FINAL missing isolation certificate cannot bypass source issues
+ok 101 - FINAL missing isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 34.2034
+  type: 'test'
+  ...
+# Subtest: FINAL changed isolation certificate cannot bypass source issues
+ok 102 - FINAL changed isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 27.7688
+  type: 'test'
+  ...
+# Subtest: FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+ok 103 - FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+  ---
+  duration_ms: 4070.9667
+  type: 'test'
+  ...
+# Subtest: preflight project mismatch is rejected before requests
+ok 104 - preflight project mismatch is rejected before requests
+  ---
+  duration_ms: 1.2391
+  type: 'test'
+  ...
+# Subtest: successful bounded reads never become authorization; no write API is reachable
+ok 105 - successful bounded reads never become authorization; no write API is reachable
+  ---
+  duration_ms: 9.1546
+  type: 'test'
+  ...
+# Subtest: insufficient IAM stops immediately without any document requests or writes
+ok 106 - insufficient IAM stops immediately without any document requests or writes
+  ---
+  duration_ms: 0.3649
+  type: 'test'
+  ...
+# Subtest: signed-in CLI identity does not bypass email or application profile mismatch
+ok 107 - signed-in CLI identity does not bypass email or application profile mismatch
+  ---
+  duration_ms: 2.2163
+  type: 'test'
+  ...
+# Subtest: USER and conflicting Auth claims stop before inventory sampling
+ok 108 - USER and conflicting Auth claims stop before inventory sampling
+  ---
+  duration_ms: 3.0132
+  type: 'test'
+  ...
+# Subtest: active or malformed control stops without trying to unlock it
+ok 109 - active or malformed control stops without trying to unlock it
+  ---
+  duration_ms: 2.1974
+  type: 'test'
+  ...
+# Subtest: cap prevents broad queries and arbitrary fields, including users listing
+ok 110 - cap prevents broad queries and arbitrary fields, including users listing
+  ---
+  duration_ms: 0.4987
+  type: 'test'
+  ...
+# Subtest: foreign ruleset is not followed and transport errors stop preflight
+ok 111 - foreign ruleset is not followed and transport errors stop preflight
+  ---
+  duration_ms: 0.3541
+  type: 'test'
+  ...
+# Subtest: sample compatibility keeps stock/remaining separate and duplicate checks bounded
+ok 112 - sample compatibility keeps stock/remaining separate and duplicate checks bounded
+  ---
+  duration_ms: 2.8556
+  type: 'test'
+  ...
+# Subtest: malformed schema and legacy formalization never imply reconciled stock
+ok 113 - malformed schema and legacy formalization never imply reconciled stock
+  ---
+  duration_ms: 0.518
+  type: 'test'
+  ...
+# Subtest: reconciliation PENDIENTE, Excel before confirmation stays blocked
+ok 114 - reconciliation PENDIENTE, Excel before confirmation stays blocked
+  ---
+  duration_ms: 0.4222
+  type: 'test'
+  ...
+# Subtest: reconciliation PENDIENTE, Excel after confirmation stays blocked
+ok 115 - reconciliation PENDIENTE, Excel after confirmation stays blocked
+  ---
+  duration_ms: 0.111
+  type: 'test'
+  ...
+# Subtest: reconciliation COMPLETADO, Excel before confirmation stays blocked
+ok 116 - reconciliation COMPLETADO, Excel before confirmation stays blocked
+  ---
+  duration_ms: 0.0596
+  type: 'test'
+  ...
+# Subtest: reconciliation COMPLETADO, Excel after confirmation stays blocked
+ok 117 - reconciliation COMPLETADO, Excel after confirmation stays blocked
+  ---
+  duration_ms: 0.0531
+  type: 'test'
+  ...
+# Subtest: reconciliation SIN_VERIFICAR, Excel before confirmation stays blocked
+ok 118 - reconciliation SIN_VERIFICAR, Excel before confirmation stays blocked
+  ---
+  duration_ms: 0.0413
+  type: 'test'
+  ...
+# Subtest: reconciliation SIN_VERIFICAR, Excel after confirmation stays blocked
+ok 119 - reconciliation SIN_VERIFICAR, Excel after confirmation stays blocked
+  ---
+  duration_ms: 0.0365
+  type: 'test'
+  ...
+# Subtest: manual/fake verification flags cannot enable reconciliation or arithmetic adjustments
+ok 120 - manual/fake verification flags cannot enable reconciliation or arithmetic adjustments
+  ---
+  duration_ms: 0.0932
+  type: 'test'
+  ...
+# Subtest: real 567-issue dossier keeps all rows, source literals and global completeness blocks
+ok 121 - real 567-issue dossier keeps all rows, source literals and global completeness blocks
+  ---
+  duration_ms: 9.8736
+  type: 'test'
+  ...
+# Subtest: issue product scope differs from unidentifiable file scope without authorizing a subset
+ok 122 - issue product scope differs from unidentifiable file scope without authorizing a subset
+  ---
+  duration_ms: 0.2478
+  type: 'test'
+  ...
+# Subtest: proposed IAM grants no destructive privilege and preflight role remains read-only
+ok 123 - proposed IAM grants no destructive privilege and preflight role remains read-only
+  ---
+  duration_ms: 2.3701
+  type: 'test'
+  ...
+1..123
+# tests 123
+# suites 0
+# pass 123
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 42123.3386
++  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+!  Firestore Emulator has exited upon receiving signal: SIGINT
+i  auth: Stopping Authentication Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator

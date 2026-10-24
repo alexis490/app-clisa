@@ -1,0 +1,1170 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =====================================================
+// VALIDAR IMPORTACIÓN DE INVENTARIO
+// =====================================================
+
+function importacionValida(importacionId) {
+
+  let i = request.resource.data;
+
+  return
+
+    // -------------------------------------------------
+    // SOLO ADMIN / SUPER_ADMIN
+    // -------------------------------------------------
+
+    cuentaActiva()
+
+    && esAdmin()
+
+    // -------------------------------------------------
+    // ESTRUCTURA OBLIGATORIA
+    // -------------------------------------------------
+
+    && i.keys().hasAll([
+      "importacionId",
+      "tipo",
+      "nombreArchivo",
+
+      "realizadoPorId",
+      "realizadoPorNombre",
+      "realizadoPorEmail",
+
+      "productosProcesados",
+      "productosCreados",
+      "productosActualizados",
+
+      "existenciasProcesadas",
+      "existenciasCreadas",
+      "existenciasActualizadas",
+
+      "filasIgnoradas",
+
+      "fechaHora",
+      "estado"
+    ])
+
+    // -------------------------------------------------
+    // NO PERMITIR CAMPOS ARBITRARIOS
+    // -------------------------------------------------
+
+    && i.keys().hasOnly([
+      "importacionId",
+      "tipo",
+      "nombreArchivo",
+
+      "realizadoPorId",
+      "realizadoPorNombre",
+      "realizadoPorEmail",
+
+      "productosProcesados",
+      "productosCreados",
+      "productosActualizados",
+
+      "existenciasProcesadas",
+      "existenciasCreadas",
+      "existenciasActualizadas",
+
+      "filasIgnoradas",
+
+      "fechaHora",
+      "estado"
+    ])
+
+    // -------------------------------------------------
+    // IDENTIDAD
+    // -------------------------------------------------
+
+    && i.importacionId == importacionId
+
+    && i.tipo == "IMPORTAR_INVENTARIO"
+
+    && i.realizadoPorId == request.auth.uid
+
+    // -------------------------------------------------
+    // ARCHIVO
+    // -------------------------------------------------
+
+    && i.nombreArchivo is string
+
+    && i.nombreArchivo.size() > 0
+
+    && i.nombreArchivo.size() <= 200
+
+    // -------------------------------------------------
+    // CONTADORES
+    // -------------------------------------------------
+
+    && i.productosProcesados is int
+    && i.productosProcesados >= 0
+
+    && i.productosCreados is int
+    && i.productosCreados >= 0
+
+    && i.productosActualizados is int
+    && i.productosActualizados >= 0
+
+    && i.existenciasProcesadas is int
+    && i.existenciasProcesadas >= 0
+
+    && i.existenciasCreadas is int
+    && i.existenciasCreadas >= 0
+
+    && i.existenciasActualizadas is int
+    && i.existenciasActualizadas >= 0
+
+    && i.filasIgnoradas is int
+    && i.filasIgnoradas >= 0
+
+    // -------------------------------------------------
+    // CONSISTENCIA DE CONTADORES
+    // -------------------------------------------------
+
+    && i.productosCreados
+      + i.productosActualizados
+      <= i.productosProcesados
+
+    && i.existenciasCreadas
+      + i.existenciasActualizadas
+      <= i.existenciasProcesadas
+
+    // -------------------------------------------------
+    // USUARIO HISTÓRICO
+    // -------------------------------------------------
+
+    && i.realizadoPorNombre is string
+    && i.realizadoPorNombre.size() > 0
+
+    && i.realizadoPorEmail is string
+    && i.realizadoPorEmail.size() > 0
+
+    // -------------------------------------------------
+    // FECHA GENERADA POR SERVIDOR
+    // -------------------------------------------------
+
+    && i.fechaHora == request.time
+
+    // -------------------------------------------------
+    // ESTADO FINAL
+    // -------------------------------------------------
+
+    && i.estado == "COMPLETADO";
+}
+
+// =====================================================
+// CATEGORÍAS
+// =====================================================
+match /categorias/{categoriaId} {
+  allow read: if cuentaActiva();
+  allow create, update, delete: if false;
+}
+
+// =====================================================
+// MARCAS
+// =====================================================
+match /marcas/{marcaId} {
+  allow read: if cuentaActiva();
+  allow create, update, delete: if false;
+}
+
+    // =====================================================
+    // AUTENTICACIÓN Y ROLES
+    // =====================================================
+
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    function miUsuario() {
+      return get(/databases/$(database)/documents/usuarios/$(request.auth.uid));
+    }
+
+function rolEfectivo() {
+  return request.auth.token.get("role", "USER");
+}
+
+function rolValido() {
+  return autenticado() && (
+    (rolEfectivo() == "USER" && (
+      request.auth.token.keys().hasAny(["role"])
+      || (request.auth.token.get("admin", false) == false
+        && request.auth.token.get("superAdmin", false) == false)
+    ))
+    || (rolEfectivo() == "ADMIN" && request.auth.token.get("admin", false) == true)
+    || (rolEfectivo() == "SUPER_ADMIN"
+      && request.auth.token.get("admin", false) == true
+      && request.auth.token.get("superAdmin", false) == true)
+  );
+}
+
+function esAdmin() {
+  return autenticado()
+    && rolEfectivo() in ["ADMIN", "SUPER_ADMIN"]
+    && request.auth.token.get("admin", false) == true;
+}
+
+function esSuperAdmin() {
+  return autenticado()
+    && rolEfectivo() == "SUPER_ADMIN"
+    && request.auth.token.get("admin", false) == true
+    && request.auth.token.get("superAdmin", false) == true;
+}
+
+function cuentaActiva() {
+  return rolValido()
+    && miUsuario().data.estado == "ACTIVO"
+    && miUsuario().data.role == rolEfectivo();
+}
+
+match /usuarios/{userId} {
+  // Leer SOLO el perfil propio aunque falte o esté bloqueado no da acceso al inventario.
+  allow get: if (autenticado() && request.auth.uid == userId)
+    || (cuentaActiva() && esSuperAdmin());
+  allow list: if cuentaActiva() && esSuperAdmin();
+
+  // Create solo se aplica si NO existe. Nunca reactiva perfiles existentes.
+  // No reconstruir como USER una identidad administrativa sin perfil.
+  allow create: if rolValido()
+    && rolEfectivo() == "USER"
+    && request.auth.uid == userId
+    && request.resource.data.uid == request.auth.uid
+    && request.resource.data.role == "USER"
+    && request.resource.data.estado == "ACTIVO"
+    && request.resource.data.keys().hasAll([
+      "uid", "email", "displayName", "role", "estado", "creadoEn"
+    ])
+    && request.resource.data.keys().hasOnly([
+      "uid", "email", "displayName", "profileImageUri", "role", "estado", "creadoEn"
+    ])
+    && request.resource.data.email == request.auth.token.get("email", "")
+    && request.resource.data.email is string
+    && request.resource.data.email.size() > 0
+    && request.resource.data.displayName is string
+    && request.resource.data.displayName.size() > 0
+    && request.resource.data.creadoEn == request.time
+    && (!request.resource.data.keys().hasAny(["profileImageUri"])
+      || request.resource.data.profileImageUri is string);
+
+  // Propuesta anterior conservada: Android solo cambia estado de otras cuentas
+  // USER/ADMIN. Roles y cuentas SUPER_ADMIN quedan fuera de esta vía.
+  allow update: if cuentaActiva()
+    && esSuperAdmin()
+    && request.auth.uid != userId
+    && resource.data.role in ["USER", "ADMIN"]
+    && request.resource.data.diff(resource.data).affectedKeys()
+         .hasOnly(["estado", "actualizadoEn"])
+    && request.resource.data.estado in ["ACTIVO", "BLOQUEADO"]
+    && request.resource.data.actualizadoEn == request.time;
+
+  allow delete: if false;
+}
+
+
+    // =====================================================
+    // TIENDAS
+    // =====================================================
+
+    match /tiendas/{tiendaId} {
+
+      allow read: if cuentaActiva();
+
+      allow create, update: if cuentaActiva()
+        && esSuperAdmin();
+
+      allow delete: if false;
+    }
+
+    // =========================================================
+// GESTIÓN ADMINISTRATIVA DE PRODUCTOS
+// =========================================================
+
+// ADMIN y SUPER_ADMIN pueden crear productos,
+// pero un producto nuevo siempre comienza sin stock.
+function nuevoProductoValido() {
+  return esAdmin()
+
+    // Campos mínimos.
+    && request.resource.data.keys().hasAll([
+      "codigo",
+      "nombre",
+      "stock",
+      "estado",
+      "creadoEn",
+      "actualizadoEn"
+    ])
+
+    // Por ahora solo permitimos estos campos.
+    && request.resource.data.keys().hasOnly([
+      "codigo",
+      "nombre",
+      "stock",
+      "estado",
+      "creadoEn",
+      "actualizadoEn"
+    ])
+
+    // Validaciones iniciales.
+    && request.resource.data.codigo is string
+    && request.resource.data.codigo.size() > 0
+
+    && request.resource.data.nombre is string
+    && request.resource.data.nombre.size() > 0
+
+    // Nunca se crea un producto inventando stock.
+    && request.resource.data.stock == 0
+
+    && request.resource.data.estado == "ACTIVO";
+}
+
+
+// ADMIN y SUPER_ADMIN pueden editar solamente
+// información administrativa/descriptiva.
+//
+// NO pueden modificar directamente:
+// codigo
+// stock
+// creadoEn
+function edicionProductoValida() {
+  return esAdmin()
+
+    && request.resource.data
+      .diff(resource.data)
+      .affectedKeys()
+      .hasOnly([
+        "nombre",
+        "estado",
+        "actualizadoEn"
+      ])
+
+    && request.resource.data.nombre is string
+    && request.resource.data.nombre.size() > 0
+
+    && (
+      request.resource.data.estado == "ACTIVO"
+      || request.resource.data.estado == "INACTIVO"
+    );
+}
+
+
+    // =====================================================
+    // PRODUCTOS
+    // =====================================================
+
+    match /productos/{productoId} {
+
+  allow read: if cuentaActiva();
+
+  // =====================================================
+  // CREAR PRODUCTO
+  // =====================================================
+
+  allow create: if cuentaActiva()
+    && nuevoProductoValido();
+
+  // =====================================================
+  // ACTUALIZAR PRODUCTO
+  // =====================================================
+
+  /*
+   * Hay solamente dos caminos válidos:
+   *
+   * 1. ADMIN / SUPER_ADMIN:
+   *    editar datos administrativos permitidos.
+   *
+   * 2. USER / ADMIN / SUPER_ADMIN:
+   *    modificar stock mediante una SALIDA válida.
+   *
+   * Ningún rol puede cambiar stock arbitrariamente.
+   */
+
+  allow update: if cuentaActiva()
+  && (
+    edicionProductoValida()
+    || salidaValidaProducto()
+    || ajusteValidoProducto()
+  );
+
+  // Nunca eliminamos físicamente productos.
+  allow delete: if false;
+}
+
+
+    // =====================================================
+    // EXISTENCIAS
+    // =====================================================
+
+    match /existencias/{existenciaId} {
+
+      allow read: if cuentaActiva();
+
+      allow create: if cuentaActiva()
+        && esAdmin();
+
+      /*
+       * ADMIN / SUPER_ADMIN:
+       * gestión normal.
+       *
+       * USER:
+       * solamente mediante una SALIDA válida.
+       */
+      allow update: if cuentaActiva()
+  && (
+    salidaValidaExistencia()
+    || ajusteValidoExistencia()
+  );
+
+      allow delete: if false;
+    }
+
+
+    // =====================================================
+    // REGISTROS
+    // =====================================================
+
+    match /registros/{registroId} {
+
+      allow read: if cuentaActiva();
+
+      /*
+       * USER, ADMIN y SUPER_ADMIN pueden registrar
+       * movimientos, pero la salida debe cumplir
+       * todas las validaciones.
+       */
+      allow create: if cuentaActiva()
+  && (
+    registroSalidaValido(registroId)
+    || registroAjusteValido(registroId)
+  );
+
+      // Historial inmutable.
+      allow update, delete: if false;
+    }
+
+
+    // =====================================================
+    // VALIDAR PRODUCTO DURANTE SALIDA
+    // =====================================================
+
+    function salidaValidaProducto() {
+
+      let registroId =
+        request.resource.data.ultimaSalidaId;
+
+      let registro =
+        getAfter(
+          /databases/$(database)/documents/registros/$(registroId)
+        );
+
+      let diferencia =
+        resource.data.stock -
+        request.resource.data.stock;
+
+      return
+
+        diferencia > 0
+
+        && request.resource.data.stock >= 0
+
+        // El usuario normal solamente puede tocar
+        // estos tres campos.
+        && request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasOnly([
+            "stock",
+            "ultimaSalidaId",
+            "actualizadoEn"
+          ])
+
+        && registro.data.tipo == "SALIDA"
+
+        && registro.data.estado == "COMPLETADO"
+
+        && registro.data.registradoPorId
+          == request.auth.uid
+
+        && registro.data.productoId
+          == resource.id
+
+        && registro.data.cantidad
+          == diferencia;
+    }
+
+
+    // =====================================================
+    // VALIDAR EXISTENCIA DURANTE SALIDA
+    // =====================================================
+
+    function salidaValidaExistencia() {
+
+      let registroId =
+        request.resource.data.ultimaSalidaId;
+
+      let registro =
+        getAfter(
+          /databases/$(database)/documents/registros/$(registroId)
+        );
+
+      let diferencia =
+        resource.data.cantidad -
+        request.resource.data.cantidad;
+
+      return
+
+        diferencia > 0
+
+        && request.resource.data.cantidad >= 0
+
+        && request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasOnly([
+            "cantidad",
+            "estado",
+            "ultimaSalidaId",
+            "actualizadoEn"
+          ])
+
+        && (
+          (
+            request.resource.data.cantidad > 0
+            && request.resource.data.estado == "DISPONIBLE"
+          )
+          ||
+          (
+            request.resource.data.cantidad == 0
+            && request.resource.data.estado == "SIN_STOCK"
+          )
+        )
+
+        && registro.data.tipo == "SALIDA"
+
+        && registro.data.estado == "COMPLETADO"
+
+        && registro.data.registradoPorId
+          == request.auth.uid
+
+        && registro.data.existenciaId
+          == resource.id
+
+        && registro.data.productoId
+          == resource.data.productoId
+
+        && registro.data.cantidad
+          == diferencia;
+    }
+
+
+    // =====================================================
+    // VALIDAR REGISTRO DE SALIDA
+    // =====================================================
+
+    function registroSalidaValido(registroId) {
+
+      let r = request.resource.data;
+
+      let existenciaAntes =
+        get(
+          /databases/$(database)/documents/existencias/$(r.existenciaId)
+        );
+
+      let existenciaDespues =
+        getAfter(
+          /databases/$(database)/documents/existencias/$(r.existenciaId)
+        );
+
+      let productoAntes =
+        get(
+          /databases/$(database)/documents/productos/$(r.productoId)
+        );
+
+      let productoDespues =
+        getAfter(
+          /databases/$(database)/documents/productos/$(r.productoId)
+        );
+
+      let tiendaOrigen =
+        get(
+          /databases/$(database)/documents/tiendas/$(r.tiendaOrigenId)
+        );
+
+      let tiendaDestino =
+        get(
+          /databases/$(database)/documents/tiendas/$(r.tiendaDestinoId)
+        );
+
+      return
+
+        // -----------------------------------------------
+        // ESTRUCTURA DEL REGISTRO
+        // -----------------------------------------------
+
+        r.keys().hasAll([
+          "registroId",
+          "tipo",
+
+          "productoId",
+          "codigoProducto",
+          "nombreProducto",
+
+          "existenciaId",
+          "codigoExistencia",
+
+          "cantidad",
+
+          "tiendaOrigenId",
+          "tiendaOrigenNombre",
+
+          "tiendaDestinoId",
+          "tiendaDestinoNombre",
+
+          "registradoPorId",
+          "registradoPorNombre",
+          "registradoPorEmail",
+
+          "recibidoPor",
+
+          "fechaHora",
+          "estado"
+        ])
+
+        && r.keys().hasOnly([
+          "registroId",
+          "tipo",
+
+          "productoId",
+          "codigoProducto",
+          "nombreProducto",
+
+          "existenciaId",
+          "codigoExistencia",
+
+          "cantidad",
+
+          "tiendaOrigenId",
+          "tiendaOrigenNombre",
+
+          "tiendaDestinoId",
+          "tiendaDestinoNombre",
+
+          "registradoPorId",
+          "registradoPorNombre",
+          "registradoPorEmail",
+
+          "recibidoPor",
+
+          "fechaHora",
+          "estado"
+        ])
+
+        // -----------------------------------------------
+        // MOVIMIENTO
+        // -----------------------------------------------
+
+        && r.registroId == registroId
+
+        && r.tipo == "SALIDA"
+
+        && r.estado == "COMPLETADO"
+
+        && r.cantidad is int
+
+        && r.cantidad > 0
+
+        && r.estadoPago in ["Pagado", "Pendiente"]
+
+        // -----------------------------------------------
+        // USUARIO
+        // -----------------------------------------------
+
+        && r.registradoPorId
+          == request.auth.uid
+
+        // -----------------------------------------------
+        // ORIGEN / DESTINO
+        // -----------------------------------------------
+
+        && r.tiendaOrigenId == "clisa"
+
+        && r.tiendaDestinoId != "clisa"
+
+        && tiendaOrigen.data.estado == "ACTIVA"
+
+        && tiendaDestino.data.estado == "ACTIVA"
+
+        // Los nombres históricos deben corresponder
+        // a las tiendas reales.
+        && r.tiendaOrigenNombre
+          == tiendaOrigen.data.nombre
+
+        && r.tiendaDestinoNombre
+          == tiendaDestino.data.nombre
+
+        // -----------------------------------------------
+        // EXISTENCIA ↔ PRODUCTO
+        // -----------------------------------------------
+
+        && existenciaAntes.data.productoId
+          == r.productoId
+
+        && r.codigoExistencia
+          == existenciaAntes.data.codigo
+
+        // -----------------------------------------------
+        // DESCUENTO EXACTO DE EXISTENCIA
+        // -----------------------------------------------
+
+        && existenciaAntes.data.cantidad
+          - existenciaDespues.data.cantidad
+          == r.cantidad
+
+        && existenciaDespues.data.cantidad >= 0
+
+        && existenciaDespues.data.ultimaSalidaId
+          == registroId
+
+        // -----------------------------------------------
+        // DESCUENTO EXACTO DEL PRODUCTO
+        // -----------------------------------------------
+
+        && productoAntes.data.stock
+          - productoDespues.data.stock
+          == r.cantidad
+
+        && productoDespues.data.stock >= 0
+
+        && productoDespues.data.ultimaSalidaId
+          == registroId;
+    }
+
+        // =====================================================
+    // VALIDAR PRODUCTO DURANTE AJUSTE DE INVENTARIO
+    // =====================================================
+
+    function ajusteValidoProducto() {
+
+      let registroId =
+        request.resource.data.ultimoAjusteId;
+
+      let registro =
+        getAfter(
+          /databases/$(database)/documents/registros/$(registroId)
+        );
+
+      let diferencia =
+        request.resource.data.stock -
+        resource.data.stock;
+
+      return
+
+        esAdmin()
+
+        && request.resource.data.stock >= 0
+
+        && request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasOnly([
+            "stock",
+            "ultimoAjusteId",
+            "actualizadoEn"
+          ])
+
+        && registro.data.estado == "COMPLETADO"
+
+        && registro.data.registradoPorId
+          == request.auth.uid
+
+        && registro.data.productoId
+          == resource.id
+
+        && (
+          (
+            registro.data.tipo == "AJUSTE_ENTRADA"
+            && diferencia > 0
+            && registro.data.cantidad == diferencia
+          )
+          ||
+          (
+            registro.data.tipo == "AJUSTE_SALIDA"
+            && diferencia < 0
+            && registro.data.cantidad == (0 - diferencia)
+          )
+        );
+    }
+
+
+    // =====================================================
+    // VALIDAR EXISTENCIA DURANTE AJUSTE DE INVENTARIO
+    // =====================================================
+
+    function ajusteValidoExistencia() {
+
+      let registroId =
+        request.resource.data.ultimoAjusteId;
+
+      let registro =
+        getAfter(
+          /databases/$(database)/documents/registros/$(registroId)
+        );
+
+      let diferencia =
+        request.resource.data.cantidad -
+        resource.data.cantidad;
+
+      return
+
+        esAdmin()
+
+        && request.resource.data.cantidad >= 0
+
+        && request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasOnly([
+            "cantidad",
+            "estado",
+            "ultimoAjusteId",
+            "actualizadoEn"
+          ])
+
+        && (
+          (
+            request.resource.data.cantidad > 0
+            && request.resource.data.estado == "DISPONIBLE"
+          )
+          ||
+          (
+            request.resource.data.cantidad == 0
+            && request.resource.data.estado == "SIN_STOCK"
+          )
+        )
+
+        && registro.data.estado == "COMPLETADO"
+
+        && registro.data.registradoPorId
+          == request.auth.uid
+
+        && registro.data.existenciaId
+          == resource.id
+
+        && registro.data.productoId
+          == resource.data.productoId
+
+        && (
+          (
+            registro.data.tipo == "AJUSTE_ENTRADA"
+            && diferencia > 0
+            && registro.data.cantidad == diferencia
+          )
+          ||
+          (
+            registro.data.tipo == "AJUSTE_SALIDA"
+            && diferencia < 0
+            && registro.data.cantidad == (0 - diferencia)
+          )
+        );
+    }
+
+
+    // =====================================================
+    // VALIDAR REGISTRO DE AJUSTE
+    // =====================================================
+
+    function registroAjusteValido(registroId) {
+
+  let r = request.resource.data;
+
+  let existenciaAntes =
+    get(
+      /databases/$(database)/documents/existencias/$(r.existenciaId)
+    );
+
+  let existenciaDespues =
+    getAfter(
+      /databases/$(database)/documents/existencias/$(r.existenciaId)
+    );
+
+  let productoAntes =
+    get(
+      /databases/$(database)/documents/productos/$(r.productoId)
+    );
+
+  let productoDespues =
+    getAfter(
+      /databases/$(database)/documents/productos/$(r.productoId)
+    );
+
+  return
+
+    // Solo ADMIN / SUPER_ADMIN.
+    esAdmin()
+
+    // =================================================
+    // ESTRUCTURA OBLIGATORIA
+    // =================================================
+
+    && r.keys().hasAll([
+      "registroId",
+      "tipo",
+
+      "productoId",
+      "codigoProducto",
+      "nombreProducto",
+
+      "existenciaId",
+      "codigoExistencia",
+
+      "cantidad",
+      "motivo",
+
+      "origen",
+
+      "registradoPorId",
+      "registradoPorNombre",
+      "registradoPorEmail",
+
+      "recibidoPor",
+      "estadoPago",
+
+      "fechaHora",
+      "estado"
+    ])
+
+    // =================================================
+    // CAMPOS PERMITIDOS
+    // =================================================
+
+    && r.keys().hasOnly([
+      "registroId",
+      "tipo",
+
+      "productoId",
+      "codigoProducto",
+      "nombreProducto",
+
+      "existenciaId",
+      "codigoExistencia",
+
+      "cantidad",
+      "motivo",
+
+      "origen",
+      "importacionId",
+
+      "registradoPorId",
+      "registradoPorNombre",
+      "registradoPorEmail",
+
+      "fechaHora",
+      "estado"
+    ])
+
+    // =================================================
+    // MOVIMIENTO
+    // =================================================
+
+    && r.registroId == registroId
+
+    && (
+      r.tipo == "AJUSTE_ENTRADA"
+      || r.tipo == "AJUSTE_SALIDA"
+    )
+
+    && r.estado == "COMPLETADO"
+
+    && r.cantidad is int
+
+    && r.cantidad > 0
+
+    && r.motivo is string
+
+    && r.motivo.size() > 0
+
+    // =================================================
+    // ORIGEN DEL AJUSTE
+    // =================================================
+
+    && (
+      r.origen == "MANUAL"
+      || r.origen == "IMPORTACION"
+    )
+
+    // =================================================
+    // USUARIO
+    // =================================================
+
+    && r.registradoPorId
+      == request.auth.uid
+
+    // =================================================
+    // AJUSTE MANUAL
+    // =================================================
+
+    && (
+      (
+        r.origen == "MANUAL"
+
+        // Un ajuste manual no puede hacerse pasar
+        // por una importación.
+        && !r.keys().hasAny([
+          "importacionId"
+        ])
+      )
+
+      ||
+
+      // =================================================
+      // AJUSTE GENERADO POR IMPORTACIÓN
+      // =================================================
+
+      (
+        r.origen == "IMPORTACION"
+
+        && r.keys().hasAll([
+          "importacionId"
+        ])
+
+        && r.importacionId is string
+
+        && r.importacionId.size() > 0
+
+        && existsAfter(
+          /databases/$(database)/documents/importaciones/$(r.importacionId)
+        )
+
+        && getAfter(
+          /databases/$(database)/documents/importaciones/$(r.importacionId)
+        ).data.tipo == "IMPORTAR_INVENTARIO"
+
+        && getAfter(
+          /databases/$(database)/documents/importaciones/$(r.importacionId)
+        ).data.estado == "COMPLETADO"
+
+        && getAfter(
+          /databases/$(database)/documents/importaciones/$(r.importacionId)
+        ).data.realizadoPorId == request.auth.uid
+      )
+    )
+
+    // =================================================
+    // EXISTENCIA ↔ PRODUCTO
+    // =================================================
+
+    && existenciaAntes.data.productoId
+      == r.productoId
+
+    && r.codigoExistencia
+      == existenciaAntes.data.codigo
+
+    && r.codigoProducto
+      == productoAntes.data.codigo
+
+    && r.nombreProducto
+      == productoAntes.data.nombre
+
+    // =================================================
+    // AJUSTE DE ENTRADA
+    // =================================================
+
+    && (
+      (
+        r.tipo == "AJUSTE_ENTRADA"
+
+        && existenciaDespues.data.cantidad
+          - existenciaAntes.data.cantidad
+          == r.cantidad
+
+        && productoDespues.data.stock
+          - productoAntes.data.stock
+          == r.cantidad
+      )
+
+      ||
+
+      // =================================================
+      // AJUSTE DE SALIDA
+      // =================================================
+
+      (
+        r.tipo == "AJUSTE_SALIDA"
+
+        && existenciaAntes.data.cantidad
+          - existenciaDespues.data.cantidad
+          == r.cantidad
+
+        && productoAntes.data.stock
+          - productoDespues.data.stock
+          == r.cantidad
+
+        && existenciaDespues.data.cantidad >= 0
+
+        && productoDespues.data.stock >= 0
+      )
+    )
+
+    // =================================================
+    // VINCULACIÓN ATÓMICA
+    // =================================================
+
+    && existenciaDespues.data.ultimoAjusteId
+      == registroId
+
+    && productoDespues.data.ultimoAjusteId
+      == registroId;
+}
+
+    // =====================================================
+// IMPORTACIONES
+// =====================================================
+
+match /importaciones/{importacionId} {
+
+  // ADMIN y SUPER_ADMIN pueden consultar
+  // el historial de importaciones.
+  allow read: if cuentaActiva()
+    && esAdmin();
+
+  // Solo se puede crear una importación válida.
+  allow create: if importacionValida(importacionId);
+
+  // El historial de importaciones es inmutable.
+  allow update, delete: if false;
+}
+
+// =====================================================
+// RECEPTORES
+// =====================================================
+
+match /receptores/{receptorId} {
+  allow read: if cuentaActiva();
+  allow create, update, delete: if false;
+}
+
+
+    // =====================================================
+    // COLECCIONES ANTIGUAS
+    // =====================================================
+
+    match /lotes/{document=**} {
+      allow read, write: if false;
+    }
+
+    match /responsables/{document=**} {
+      allow read, write: if false;
+    }
+
+
+    // =====================================================
+    // DENEGAR TODO LO NO DEFINIDO
+    // =====================================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

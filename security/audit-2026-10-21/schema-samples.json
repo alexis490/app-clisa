@@ -1,0 +1,765 @@
+{
+  "checkedAt": "2026-10-21T19:32:56.598Z",
+  "project": "empresa-clisa",
+  "authMode": "Firebase CLI OAuth/IAM, read-only schema samples; DOES NOT test Android security rules",
+  "pageSize": 3,
+  "maximumDocumentsRequested": 26,
+  "collections": {
+    "productos": {
+      "status": 200,
+      "documentsReturned": 3,
+      "hasNextPage": true,
+      "documents": [
+        {
+          "id": "0-761345-10024-3",
+          "fields": {
+            "cantidadTotal": {
+              "type": "integerValue",
+              "value": "2"
+            },
+            "codigo": {
+              "type": "stringValue",
+              "value": "0-761345-10024-3"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "ACTIVO"
+            },
+            "cantidadRestante": {
+              "type": "integerValue",
+              "value": "2"
+            },
+            "marcaId": {
+              "type": "stringValue",
+              "value": "antec"
+            },
+            "nombreCompleto": {
+              "type": "stringValue",
+              "value": "[0-761345-10024-3] Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "descripcion": {
+              "type": "stringValue",
+              "value": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "cantidadLotes": {
+              "type": "integerValue",
+              "value": "2"
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:39.451Z"
+            },
+            "stock": {
+              "type": "integerValue",
+              "value": "2"
+            },
+            "categoriaId": {
+              "type": "stringValue",
+              "value": "cases-y-gabinetes"
+            }
+          }
+        },
+        {
+          "id": "0-761345-100618",
+          "fields": {
+            "descripcion": {
+              "type": "stringValue",
+              "value": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente."
+            },
+            "nombreCompleto": {
+              "type": "stringValue",
+              "value": "[0-761345-100618] Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente."
+            },
+            "stock": {
+              "type": "integerValue",
+              "value": "0"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "ACTIVO"
+            },
+            "cantidadTotal": {
+              "type": "integerValue",
+              "value": "0"
+            },
+            "marcaId": {
+              "type": "stringValue",
+              "value": "antec"
+            },
+            "codigo": {
+              "type": "stringValue",
+              "value": "0-761345-100618"
+            },
+            "cantidadRestante": {
+              "type": "integerValue",
+              "value": "0"
+            },
+            "categoriaId": {
+              "type": "stringValue",
+              "value": "cases-y-gabinetes"
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente."
+            },
+            "cantidadLotes": {
+              "type": "integerValue",
+              "value": "2"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:39.451Z"
+            }
+          }
+        },
+        {
+          "id": "0-761345-10066-3",
+          "fields": {
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:39.451Z"
+            },
+            "categoriaId": {
+              "type": "stringValue",
+              "value": "cases-y-gabinetes"
+            },
+            "stock": {
+              "type": "integerValue",
+              "value": "0"
+            },
+            "ESTADO": {
+              "type": "stringValue",
+              "value": "ACTIVO"
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "Case Antec AX20 ELITE MT 4AR GL, Black, 03 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "cantidadRestante": {
+              "type": "integerValue",
+              "value": "0"
+            },
+            "cantidadTotal": {
+              "type": "integerValue",
+              "value": "0"
+            },
+            "nombreCompleto": {
+              "type": "stringValue",
+              "value": "[0-761345-10066-3] Case Antec AX20 ELITE MT 4AR GL, Black, 03 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "marcaId": {
+              "type": "stringValue",
+              "value": "antec"
+            },
+            "cantidadLotes": {
+              "type": "integerValue",
+              "value": "3"
+            },
+            "descripcion": {
+              "type": "stringValue",
+              "value": "Case Antec AX20 ELITE MT 4AR GL, Black, 03 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "ACTIVO"
+            },
+            "codigo": {
+              "type": "stringValue",
+              "value": "0-761345-10066-3"
+            }
+          }
+        }
+      ]
+    },
+    "existencias": {
+      "status": 200,
+      "documentsReturned": 3,
+      "hasNextPage": true,
+      "documents": [
+        {
+          "id": "0-761345-10024-3_242100661_ec0c340b7e1f07",
+          "fields": {
+            "codigoProducto": {
+              "type": "stringValue",
+              "value": "0-761345-10024-3"
+            },
+            "nombreProducto": {
+              "type": "stringValue",
+              "value": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "DISPONIBLE"
+            },
+            "filaOrigen": {
+              "type": "integerValue",
+              "value": "5"
+            },
+            "cantidad": {
+              "type": "integerValue",
+              "value": "1"
+            },
+            "codigo": {
+              "type": "stringValue",
+              "value": "242100661"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:42.154Z"
+            },
+            "productoId": {
+              "type": "stringValue",
+              "value": "0-761345-10024-3"
+            }
+          }
+        },
+        {
+          "id": "0-761345-10024-3_242100670_c12277bec537fa",
+          "fields": {
+            "filaOrigen": {
+              "type": "integerValue",
+              "value": "6"
+            },
+            "cantidad": {
+              "type": "integerValue",
+              "value": "1"
+            },
+            "codigoProducto": {
+              "type": "stringValue",
+              "value": "0-761345-10024-3"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "DISPONIBLE"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:42.154Z"
+            },
+            "nombreProducto": {
+              "type": "stringValue",
+              "value": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+            },
+            "codigo": {
+              "type": "stringValue",
+              "value": "242100670"
+            },
+            "productoId": {
+              "type": "stringValue",
+              "value": "0-761345-10024-3"
+            }
+          }
+        },
+        {
+          "id": "0-761345-100618_2412C000209_05bb4d9e8fd7ee",
+          "fields": {
+            "productoId": {
+              "type": "stringValue",
+              "value": "0-761345-100618"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:42.154Z"
+            },
+            "nombreProducto": {
+              "type": "stringValue",
+              "value": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente."
+            },
+            "codigoProducto": {
+              "type": "stringValue",
+              "value": "0-761345-100618"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "SIN_STOCK"
+            },
+            "cantidad": {
+              "type": "integerValue",
+              "value": "0"
+            },
+            "filaOrigen": {
+              "type": "integerValue",
+              "value": "8"
+            },
+            "codigo": {
+              "type": "stringValue",
+              "value": "2412C000209"
+            }
+          }
+        }
+      ]
+    },
+    "registros": {
+      "status": 200,
+      "documentsReturned": 1,
+      "hasNextPage": false,
+      "documents": [
+        {
+          "id": "59e730c4-5352-4116-b0d4-e7935a7b5b7d",
+          "fields": {
+            "registradoPorEmail": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "tiendaDestinoId": {
+              "type": "stringValue",
+              "value": "toqen"
+            },
+            "tiendaDestinoNombre": {
+              "type": "stringValue",
+              "value": "TOQEN"
+            },
+            "tiendaOrigenNombre": {
+              "type": "stringValue",
+              "value": "CLISA"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "COMPLETADO"
+            },
+            "recibidoPor": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "nombreProducto": {
+              "type": "stringValue",
+              "value": "Laptop Lenovo Ideapad Slim 3 Intel Core I7-13620H 2.4/4.9Ghz, | 15.3\" WUXGA | 24GB RAM LPDDR5 | 512GB SSD  | Intel Iris Xe | Freedos | Español."
+            },
+            "codigoExistencia": {
+              "type": "stringValue",
+              "value": "SPF5QD453"
+            },
+            "registroId": {
+              "type": "stringValue",
+              "value": "59e730c4-5352-4116-b0d4-e7935a7b5b7d"
+            },
+            "codigoProducto": {
+              "type": "stringValue",
+              "value": "83K100KFLM"
+            },
+            "tiendaOrigenId": {
+              "type": "stringValue",
+              "value": "clisa"
+            },
+            "productoId": {
+              "type": "stringValue",
+              "value": "83K100KFLM"
+            },
+            "fechaHora": {
+              "type": "timestampValue",
+              "value": "2026-10-10T06:27:50.810Z"
+            },
+            "registradoPorId": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "tipo": {
+              "type": "stringValue",
+              "value": "SALIDA"
+            },
+            "existenciaId": {
+              "type": "stringValue",
+              "value": "83K100KFLM_SPF5QD453_916e57eb47f02f"
+            },
+            "registradoPorNombre": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "estadoPago": {
+              "type": "stringValue",
+              "value": "Pendiente"
+            },
+            "cantidad": {
+              "type": "integerValue",
+              "value": "1"
+            }
+          }
+        }
+      ]
+    },
+    "importaciones": {
+      "status": 200,
+      "documentsReturned": 0,
+      "hasNextPage": false,
+      "note": "No documents found; Firestore does not retain empty collections.",
+      "documents": []
+    },
+    "categorias": {
+      "status": 200,
+      "documentsReturned": 3,
+      "hasNextPage": true,
+      "documents": [
+        {
+          "id": "accesorios-para-computadoras",
+          "fields": {
+            "nombre": {
+              "type": "stringValue",
+              "value": "Accesorios para computadoras"
+            },
+            "activo": {
+              "type": "booleanValue",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "accesorios-para-laptops",
+          "fields": {
+            "nombre": {
+              "type": "stringValue",
+              "value": "Accesorios para laptops"
+            },
+            "activo": {
+              "type": "booleanValue",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "audifonos-y-microfonos",
+          "fields": {
+            "activo": {
+              "type": "booleanValue",
+              "value": true
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "Audífonos y micrófonos"
+            }
+          }
+        }
+      ]
+    },
+    "marcas": {
+      "status": 200,
+      "documentsReturned": 3,
+      "hasNextPage": true,
+      "documents": [
+        {
+          "id": "1st-player",
+          "fields": {
+            "activo": {
+              "type": "booleanValue",
+              "value": true
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "1ST Player"
+            }
+          }
+        },
+        {
+          "id": "acer",
+          "fields": {
+            "activo": {
+              "type": "booleanValue",
+              "value": true
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "Acer"
+            }
+          }
+        },
+        {
+          "id": "adata",
+          "fields": {
+            "nombre": {
+              "type": "stringValue",
+              "value": "Adata"
+            },
+            "activo": {
+              "type": "booleanValue",
+              "value": true
+            }
+          }
+        }
+      ]
+    },
+    "usuarios": {
+      "status": 200,
+      "documentsReturned": 3,
+      "hasNextPage": false,
+      "documents": [
+        {
+          "id": "[Firebase Auth uid sample 1]",
+          "fields": {
+            "creadoEn": {
+              "type": "timestampValue",
+              "value": "2026-10-19T22:31:07.846Z"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-10-20T14:23:53.577Z"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "BLOQUEADO"
+            },
+            "email": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "role": {
+              "type": "stringValue",
+              "value": "USER"
+            },
+            "displayName": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "uid": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            }
+          }
+        },
+        {
+          "id": "[Firebase Auth uid sample 2]",
+          "fields": {
+            "displayName": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "role": {
+              "type": "stringValue",
+              "value": "ADMIN"
+            },
+            "uid": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "username": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "BLOQUEADO"
+            },
+            "profileImageUri": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-10-20T14:23:59.897Z"
+            },
+            "email": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            }
+          }
+        },
+        {
+          "id": "[Firebase Auth uid sample 3]",
+          "fields": {
+            "uid": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "profileImageUri": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "displayName": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "estado": {
+              "type": "stringValue",
+              "value": "ACTIVO"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-27T03:13:09.693Z"
+            },
+            "email": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            },
+            "role": {
+              "type": "stringValue",
+              "value": "SUPER_ADMIN"
+            },
+            "username": {
+              "type": "stringValue",
+              "value": "[redacted]"
+            }
+          }
+        }
+      ]
+    },
+    "tiendas": {
+      "status": 200,
+      "documentsReturned": 2,
+      "hasNextPage": false,
+      "documents": [
+        {
+          "id": "clisa",
+          "fields": {
+            "estado": {
+              "type": "stringValue",
+              "value": "ACTIVA"
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "CLISA"
+            },
+            "tipo": {
+              "type": "stringValue",
+              "value": "ORIGEN"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:39.451Z"
+            }
+          }
+        },
+        {
+          "id": "toqen",
+          "fields": {
+            "estado": {
+              "type": "stringValue",
+              "value": "ACTIVA"
+            },
+            "nombre": {
+              "type": "stringValue",
+              "value": "TOQEN"
+            },
+            "actualizadoEn": {
+              "type": "timestampValue",
+              "value": "2026-09-26T00:48:39.451Z"
+            },
+            "tipo": {
+              "type": "stringValue",
+              "value": "RECEPTORA"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "relations": [
+    {
+      "existenceId": "0-761345-10024-3_242100661_ec0c340b7e1f07",
+      "productoId": "0-761345-10024-3",
+      "status": 200,
+      "product": {
+        "id": "0-761345-10024-3",
+        "fields": {
+          "estado": {
+            "type": "stringValue",
+            "value": "ACTIVO"
+          },
+          "nombre": {
+            "type": "stringValue",
+            "value": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+          },
+          "cantidadRestante": {
+            "type": "integerValue",
+            "value": "2"
+          },
+          "cantidadTotal": {
+            "type": "integerValue",
+            "value": "2"
+          },
+          "marcaId": {
+            "type": "stringValue",
+            "value": "antec"
+          },
+          "codigo": {
+            "type": "stringValue",
+            "value": "0-761345-10024-3"
+          },
+          "cantidadLotes": {
+            "type": "integerValue",
+            "value": "2"
+          },
+          "descripcion": {
+            "type": "stringValue",
+            "value": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+          },
+          "actualizadoEn": {
+            "type": "timestampValue",
+            "value": "2026-09-26T00:48:39.451Z"
+          },
+          "categoriaId": {
+            "type": "stringValue",
+            "value": "cases-y-gabinetes"
+          },
+          "nombreCompleto": {
+            "type": "stringValue",
+            "value": "[0-761345-10024-3] Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+          },
+          "stock": {
+            "type": "integerValue",
+            "value": "2"
+          }
+        }
+      }
+    },
+    {
+      "existenceId": "0-761345-100618_2412C000209_05bb4d9e8fd7ee",
+      "productoId": "0-761345-100618",
+      "status": 200,
+      "product": {
+        "id": "0-761345-100618",
+        "fields": {
+          "cantidadLotes": {
+            "type": "integerValue",
+            "value": "2"
+          },
+          "categoriaId": {
+            "type": "stringValue",
+            "value": "cases-y-gabinetes"
+          },
+          "stock": {
+            "type": "integerValue",
+            "value": "0"
+          },
+          "marcaId": {
+            "type": "stringValue",
+            "value": "antec"
+          },
+          "cantidadRestante": {
+            "type": "integerValue",
+            "value": "0"
+          },
+          "nombreCompleto": {
+            "type": "stringValue",
+            "value": "[0-761345-100618] Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente."
+          },
+          "codigo": {
+            "type": "stringValue",
+            "value": "0-761345-100618"
+          },
+          "estado": {
+            "type": "stringValue",
+            "value": "ACTIVO"
+          },
+          "actualizadoEn": {
+            "type": "timestampValue",
+            "value": "2026-09-26T00:48:39.451Z"
+          },
+          "descripcion": {
+            "type": "stringValue",
+            "value": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente."
+          },
+          "nombre": {
+            "type": "stringValue",
+            "value": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente."
+          },
+          "cantidadTotal": {
+            "type": "integerValue",
+            "value": "0"
+          }
+        }
+      }
+    }
+  ]
+}

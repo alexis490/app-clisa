@@ -1,0 +1,77 @@
+diff --git security/paso4b1/production-inspection/deployed-0-firestore.proposed.rules security/paso4b1/firestore.emulator.rules
+index a06794b..7993949 100644
+--- security/paso4b1/production-inspection/deployed-0-firestore.proposed.rules
++++ security/paso4b1/firestore.emulator.rules
+@@ -354,6 +354,10 @@ function edicionProductoValida() {
+     // PRODUCTOS
+     // =====================================================
+ 
++    function inventarioLibre4b1() {
++      return !exists(/databases/$(database)/documents/importaciones/_control_clisa)
++        || get(/databases/$(database)/documents/importaciones/_control_clisa).data.get('locked',true) == false;
++    }
+     match /productos/{productoId} {
+ 
+   allow read: if cuentaActiva();
+@@ -362,7 +366,7 @@ function edicionProductoValida() {
+   // CREAR PRODUCTO
+   // =====================================================
+ 
+-  allow create: if cuentaActiva()
++  allow create: if inventarioLibre4b1() && cuentaActiva()
+     && nuevoProductoValido();
+ 
+   // =====================================================
+@@ -381,7 +385,7 @@ function edicionProductoValida() {
+    * Ningún rol puede cambiar stock arbitrariamente.
+    */
+ 
+-  allow update: if cuentaActiva()
++  allow update: if inventarioLibre4b1() && cuentaActiva()
+   && (
+     edicionProductoValida()
+     || salidaValidaProducto()
+@@ -401,7 +405,7 @@ function edicionProductoValida() {
+ 
+       allow read: if cuentaActiva();
+ 
+-      allow create: if cuentaActiva()
++      allow create: if inventarioLibre4b1() && cuentaActiva()
+         && esAdmin();
+ 
+       /*
+@@ -411,7 +415,7 @@ function edicionProductoValida() {
+        * USER:
+        * solamente mediante una SALIDA válida.
+        */
+-      allow update: if cuentaActiva()
++      allow update: if inventarioLibre4b1() && cuentaActiva()
+   && (
+     salidaValidaExistencia()
+     || ajusteValidoExistencia()
+@@ -455,14 +459,14 @@ function edicionProductoValida() {
+        * movimientos, pero la salida debe cumplir
+        * todas las validaciones.
+        */
+-      allow create: if cuentaActiva()
++      allow create: if inventarioLibre4b1() && cuentaActiva()
+   && (
+     registroSalidaValido(registroId)
+     || registroAjusteValido(registroId)
+   );
+ 
+       // Campos originales inmutables; unica transicion administrativa de formalizacion.
+-      allow update: if formalizacionValida();
++      allow update: if inventarioLibre4b1() && formalizacionValida();
+       allow delete: if false;
+     }
+ 
+@@ -1159,7 +1163,7 @@ match /importaciones/{importacionId} {
+     && esAdmin();
+ 
+   // Solo se puede crear una importación válida.
+-  allow create: if importacionValida(importacionId);
++  allow create: if false;
+ 
+   // El historial de importaciones es inmutable.
+   allow update, delete: if false;

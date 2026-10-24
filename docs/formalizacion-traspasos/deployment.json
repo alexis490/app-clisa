@@ -1,0 +1,18 @@
+{
+  "authorizedBy": "Usuario: si autorizo",
+  "verifiedAt": "2026-10-23T01:38:41.606Z",
+  "project": "empresa-clisa",
+  "deployedRuleset": "projects/empresa-clisa/rulesets/27e24b85-2698-435c-9949-e5daa2a4abce",
+  "previousRuleset": "projects/empresa-clisa/rulesets/fa1be2b3-bfde-47d1-8758-a4ef1c43cf91",
+  "sha256": "41f7aadf06df0e4d5b8e89af1fb4ae6f484c9cd57aec3fd6dc553b35ea33451a",
+  "localRulesTests": {
+    "passed": 33,
+    "failed": 0
+  },
+  "scope": "firestore:rules",
+  "productionDocumentReads": 0,
+  "productionDocumentWrites": 0,
+  "indexesDeployed": false,
+  "functionsDeployed": false,
+  "verifiedContentMatches": true
+}

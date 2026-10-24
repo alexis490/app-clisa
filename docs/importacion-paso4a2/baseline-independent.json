@@ -1,0 +1,18 @@
+{
+  "groups": 1814,
+  "serialRows": 22762,
+  "validSerialRows": 22528,
+  "validUniqueSkuGroups": 1395,
+  "serialsInValidGroups": 17727,
+  "zeroQuantityGroups": 1016,
+  "missingSkuGroups": 346,
+  "uninterpretedRows": 0,
+  "issueCounts": {
+    "DUPLICATE_PRODUCT": 15,
+    "SERIAL_WHITESPACE": 156,
+    "DUPLICATE_SERIAL": 48,
+    "NEGATIVE_QUANTITY": 2,
+    "MISSING_SKU": 346
+  },
+  "incidents": 567
+}

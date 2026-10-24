@@ -1,0 +1,113 @@
+i  emulators: Starting emulators: auth, firestore
+i  emulators: Detected demo project ID "demo-clisa-sync-4b1", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
++  firestore: Firestore Emulator was started in standard edition.
++  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: node --test --test-concurrency=1 test/final-pipeline.test.mjs
+TAP version 13
+# Subtest: FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+ok 1 - FINAL unchanged XLSX -> reader -> comparison -> skip without job or writes
+  ---
+  duration_ms: 1258.0176
+  type: 'test'
+  ...
+# Subtest: FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+ok 2 - FINAL valid XLSX -> administrative plan -> signed reconciliation -> transaction -> audit
+  ---
+  duration_ms: 383.4756
+  type: 'test'
+  ...
+# Subtest: FINAL pending NOT included updates to reconciled 8, never official 10
+ok 3 - FINAL pending NOT included updates to reconciled 8, never official 10
+  ---
+  duration_ms: 345.5582
+  type: 'test'
+  ...
+# Subtest: FINAL completed included updates to 8 without second deduction
+ok 4 - FINAL completed included updates to 8 without second deduction
+  ---
+  duration_ms: 353.1406
+  type: 'test'
+  ...
+# Subtest: FINAL ambiguous movement rejects before inventory writes
+ok 5 - FINAL ambiguous movement rejects before inventory writes
+  ---
+  duration_ms: 140.0568
+  type: 'test'
+  ...
+# Subtest: FINAL duplicate XLSX is not made complete by preparation
+ok 6 - FINAL duplicate XLSX is not made complete by preparation
+  ---
+  duration_ms: 29.59
+  type: 'test'
+  ...
+# Subtest: FINAL incomplete XLSX is not made complete by preparation
+ok 7 - FINAL incomplete XLSX is not made complete by preparation
+  ---
+  duration_ms: 28.8784
+  type: 'test'
+  ...
+# Subtest: FINAL independently proven local issues do not block unrelated valid product
+ok 8 - FINAL independently proven local issues do not block unrelated valid product
+  ---
+  duration_ms: 356.1693
+  type: 'test'
+  ...
+# Subtest: FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+ok 9 - FINAL execution failure -> supervised retry -> idempotent replay and one audit per operation
+  ---
+  duration_ms: 558.8997
+  type: 'test'
+  ...
+# Subtest: FINAL concurrent SALIDA change invalidates prepared history
+ok 10 - FINAL concurrent SALIDA change invalidates prepared history
+  ---
+  duration_ms: 274.5406
+  type: 'test'
+  ...
+# Subtest: FINAL QUOTA cannot execute imported plan
+ok 11 - FINAL QUOTA cannot execute imported plan
+  ---
+  duration_ms: 48.5483
+  type: 'test'
+  ...
+# Subtest: FINAL USER cannot execute imported plan
+ok 12 - FINAL USER cannot execute imported plan
+  ---
+  duration_ms: 45.1426
+  type: 'test'
+  ...
+# Subtest: FINAL missing isolation certificate cannot bypass source issues
+ok 13 - FINAL missing isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 34.6866
+  type: 'test'
+  ...
+# Subtest: FINAL changed isolation certificate cannot bypass source issues
+ok 14 - FINAL changed isolation certificate cannot bypass source issues
+  ---
+  duration_ms: 43.4722
+  type: 'test'
+  ...
+# Subtest: FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+ok 15 - FINAL actual CLI prepares exported Kotlin proposal, executes signed Emulator request and returns bound simulation report
+  ---
+  duration_ms: 4057.8247
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8439.9859
++  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+!  Firestore Emulator has exited upon receiving signal: SIGINT
+i  auth: Stopping Authentication Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator

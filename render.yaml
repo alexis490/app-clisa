@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: clisa-inventory-api
+    runtime: node
+    plan: free
+    rootDir: tools/inventory-sync
+    buildCommand: npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: "off"
+    numInstances: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: INVENTORY_WRITES_ENABLED
+        value: "false"
+      - key: REQUIRE_HTTPS
+        value: "true"
+      - key: TRUST_PROXY_HOPS
+        value: "1"

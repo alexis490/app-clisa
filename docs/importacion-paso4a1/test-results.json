@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-22",
+  "androidTasks": [
+    ":app:assembleDebug",
+    ":app:testDebugUnitTest"
+  ],
+  "unitTests": {
+    "tests": 177,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "unitSuites": [
+    {
+      "name": "com.example.app_clisa.AccessPolicyTest",
+      "tests": 12
+    },
+    {
+      "name": "com.example.app_clisa.ExampleUnitTest",
+      "tests": 1
+    },
+    {
+      "name": "com.example.app_clisa.ImportRulesAuditTest",
+      "tests": 5
+    },
+    {
+      "name": "com.example.app_clisa.InventoryComparatorTest",
+      "tests": 21
+    },
+    {
+      "name": "com.example.app_clisa.InventoryDryRunPlannerTest",
+      "tests": 27
+    },
+    {
+      "name": "com.example.app_clisa.InventoryPreviewTest",
+      "tests": 13
+    },
+    {
+      "name": "com.example.app_clisa.InventorySafety4a1Test",
+      "tests": 20
+    },
+    {
+      "name": "com.example.app_clisa.InventoryTest",
+      "tests": 6
+    },
+    {
+      "name": "com.example.app_clisa.PendingExitTest",
+      "tests": 8
+    },
+    {
+      "name": "com.example.app_clisa.ProductSearchTest",
+      "tests": 6
+    },
+    {
+      "name": "com.example.app_clisa.ReportAnalysisTest",
+      "tests": 9
+    },
+    {
+      "name": "com.example.app_clisa.ReportCalendarTest",
+      "tests": 5
+    },
+    {
+      "name": "com.example.app_clisa.StockDeductionTest",
+      "tests": 6
+    },
+    {
+      "name": "com.example.app_clisa.UserManagementPolicyTest",
+      "tests": 5
+    },
+    {
+      "name": "com.example.app_clisa.UserProfilesTest",
+      "tests": 12
+    },
+    {
+      "name": "com.example.app_clisa.XlsxInventoryReaderTest",
+      "tests": 21
+    }
+  ],
+  "emulator": {
+    "project": "demo-clisa-4a1",
+    "host": "127.0.0.1:8087",
+    "tests": 33,
+    "pass": 33,
+    "fail": 0,
+    "skipped": 0,
+    "rulesSha256": "51b24d55539ed1db5a100d7b41a7f0d4283905a0b76cc08068b899299ecf7efd"
+  },
+  "productionReads": 0,
+  "productionWrites": 0,
+  "deployedRules": false,
+  "unitResultsTimestampUtc": "2026-10-22T16:19:23.251Z"
+}

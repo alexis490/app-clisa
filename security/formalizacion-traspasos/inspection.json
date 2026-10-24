@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-10-23T00:34:03.103Z",
+  "project": "empresa-clisa",
+  "ruleset": "projects/empresa-clisa/rulesets/fa1be2b3-bfde-47d1-8758-a4ef1c43cf91",
+  "files": [
+    {
+      "file": "deployed-0-firestore.rules",
+      "sha256": "45f9f43640e970f740abfa7588ddbc8dd9b9720720f7da7d620d8481cacd063c"
+    }
+  ],
+  "productionDocumentReads": 0,
+  "productionWrites": 0
+}

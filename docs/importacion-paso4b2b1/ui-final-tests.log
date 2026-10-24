@@ -1,0 +1,228 @@
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+com.example.app_clisa.IssueReviewUiTest:
+INSTRUMENTATION_STATUS: test=statesAreRecoveredAndFiltersAreLocal
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=statesAreRecoveredAndFiltersAreLocal
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=adminRequiresExplicitConfirmationAndPreservesOriginal
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=adminRequiresExplicitConfirmationAndPreservesOriginal
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=userCanReviewButCannotSaveOrPropose
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=userCanReviewButCannotSaveOrPropose
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=copySummaryIsReadOnlyAndShowsWriterBlock
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.IssueReviewUiTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=copySummaryIsReadOnlyAndShowsWriterBlock
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+com.example.app_clisa.InventoryPreviewScreenTest:
+INSTRUMENTATION_STATUS: test=captureOverviewUsingOnlyLocalFixtures
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=captureOverviewUsingOnlyLocalFixtures
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=syncIsDisabledAndBackReturnsToCaller
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=syncIsDisabledAndBackReturnsToCaller
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=absentSeriesAreConditionalAndLocalSearchFiltersThem
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stack=androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 1000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:809)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:378)
+	at androidx.compose.ui.test.junit4.ComposeTestRule.waitUntil$default(ComposeTestRule.jvm.kt:138)
+	at com.example.app_clisa.InventoryPreviewScreenTest.absentSeriesAreConditionalAndLocalSearchFiltersThem(InventoryPreviewScreenTest.kt:70)
+
+INSTRUMENTATION_STATUS: stream=
+Error in absentSeriesAreConditionalAndLocalSearchFiltersThem(com.example.app_clisa.InventoryPreviewScreenTest):
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 1000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:809)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:378)
+	at androidx.compose.ui.test.junit4.ComposeTestRule.waitUntil$default(ComposeTestRule.jvm.kt:138)
+	at com.example.app_clisa.InventoryPreviewScreenTest.absentSeriesAreConditionalAndLocalSearchFiltersThem(InventoryPreviewScreenTest.kt:70)
+
+INSTRUMENTATION_STATUS: test=absentSeriesAreConditionalAndLocalSearchFiltersThem
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=8
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=quantityDetailsKeepRealIdAndBackReturnsToOverview
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=8
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=quantityDetailsKeepRealIdAndBackReturnsToOverview
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=9
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=mockupHasSixSummaryCardsAndProductTabsFilterLocally
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.InventoryPreviewScreenTest
+INSTRUMENTATION_STATUS: current=9
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=mockupHasSixSummaryCardsAndProductTabsFilterLocally
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=10
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+com.example.app_clisa.ExportTimeSectionTest:
+INSTRUMENTATION_STATUS: test=previewIncludesTemporalBlockBeforeProductsAndSynchronizationStaysDisabled
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=10
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=previewIncludesTemporalBlockBeforeProductsAndSynchronizationStaysDisabled
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=11
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=cachedHistoryRendersWithoutQueryAndCannotBeQueriedAgainOnNavigation
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=11
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cachedHistoryRendersWithoutQueryAndCannotBeQueriedAgainOnNavigation
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=12
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=datesStartUnknownAndChoosingNothingDoesNotSetImportTime
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=12
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=datesStartUnknownAndChoosingNothingDoesNotSetImportTime
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=13
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=missingOrFutureDateNeverEnablesHistoryQuery
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=13
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=missingOrFutureDateNeverEnablesHistoryQuery
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=14
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=doubtAndUnknownActionsPreserveOrClearTheExplicitDeclaration
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.example.app_clisa.ExportTimeSectionTest
+INSTRUMENTATION_STATUS: current=14
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=14
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=doubtAndUnknownActionsPreserveOrClearTheExplicitDeclaration
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 61.908
+There was 1 failure:
+1) absentSeriesAreConditionalAndLocalSearchFiltersThem(com.example.app_clisa.InventoryPreviewScreenTest)
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 1000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:809)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:378)
+	at androidx.compose.ui.test.junit4.ComposeTestRule.waitUntil$default(ComposeTestRule.jvm.kt:138)
+	at com.example.app_clisa.InventoryPreviewScreenTest.absentSeriesAreConditionalAndLocalSearchFiltersThem(InventoryPreviewScreenTest.kt:70)
+
+FAILURES!!!
+Tests run: 14,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

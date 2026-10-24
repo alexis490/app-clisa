@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-23",
+  "timezone": "America/Lima",
+  "stage": "4B.1_EMULATOR_ONLY",
+  "unit": {
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "tests": 212
+  },
+  "motor": {
+    "failures": 0,
+    "passed": 56,
+    "log": "docs/importacion-paso4b1/emulator-results.log",
+    "tests": 56
+  },
+  "formalization": {
+    "failures": 0,
+    "passed": 33,
+    "log": "docs/importacion-paso4b1/formalization-regression.log",
+    "tests": 33
+  },
+  "safetyTemporal": {
+    "failures": 0,
+    "passed": 36,
+    "log": "docs/importacion-paso4b1/safety-regression.log",
+    "tests": 36
+  },
+  "androidBuild": "SUCCESS",
+  "androidInstrumentedTests": "NOT_RERUN_NO_UI_CHANGES",
+  "productionDocumentReads": 0,
+  "productionDocumentWrites": 0,
+  "productionRuleMetadataGets": 2,
+  "rulesDeployed": false,
+  "indexesDeployed": false,
+  "productionSynchronizationEnabled": false,
+  "sourceRealIssues": 567,
+  "sourceRealCompleteness": "INCOMPLETE",
+  "productionGuard": "DEMO_PROJECT_REQUIRED",
+  "rulesSHA256": "7ad32dde9ecce82d6deca31f546147eca364c33376e751df50ffb6762a324623",
+  "nodeVersion": "v22.20.0"
+}

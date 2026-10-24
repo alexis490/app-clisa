@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "700988847796",
+    "firebase_url": "https://empresa-clisa-default-rtdb.firebaseio.com",
+    "project_id": "empresa-clisa",
+    "storage_bucket": "empresa-clisa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700988847796:android:5f4b23fe1c41edc26cc9e1",
+        "android_client_info": {
+          "package_name": "com.example.app_clisa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700988847796-29vd67i1ov0voovtoe7ismsonva9evn8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app_clisa",
+            "certificate_hash": "62bec6d98f9ce40e796bf58c71581df6b6a5751e"
+          }
+        },
+        {
+          "client_id": "700988847796-p2fednff6adc8tnts9gp4kcpo01lttpi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app_clisa",
+            "certificate_hash": "6c031ad25b628ef39cb3bc739eb8a8359707fe53"
+          }
+        },
+        {
+          "client_id": "700988847796-jedj3455i18q5jjk6k1hn1donvds4oag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByvRKs9cQwK9yjSs-Y7MG_u7xnlWGe9EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700988847796-jedj3455i18q5jjk6k1hn1donvds4oag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700988847796:android:40475818de2cc1816cc9e1",
+        "android_client_info": {
+          "package_name": "com.example.app_registro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700988847796-02lrolv4sc995d1usaqp78mliir5vd8l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app_registro",
+            "certificate_hash": "62bec6d98f9ce40e796bf58c71581df6b6a5751e"
+          }
+        },
+        {
+          "client_id": "700988847796-gllou3e40129ljv4v6456ku0d4lr6j93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app_registro",
+            "certificate_hash": "6c031ad25b628ef39cb3bc739eb8a8359707fe53"
+          }
+        },
+        {
+          "client_id": "700988847796-jedj3455i18q5jjk6k1hn1donvds4oag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByvRKs9cQwK9yjSs-Y7MG_u7xnlWGe9EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700988847796-jedj3455i18q5jjk6k1hn1donvds4oag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,26 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+# Administrative backend secrets must stay outside source control.
+**/.env
+**/.env.*
+!**/.env.example
+**/*service-account*.json
+**/*serviceAccount*.json
+**/*firebase-adminsdk*.json
+**/*credentials*.json
+**/*.key
+**/*.p12
+.render-smoke/

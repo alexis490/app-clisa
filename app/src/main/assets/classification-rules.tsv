@@ -1,0 +1,11 @@
+version	CLISA_CLASSIFICATION_RULES_V1
+# type, existing catalog NAME, explicit word/phrase aliases, exclusions. IDs are NEVER supplied here.
+category	Accesorios para computadoras	accesorio para computadora|accesorios para computadora|accesorio para pc	
+category	Accesorios para laptops	accesorio para laptop|accesorios para laptop|mochila para laptop|soporte para laptop	
+category	Audífonos y micrófonos	audifono|audifonos|auricular|auriculares|microfono|microfonos|headset	cable|adaptador|soporte
+category	Cases y gabinetes	case|gabinete|gabinetes|chasis	ssd|laptop|celular
+category	Parlantes y audio	parlante|parlantes|speaker|speakers	cable|adaptador|soporte
+brand	HP	hewlett packard|hp	
+brand	Hewlett Packard	hewlett packard|hp	
+brand	Western Digital	western digital|wd	
+brand	1ST Player	1st player|1stplayer	

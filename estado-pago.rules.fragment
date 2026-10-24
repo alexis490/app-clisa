@@ -1,0 +1,9 @@
+// En la función registroSalidaValido(registroId) de las reglas publicadas:
+// 1. Añadir "estadoPago" a la lista r.keys().hasAll([...]).
+// 2. Añadir "estadoPago" a la lista r.keys().hasOnly([...]).
+// 3. Añadir al encadenamiento de condiciones del return, antes del punto y coma:
+//
+//    && r.estadoPago in ["Pagado", "Pendiente"]
+//
+// Conservar las validaciones existentes de cuenta, tiendas, registro y stock.
+// Este archivo es una guía de cambios; no reemplaza las reglas completas.

@@ -1,0 +1,92 @@
+{
+  "registroSalidaValido": {
+    "required": [
+      "registroId",
+      "tipo",
+      "productoId",
+      "codigoProducto",
+      "nombreProducto",
+      "existenciaId",
+      "codigoExistencia",
+      "cantidad",
+      "tiendaOrigenId",
+      "tiendaOrigenNombre",
+      "tiendaDestinoId",
+      "tiendaDestinoNombre",
+      "registradoPorId",
+      "registradoPorNombre",
+      "registradoPorEmail",
+      "recibidoPor",
+      "fechaHora",
+      "estado"
+    ],
+    "allowed": [
+      "registroId",
+      "tipo",
+      "productoId",
+      "codigoProducto",
+      "nombreProducto",
+      "existenciaId",
+      "codigoExistencia",
+      "cantidad",
+      "tiendaOrigenId",
+      "tiendaOrigenNombre",
+      "tiendaDestinoId",
+      "tiendaDestinoNombre",
+      "registradoPorId",
+      "registradoPorNombre",
+      "registradoPorEmail",
+      "recibidoPor",
+      "fechaHora",
+      "estado"
+    ],
+    "requiredButForbidden": [],
+    "paymentValidated": true,
+    "paymentAllowed": false
+  },
+  "registroAjusteValido": {
+    "required": [
+      "registroId",
+      "tipo",
+      "productoId",
+      "codigoProducto",
+      "nombreProducto",
+      "existenciaId",
+      "codigoExistencia",
+      "cantidad",
+      "motivo",
+      "origen",
+      "registradoPorId",
+      "registradoPorNombre",
+      "registradoPorEmail",
+      "recibidoPor",
+      "estadoPago",
+      "fechaHora",
+      "estado"
+    ],
+    "allowed": [
+      "registroId",
+      "tipo",
+      "productoId",
+      "codigoProducto",
+      "nombreProducto",
+      "existenciaId",
+      "codigoExistencia",
+      "cantidad",
+      "motivo",
+      "origen",
+      "importacionId",
+      "registradoPorId",
+      "registradoPorNombre",
+      "registradoPorEmail",
+      "fechaHora",
+      "estado"
+    ],
+    "requiredButForbidden": [
+      "recibidoPor",
+      "estadoPago"
+    ],
+    "paymentValidated": false,
+    "paymentAllowed": false
+  }
+}

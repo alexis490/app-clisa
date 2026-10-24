@@ -1,0 +1,96 @@
+--- deployed-inspected.rules
++++ firestore.proposed.rules
+@@ -425,6 +425,27 @@
+     // REGISTROS
+     // =====================================================
+ 
++    // Formalizacion externa: solo tres campos, nunca estado del movimiento o pago.
++    function formalizacionInicialValida(r) {
++      return !r.keys().hasAny(['estadoFormalizacion','formalizadoEn','formalizadoPor'])
++        || (r.keys().hasAll(['estadoFormalizacion','formalizadoEn','formalizadoPor'])
++          && r.estadoFormalizacion == 'PENDIENTE' && r.formalizadoEn == null && r.formalizadoPor == null);
++    }
++    function formalizacionValida() {
++      let before = resource.data;
++      let after = request.resource.data;
++      return cuentaActiva() && esAdmin()
++        && before.tipo == 'SALIDA' && before.estado == 'COMPLETADO'
++        && before.tiendaOrigenId == 'clisa' && before.tiendaDestinoId == 'toqen'
++        && before.get('estadoFormalizacion','SIN_VERIFICAR') in ['PENDIENTE','SIN_VERIFICAR']
++        && before.get('formalizadoEn',null) == null && before.get('formalizadoPor',null) == null
++        && after.diff(before).affectedKeys().hasOnly(['estadoFormalizacion','formalizadoEn','formalizadoPor'])
++        && after.keys().hasAll(['estadoFormalizacion','formalizadoEn','formalizadoPor'])
++        && after.estadoFormalizacion == 'COMPLETADO'
++        && after.formalizadoPor is string && after.formalizadoPor == request.auth.uid
++        && after.formalizadoEn is timestamp && after.formalizadoEn == request.time;
++    }
++
+     match /registros/{registroId} {
+ 
+       allow read: if cuentaActiva();
+@@ -440,8 +461,9 @@
+     || registroAjusteValido(registroId)
+   );
+ 
+-      // Historial inmutable.
+-      allow update, delete: if false;
++      // Campos originales inmutables; unica transicion administrativa de formalizacion.
++      allow update: if formalizacionValida();
++      allow delete: if false;
+     }
+ 
+ 
+@@ -464,6 +486,7 @@
+         request.resource.data.stock;
+ 
+       return
++        !exists(/databases/$(database)/documents/registros/$(registroId)) &&
+ 
+         diferencia > 0
+ 
+@@ -514,6 +537,7 @@
+         request.resource.data.cantidad;
+ 
+       return
++        !exists(/databases/$(database)/documents/registros/$(registroId)) &&
+ 
+         diferencia > 0
+ 
+@@ -627,6 +651,7 @@
+           "registradoPorEmail",
+ 
+           "recibidoPor",
++          "estadoPago",
+ 
+           "fechaHora",
+           "estado"
+@@ -656,10 +681,12 @@
+           "registradoPorEmail",
+ 
+           "recibidoPor",
++          "estadoPago",
+ 
+           "fechaHora",
+-          "estado"
++          "estado", "estadoFormalizacion", "formalizadoEn", "formalizadoPor"
+         ])
++        && formalizacionInicialValida(r)
+ 
+         // -----------------------------------------------
+         // MOVIMIENTO
+@@ -760,6 +787,7 @@
+         resource.data.stock;
+ 
+       return
++        !exists(/databases/$(database)/documents/registros/$(registroId)) &&
+ 
+         esAdmin()
+ 
+@@ -817,6 +845,7 @@
+         resource.data.cantidad;
+ 
+       return
++        !exists(/databases/$(database)/documents/registros/$(registroId)) &&
+ 
+         esAdmin()
+ 

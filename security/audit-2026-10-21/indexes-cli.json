@@ -1,0 +1,17 @@
+{
+  "source": "firebase-tools 15.34.0 firestore:indexes --project empresa-clisa",
+  "verified": true,
+  "indexes": [
+    {
+      "collectionGroup": "productos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "categoriaId", "order": "ASCENDING" },
+        { "fieldPath": "stock", "order": "ASCENDING" },
+        { "fieldPath": "__name__", "order": "ASCENDING" }
+      ],
+      "density": "SPARSE_ALL"
+    }
+  ],
+  "fieldOverrides": []
+}

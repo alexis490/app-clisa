@@ -1,0 +1,14 @@
+{
+  "title": "CLISA Supervised Inventory Worker - PROPOSAL",
+  "description": "No concedido. Solo futura ejecución aprobada. IAM no impone restricciones de campos ni reemplaza las validaciones del ejecutor.",
+  "stage": "GA",
+  "includedPermissions": [
+    "datastore.databases.getMetadata",
+    "datastore.databases.get",
+    "datastore.entities.get",
+    "datastore.entities.list",
+    "datastore.entities.create",
+    "datastore.entities.update",
+    "firebaseauth.users.get"
+  ]
+}

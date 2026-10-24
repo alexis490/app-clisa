@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-22",
+  "unitTests": {
+    "tests": 200,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "androidInstrumented": {
+    "tests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "firestoreEmulator": {
+    "tests": 36,
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "projectId": "demo-clisa-4a1",
+    "host": "127.0.0.1:8087"
+  },
+  "originalXlsxSha256": "ce8c508680f8b547d71572def7fe127012d4e8191c8bc25bc7cbb69065c61a8c",
+  "sourceIncidentsBefore": 567,
+  "sourceIncidentsAfter": 567,
+  "sameIssueIdentities": true,
+  "productionReads": 0,
+  "productionWrites": 0,
+  "rulesOrIndexesDeployed": false,
+  "synchronizationEnabled": false
+}

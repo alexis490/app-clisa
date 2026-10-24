@@ -1,0 +1,12 @@
+Solo archivo local; Firestore no consultado.
+Grupos=1814; SKU únicos=1453; sin SKU=346
+Grupos con SKU único y series sin error local=1395
+Filas de serie=22762; series válidas por fila=22528; series de grupos válidos=17727
+Grupos con cantidad cero=1016
+Incidencias=567; retenidas=567; filas no interpretadas=0
+DUPLICATE_SKU=15
+SERIAL_WHITESPACE=156
+DUPLICATE_SERIAL=48
+NEGATIVE_QUANTITY=2
+MISSING_SKU=346
+Completitud=INCOMPLETE

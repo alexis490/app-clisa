@@ -1,0 +1,32 @@
+{
+  "productos": {
+    "status": 200,
+    "data": [
+      {
+        "result": {
+          "aggregateFields": {
+            "total": {
+              "integerValue": "1799"
+            }
+          }
+        },
+        "readTime": "2026-10-21T19:36:41.966537Z"
+      }
+    ]
+  },
+  "existencias": {
+    "status": 200,
+    "data": [
+      {
+        "result": {
+          "aggregateFields": {
+            "total": {
+              "integerValue": "22762"
+            }
+          }
+        },
+        "readTime": "2026-10-21T19:36:42.370343Z"
+      }
+    ]
+  }
+}

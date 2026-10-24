@@ -1,0 +1,14 @@
+{
+  "name": "clisa-local-rules-4a1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 rules.test.mjs",
+    "test:4a2": "node --test --test-concurrency=1 rules.test.mjs temporal.test.mjs",
+    "test:formalizacion": "node --test --test-concurrency=1 formalization.test.mjs"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "5.0.0",
+    "firebase": "12.4.0"
+  }
+}

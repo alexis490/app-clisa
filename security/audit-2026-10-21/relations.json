@@ -1,0 +1,247 @@
+{
+  "note": "Four exact-document GETs plus two bounded read-only queries. Not a synchronization comparison or Android rules test.",
+  "targets": {
+    "categoria": {
+      "status": 200,
+      "data": {
+        "name": "projects/empresa-clisa/databases/(default)/documents/categorias/cases-y-gabinetes",
+        "fields": {
+          "nombre": {
+            "stringValue": "Cases y gabinetes"
+          },
+          "activo": {
+            "booleanValue": true
+          }
+        },
+        "createTime": "2026-10-12T02:04:50.211977Z",
+        "updateTime": "2026-10-12T02:04:50.211977Z"
+      }
+    },
+    "marca": {
+      "status": 200,
+      "data": {
+        "name": "projects/empresa-clisa/databases/(default)/documents/marcas/antec",
+        "fields": {
+          "nombre": {
+            "stringValue": "Antec"
+          },
+          "activo": {
+            "booleanValue": true
+          }
+        },
+        "createTime": "2026-10-12T02:04:50.211977Z",
+        "updateTime": "2026-10-12T02:04:50.211977Z"
+      }
+    },
+    "productoDelRegistro": {
+      "status": 200,
+      "data": {
+        "name": "projects/empresa-clisa/databases/(default)/documents/productos/83K100KFLM",
+        "fields": {
+          "codigo": {
+            "stringValue": "83K100KFLM"
+          },
+          "descripcion": {
+            "stringValue": "Laptop Lenovo Ideapad Slim 3 Intel Core I7-13620H 2.4/4.9Ghz, | 15.3\" WUXGA | 24GB RAM LPDDR5 | 512GB SSD  | Intel Iris Xe | Freedos | Español."
+          },
+          "categoriaId": {
+            "stringValue": "laptops"
+          },
+          "nombreCompleto": {
+            "stringValue": "[83K100KFLM] Laptop Lenovo Ideapad Slim 3 Intel Core I7-13620H 2.4/4.9Ghz, | 15.3\" WUXGA | 24GB RAM LPDDR5 | 512GB SSD  | Intel Iris Xe | Freedos | Español."
+          },
+          "cantidadTotal": {
+            "integerValue": "1"
+          },
+          "actualizadoEn": {
+            "timestampValue": "2026-10-10T06:27:50.810Z"
+          },
+          "cantidadRestante": {
+            "integerValue": "1"
+          },
+          "estado": {
+            "stringValue": "ACTIVO"
+          },
+          "nombre": {
+            "stringValue": "Laptop Lenovo Ideapad Slim 3 Intel Core I7-13620H 2.4/4.9Ghz, | 15.3\" WUXGA | 24GB RAM LPDDR5 | 512GB SSD  | Intel Iris Xe | Freedos | Español."
+          },
+          "stock": {
+            "integerValue": "0"
+          },
+          "ultimaSalidaId": {
+            "stringValue": "59e730c4-5352-4116-b0d4-e7935a7b5b7d"
+          },
+          "cantidadLotes": {
+            "integerValue": "6"
+          },
+          "marcaId": {
+            "stringValue": "lenovo"
+          }
+        },
+        "createTime": "2026-05-05T01:46:02.079377Z",
+        "updateTime": "2026-10-12T08:09:44.153256Z"
+      }
+    },
+    "existenciaDelRegistro": {
+      "status": 200,
+      "data": {
+        "name": "projects/empresa-clisa/databases/(default)/documents/existencias/83K100KFLM_SPF5QD453_916e57eb47f02f",
+        "fields": {
+          "productoId": {
+            "stringValue": "83K100KFLM"
+          },
+          "codigoProducto": {
+            "stringValue": "83K100KFLM"
+          },
+          "nombreProducto": {
+            "stringValue": "Laptop Lenovo Ideapad Slim 3 Intel Core I7-13620H 2.4/4.9Ghz, | 15.3\" WUXGA | 24GB RAM LPDDR5 | 512GB SSD  | Intel Iris Xe | Freedos | Español."
+          },
+          "actualizadoEn": {
+            "timestampValue": "2026-10-10T06:27:50.810Z"
+          },
+          "codigo": {
+            "stringValue": "SPF5QD453"
+          },
+          "filaOrigen": {
+            "integerValue": "2354"
+          },
+          "estado": {
+            "stringValue": "SIN_STOCK"
+          },
+          "ultimaSalidaId": {
+            "stringValue": "59e730c4-5352-4116-b0d4-e7935a7b5b7d"
+          },
+          "cantidad": {
+            "integerValue": "0"
+          }
+        },
+        "createTime": "2026-09-26T00:48:46.775426Z",
+        "updateTime": "2026-10-10T06:27:50.899560Z"
+      }
+    }
+  },
+  "existenciasDelPrimerProducto": {
+    "status": 200,
+    "data": [
+      {
+        "document": {
+          "name": "projects/empresa-clisa/databases/(default)/documents/existencias/0-761345-10024-3_242100661_ec0c340b7e1f07",
+          "fields": {
+            "codigo": {
+              "stringValue": "242100661"
+            },
+            "estado": {
+              "stringValue": "DISPONIBLE"
+            },
+            "filaOrigen": {
+              "integerValue": "5"
+            },
+            "productoId": {
+              "stringValue": "0-761345-10024-3"
+            },
+            "cantidad": {
+              "integerValue": "1"
+            },
+            "codigoProducto": {
+              "stringValue": "0-761345-10024-3"
+            },
+            "actualizadoEn": {
+              "timestampValue": "2026-09-26T00:48:42.154Z"
+            },
+            "nombreProducto": {
+              "stringValue": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+            }
+          },
+          "createTime": "2026-09-26T00:48:42.611959Z",
+          "updateTime": "2026-09-26T00:48:42.611959Z"
+        },
+        "readTime": "2026-10-21T19:35:15.566915Z"
+      },
+      {
+        "document": {
+          "name": "projects/empresa-clisa/databases/(default)/documents/existencias/0-761345-10024-3_242100670_c12277bec537fa",
+          "fields": {
+            "codigo": {
+              "stringValue": "242100670"
+            },
+            "estado": {
+              "stringValue": "DISPONIBLE"
+            },
+            "filaOrigen": {
+              "integerValue": "6"
+            },
+            "productoId": {
+              "stringValue": "0-761345-10024-3"
+            },
+            "cantidad": {
+              "integerValue": "1"
+            },
+            "codigoProducto": {
+              "stringValue": "0-761345-10024-3"
+            },
+            "actualizadoEn": {
+              "timestampValue": "2026-09-26T00:48:42.154Z"
+            },
+            "nombreProducto": {
+              "stringValue": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente."
+            }
+          },
+          "createTime": "2026-09-26T00:48:42.611959Z",
+          "updateTime": "2026-09-26T00:48:42.611959Z"
+        },
+        "readTime": "2026-10-21T19:35:15.566915Z"
+      }
+    ]
+  },
+  "skuConBarra": {
+    "status": 200,
+    "data": [
+      {
+        "document": {
+          "name": "projects/empresa-clisa/databases/(default)/documents/productos/SFYRS_1000G",
+          "fields": {
+            "cantidadTotal": {
+              "integerValue": "0"
+            },
+            "codigo": {
+              "stringValue": "SFYRS/1000G"
+            },
+            "cantidadRestante": {
+              "integerValue": "0"
+            },
+            "nombreCompleto": {
+              "stringValue": "[SFYRS/1000G] Unidad en Estado Solido KINGSTON FURY Renegade 1TB, M.2 2280 PCIe 4.0 NVMe."
+            },
+            "nombre": {
+              "stringValue": "Unidad en Estado Solido KINGSTON FURY Renegade 1TB, M.2 2280 PCIe 4.0 NVMe."
+            },
+            "cantidadLotes": {
+              "integerValue": "2"
+            },
+            "estado": {
+              "stringValue": "ACTIVO"
+            },
+            "stock": {
+              "integerValue": "0"
+            },
+            "actualizadoEn": {
+              "timestampValue": "2026-09-26T00:48:40.887Z"
+            },
+            "descripcion": {
+              "stringValue": "Unidad en Estado Solido KINGSTON FURY Renegade 1TB, M.2 2280 PCIe 4.0 NVMe."
+            },
+            "marcaId": {
+              "stringValue": "kingston"
+            },
+            "categoriaId": {
+              "stringValue": "unidades-ssd"
+            }
+          },
+          "createTime": "2026-05-05T01:46:04.231672Z",
+          "updateTime": "2026-10-12T08:11:26.922147Z"
+        },
+        "readTime": "2026-10-21T19:35:15.967008Z"
+      }
+    ]
+  }
+}

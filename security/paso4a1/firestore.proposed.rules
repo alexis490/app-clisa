@@ -1,0 +1,130 @@
+rules_version = '2';
+// LOCAL PROPOSAL ONLY. Never deployed by the test runner.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signed() { return request.auth != null; }
+    function role() { return request.auth.token.get('role', 'USER'); }
+    function validRole() {
+      return signed() && (
+        (role() == 'USER' && request.auth.token.get('admin', false) == false && request.auth.token.get('superAdmin', false) == false)
+        || (role() == 'ADMIN' && request.auth.token.get('admin', false) == true && request.auth.token.get('superAdmin', false) == false)
+        || (role() == 'SUPER_ADMIN' && request.auth.token.get('admin', false) == true && request.auth.token.get('superAdmin', false) == true));
+    }
+    function profile() { return get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data; }
+    function active() { return validRole() && profile().estado == 'ACTIVO' && profile().role == role(); }
+    function admin() { return role() in ['ADMIN', 'SUPER_ADMIN']; }
+    function superAdmin() { return role() == 'SUPER_ADMIN'; }
+    // Future trusted worker contract; no client can create/remove this lock. Fail closed, even if expired.
+    function unlocked() { return !exists(/databases/$(database)/documents/importaciones/_control_clisa); }
+    function nonempty(v) { return v is string && v.size() > 0 && v.size() <= 1000; }
+    function newRecord(id) { return nonempty(id) && !exists(/databases/$(database)/documents/registros/$(id)); }
+    function recordAfter(id) { return getAfter(/databases/$(database)/documents/registros/$(id)).data; }
+    function outgoing(r) { return r.tipo == 'SALIDA'; }
+    function allowedMovement(r) { return outgoing(r) || (admin() && r.tipo in ['AJUSTE_ENTRADA', 'AJUSTE_SALIDA']); }
+    function delta(r) { return r.tipo == 'AJUSTE_ENTRADA' ? r.cantidad : -r.cantidad; }
+    function entryState(q, state) { return q is int && q >= 0 && ((q == 0 && state == 'SIN_STOCK') || (q > 0 && state == 'DISPONIBLE')); }
+    function productMutation(pid, id, isSalida) {
+      let r = recordAfter(id);
+      return newRecord(id) && allowedMovement(r) && outgoing(r) == isSalida
+        && r.registroId == id && r.registradoPorId == request.auth.uid && r.productoId == pid
+        && r.estado == 'COMPLETADO' && r.cantidad is int && r.cantidad > 0
+        && request.resource.data.stock is int && request.resource.data.stock >= 0
+        && request.resource.data.stock - resource.data.stock == delta(r)
+        && request.resource.data.actualizadoEn == request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(isSalida
+          ? ['stock', 'ultimaSalidaId', 'actualizadoEn'] : ['stock', 'ultimoAjusteId', 'actualizadoEn']);
+    }
+    function entryMutation(eid, id, isSalida) {
+      let r = recordAfter(id);
+      return newRecord(id) && allowedMovement(r) && outgoing(r) == isSalida
+        && r.registroId == id && r.registradoPorId == request.auth.uid && r.existenciaId == eid
+        && r.productoId == resource.data.productoId && r.estado == 'COMPLETADO' && r.cantidad is int && r.cantidad > 0
+        && request.resource.data.cantidad - resource.data.cantidad == delta(r)
+        && entryState(request.resource.data.cantidad, request.resource.data.estado)
+        && request.resource.data.actualizadoEn == request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(isSalida
+          ? ['cantidad', 'estado', 'ultimaSalidaId', 'actualizadoEn'] : ['cantidad', 'estado', 'ultimoAjusteId', 'actualizadoEn']);
+    }
+    function salidaSchema(r) {
+      let fields = ['registroId','tipo','productoId','codigoProducto','nombreProducto','existenciaId','codigoExistencia',
+        'cantidad','tiendaOrigenId','tiendaOrigenNombre','tiendaDestinoId','tiendaDestinoNombre',
+        'registradoPorId','registradoPorNombre','registradoPorEmail','recibidoPor','estadoPago','fechaHora','estado'];
+      let origin = get(/databases/$(database)/documents/tiendas/$(r.tiendaOrigenId)).data;
+      let target = get(/databases/$(database)/documents/tiendas/$(r.tiendaDestinoId)).data;
+      return r.keys().hasAll(fields) && r.keys().hasOnly(fields)
+        && r.estadoPago in ['Pagado','Pendiente'] && nonempty(r.recibidoPor)
+        && r.tiendaOrigenId == 'clisa' && r.tiendaDestinoId == 'toqen'
+        && origin.estado == 'ACTIVA' && target.estado == 'ACTIVA'
+        && r.tiendaOrigenNombre == origin.nombre && r.tiendaDestinoNombre == target.nombre;
+    }
+    function ajusteSchema(r) {
+      let fields = ['registroId','tipo','productoId','codigoProducto','nombreProducto','existenciaId','codigoExistencia',
+        'cantidad','motivo','origen','registradoPorId','registradoPorNombre','registradoPorEmail','fechaHora','estado'];
+      return admin() && r.tipo in ['AJUSTE_ENTRADA','AJUSTE_SALIDA'] && r.origen == 'MANUAL'
+        && r.keys().hasAll(fields) && r.keys().hasOnly(fields) && nonempty(r.motivo);
+    }
+    function movement(id, r) {
+      let p = get(/databases/$(database)/documents/productos/$(r.productoId)).data;
+      let pa = getAfter(/databases/$(database)/documents/productos/$(r.productoId)).data;
+      let e = get(/databases/$(database)/documents/existencias/$(r.existenciaId)).data;
+      let ea = getAfter(/databases/$(database)/documents/existencias/$(r.existenciaId)).data;
+      return r.registroId == id && r.estado == 'COMPLETADO' && allowedMovement(r)
+        && r.cantidad is int && r.cantidad > 0 && r.fechaHora == request.time
+        && r.registradoPorId == request.auth.uid && r.registradoPorEmail == request.auth.token.get('email','')
+        && nonempty(r.registradoPorNombre) && r.registradoPorNombre == profile().displayName
+        && p.estado == 'ACTIVO' && r.codigoProducto == p.codigo && r.nombreProducto == p.nombre
+        && e.productoId == r.productoId && e.codigoProducto == p.codigo && e.codigo == r.codigoExistencia
+        && p.stock is int && e.cantidad is int && pa.stock is int && pa.stock >= 0
+        && pa.stock - p.stock == delta(r) && ea.cantidad - e.cantidad == delta(r)
+        && entryState(ea.cantidad, ea.estado)
+        && pa.actualizadoEn == request.time && ea.actualizadoEn == request.time
+        && (outgoing(r)
+          ? (salidaSchema(r) && e.estado == 'DISPONIBLE' && pa.ultimaSalidaId == id && ea.ultimaSalidaId == id)
+          : (ajusteSchema(r) && pa.ultimoAjusteId == id && ea.ultimoAjusteId == id));
+    }
+    match /usuarios/{uid} {
+      allow get: if (signed() && request.auth.uid == uid) || (active() && superAdmin());
+      allow list: if active() && superAdmin();
+      allow create: if validRole() && role() == 'USER' && uid == request.auth.uid
+        && request.resource.data.keys().hasAll(['uid','email','displayName','role','estado','creadoEn'])
+        && request.resource.data.keys().hasOnly(['uid','email','displayName','profileImageUri','role','estado','creadoEn'])
+        && request.resource.data.uid == uid && request.resource.data.role == 'USER' && request.resource.data.estado == 'ACTIVO'
+        && request.resource.data.email == request.auth.token.get('email','') && nonempty(request.resource.data.email)
+        && nonempty(request.resource.data.displayName) && request.resource.data.creadoEn == request.time
+        && (!request.resource.data.keys().hasAny(['profileImageUri']) || request.resource.data.profileImageUri is string);
+      allow update: if active() && superAdmin() && uid != request.auth.uid && resource.data.role in ['USER','ADMIN']
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['estado','actualizadoEn'])
+        && request.resource.data.estado in ['ACTIVO','BLOQUEADO'] && request.resource.data.actualizadoEn == request.time;
+      allow delete: if false;
+    }
+    match /productos/{pid} {
+      allow read: if active();
+      // Global SKU/serial uniqueness cannot be established by rules over legacy arbitrary IDs.
+      allow create, delete: if false;
+      allow update: if active() && unlocked() && (
+        (admin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nombre','estado','actualizadoEn'])
+          && nonempty(request.resource.data.nombre) && request.resource.data.estado in ['ACTIVO','INACTIVO']
+          && request.resource.data.actualizadoEn == request.time)
+        || (request.resource.data.keys().hasAll(['ultimaSalidaId']) && productMutation(pid, request.resource.data.ultimaSalidaId, true))
+        || (admin() && request.resource.data.keys().hasAll(['ultimoAjusteId']) && productMutation(pid, request.resource.data.ultimoAjusteId, false)));
+    }
+    match /existencias/{eid} {
+      allow read: if active();
+      allow create, delete: if false;
+      allow update: if active() && unlocked() && (
+        (request.resource.data.keys().hasAll(['ultimaSalidaId']) && entryMutation(eid, request.resource.data.ultimaSalidaId, true))
+        || (admin() && request.resource.data.keys().hasAll(['ultimoAjusteId']) && entryMutation(eid, request.resource.data.ultimoAjusteId, false)));
+    }
+    match /registros/{id} {
+      allow read: if active();
+      allow create: if active() && unlocked() && movement(id, request.resource.data);
+      allow update, delete: if false;
+    }
+    match /importaciones/{id} { allow read: if active() && admin(); allow write: if false; }
+    match /categorias/{id} { allow read: if active(); allow write: if false; }
+    match /marcas/{id} { allow read: if active(); allow write: if false; }
+    match /tiendas/{id} { allow read: if active(); allow write: if false; }
+    match /receptores/{id} { allow read: if active(); allow write: if false; }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

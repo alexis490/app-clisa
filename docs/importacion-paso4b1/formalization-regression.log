@@ -1,0 +1,294 @@
+i  emulators: Starting emulators: firestore
+i  emulators: Detected demo project ID "demo-clisa-formalizacion", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
++  firestore: Firestore Emulator was started in standard edition.
++  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: npm.cmd run test:formalizacion
+
+> test:formalizacion
+> node --test --test-concurrency=1 formalization.test.mjs
+
+TAP version 13
+# Subtest: USER: atomic SALIDA creates PENDIENTE with null audit and original stock deduction
+ok 1 - USER: atomic SALIDA creates PENDIENTE with null audit and original stock deduction
+  ---
+  duration_ms: 1455.6411
+  type: 'test'
+  ...
+# Subtest: ADMIN: atomic SALIDA creates PENDIENTE with null audit and original stock deduction
+ok 2 - ADMIN: atomic SALIDA creates PENDIENTE with null audit and original stock deduction
+  ---
+  duration_ms: 138.986
+  type: 'test'
+  ...
+# Subtest: SUPER_ADMIN: atomic SALIDA creates PENDIENTE with null audit and original stock deduction
+ok 3 - SUPER_ADMIN: atomic SALIDA creates PENDIENTE with null audit and original stock deduction
+  ---
+  duration_ms: 116.0229
+  type: 'test'
+  ...
+# Subtest: old client SALIDA remains valid without migration; absent formalization remains absent
+ok 4 - old client SALIDA remains valid without migration; absent formalization remains absent
+  ---
+  duration_ms: 83.576
+  type: 'test'
+  ...
+# [2026-10-23T17:44:46.874Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d505 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200, false for 'create' @ L462, false for 'create' @ L1200
+# Subtest: new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/COMPLETADO
+ok 5 - new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/COMPLETADO
+  ---
+  duration_ms: 60.9322
+  type: 'test'
+  ...
+# [2026-10-23T17:44:46.921Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d507 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200, false for 'create' @ L462, false for 'create' @ L1200
+# Subtest: new SALIDA rejects forged initial formalization estadoFormalizacion/PENDIENTE
+ok 6 - new SALIDA rejects forged initial formalization estadoFormalizacion/PENDIENTE
+  ---
+  duration_ms: 46.4075
+  type: 'test'
+  ...
+# [2026-10-23T17:44:46.971Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d509 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200, false for 'create' @ L462, false for 'create' @ L1200
+# Subtest: new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/SIN_VERIFICAR
+ok 7 - new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/SIN_VERIFICAR
+  ---
+  duration_ms: 49.0389
+  type: 'test'
+  ...
+# [2026-10-23T17:44:47.014Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d50b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200, false for 'create' @ L462, false for 'create' @ L1200
+# Subtest: new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/PENDIENTE
+ok 8 - new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/PENDIENTE
+  ---
+  duration_ms: 42.7829
+  type: 'test'
+  ...
+# [2026-10-23T17:44:47.056Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d50d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200, false for 'create' @ L462, false for 'create' @ L1200
+# Subtest: new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/PENDIENTE
+ok 9 - new SALIDA rejects forged initial formalization estadoFormalizacion,formalizadoEn,formalizadoPor/PENDIENTE
+  ---
+  duration_ms: 42.7279
+  type: 'test'
+  ...
+# Subtest: ADMIN confirms once, UID/time persisted, original data and inventory unchanged
+ok 10 - ADMIN confirms once, UID/time persisted, original data and inventory unchanged
+  ---
+  duration_ms: 237.9697
+  type: 'test'
+  ...
+# Subtest: SUPER_ADMIN confirms once, UID/time persisted, original data and inventory unchanged
+ok 11 - SUPER_ADMIN confirms once, UID/time persisted, original data and inventory unchanged
+  ---
+  duration_ms: 186.8225
+  type: 'test'
+  ...
+# Subtest: ADMIN can confirm a missing-field historical record without altering legacy fields
+ok 12 - ADMIN can confirm a missing-field historical record without altering legacy fields
+  ---
+  duration_ms: 105.4873
+  type: 'test'
+  ...
+# Subtest: SUPER_ADMIN can confirm a missing-field historical record without altering legacy fields
+ok 13 - SUPER_ADMIN can confirm a missing-field historical record without altering legacy fields
+  ---
+  duration_ms: 106.4353
+  type: 'test'
+  ...
+# [2026-10-23T17:44:47.740Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d531 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:47.755Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d532 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:47.782Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d533 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:47.797Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d534 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: USER, blocked, unauthenticated and contradictory role/profile cannot confirm by direct write
+ok 14 - USER, blocked, unauthenticated and contradictory role/profile cannot confirm by direct write
+  ---
+  duration_ms: 103.4121
+  type: 'test'
+  ...
+# Subtest: USER can read all three formalization states including legacy missing state
+ok 15 - USER can read all three formalization states including legacy missing state
+  ---
+  duration_ms: 59.1746
+  type: 'test'
+  ...
+# [2026-10-23T17:44:47.890Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d53b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field cantidad
+ok 16 - formalization cannot change original field cantidad
+  ---
+  duration_ms: 34.2268
+  type: 'test'
+  ...
+# [2026-10-23T17:44:47.921Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d53d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field estadoPago
+ok 17 - formalization cannot change original field estadoPago
+  ---
+  duration_ms: 30.7476
+  type: 'test'
+  ...
+# [2026-10-23T17:44:47.950Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d53f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field productoId
+ok 18 - formalization cannot change original field productoId
+  ---
+  duration_ms: 29.1498
+  type: 'test'
+  ...
+# [2026-10-23T17:44:47.981Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d541 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field codigoProducto
+ok 19 - formalization cannot change original field codigoProducto
+  ---
+  duration_ms: 30.4932
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.013Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d543 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field codigoExistencia
+ok 20 - formalization cannot change original field codigoExistencia
+  ---
+  duration_ms: 32.1916
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.042Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d545 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field recibidoPor
+ok 21 - formalization cannot change original field recibidoPor
+  ---
+  duration_ms: 28.7122
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.078Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d547 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field tiendaDestinoId
+ok 22 - formalization cannot change original field tiendaDestinoId
+  ---
+  duration_ms: 36.0694
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.108Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d549 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field tiendaOrigenId
+ok 23 - formalization cannot change original field tiendaOrigenId
+  ---
+  duration_ms: 30.0339
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.135Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d54b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field fechaHora
+ok 24 - formalization cannot change original field fechaHora
+  ---
+  duration_ms: 27.2201
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.163Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d54d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field estado
+ok 25 - formalization cannot change original field estado
+  ---
+  duration_ms: 27.481
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.202Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d54f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: formalization cannot change original field extra
+ok 26 - formalization cannot change original field extra
+  ---
+  duration_ms: 39.4314
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.252Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d551 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.264Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d552 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.279Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d553 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.294Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d554 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: UID spoof, client timestamp, missing audit or pending audit-only update rejected
+ok 27 - UID spoof, client timestamp, missing audit or pending audit-only update rejected
+  ---
+  duration_ms: 91.7246
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.373Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d559 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.379Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d55a error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.389Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d55b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.401Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d55c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# false for 'delete' @ L470, false for 'delete' @ L1200
+# Subtest: completed is immutable: no revert, reconfirm, audit replacement or delete
+ok 28 - completed is immutable: no revert, reconfirm, audit replacement or delete
+  ---
+  duration_ms: 106.8823
+  type: 'test'
+  ...
+# Subtest: two concurrent administrators yield one confirmed transaction and preserve its first audit
+ok 29 - two concurrent administrators yield one confirmed transaction and preserve its first audit
+  ---
+  duration_ms: 106.1416
+  type: 'test'
+  ...
+# Subtest: unreachable local transport rejects transaction with no false completion or queued update
+ok 30 - unreachable local transport rejects transaction with no false completion or queued update
+  ---
+  duration_ms: 46.1952
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.586Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d56a error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, Property ultimoAjusteId is undefined on object. for 'update' @ L388, false for 'update' @ L1200
+# Subtest: formalization cannot be coupled to historical-record stock replay
+ok 31 - formalization cannot be coupled to historical-record stock replay
+  ---
+  duration_ms: 61.1496
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.658Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d56e error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.697Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d570 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.731Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d572 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# [2026-10-23T17:44:48.754Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d574 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'update' @ L469, false for 'update' @ L1200
+# Subtest: malformed legacy audit and non-transfer records do not obtain formalization permissions
+ok 32 - malformed legacy audit and non-transfer records do not obtain formalization permissions
+  ---
+  duration_ms: 139.5895
+  type: 'test'
+  ...
+# [2026-10-23T17:44:48.789Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d576 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, false for 'create' @ L462, false for 'create' @ L1200
+# [2026-10-23T17:44:48.808Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x7dd9d577 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+# evaluation error at L462:24 for 'create' @ L462, false for 'create' @ L1200, evaluation error at L469:24 for 'update' @ L469, false for 'update' @ L1200, evaluation error at L388:20 for 'update' @ L388, false for 'update' @ L1200, evaluation error at L418:24 for 'update' @ L418, false for 'update' @ L1200, false for 'update' @ L388, false for 'update' @ L1200
+# Subtest: new SALIDA still rejects non-atomic or malformed stock movement
+ok 33 - new SALIDA still rejects non-atomic or malformed stock movement
+  ---
+  duration_ms: 53.6747
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6133.8183
++  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+!  Firestore Emulator has exited upon receiving signal: SIGINT
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator
