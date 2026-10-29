@@ -4,13 +4,15 @@ import { rateLimit } from 'express-rate-limit';
 import { randomUUID } from 'node:crypto';
 import { HttpError,prepareInWorker } from './http-proposal.mjs';
 import { readProposalUpload } from './http-upload.mjs';
+import { createAutomaticImport,readSourceWorker } from './automatic-import.mjs';
 
 const authenticatedFailures=new Set(['auth/argument-error','auth/invalid-id-token','auth/id-token-expired','auth/id-token-revoked','auth/user-not-found']);
 const adminClaims=c=>['ADMIN','SUPER_ADMIN'].includes(c?.role)&&c.admin===true&&(c.role!=='SUPER_ADMIN'||c.superAdmin===true);
 const reject=(res,status,code)=>res.status(status).json({error:{code},requestId:res.locals.requestId});
 const finished=res=>res.writableEnded||res.destroyed;
 
-export function createHttpApp({config,firebase=null,logger=()=>{}}){
+export function createHttpApp({config,firebase=null,logger=()=>{},automaticImport=null}){
+ const imports=automaticImport??(config.automaticImportEnabled&&firebase?.inventoryDb?createAutomaticImport({db:firebase.inventoryDb,apiKey:process.env.GEMINI_API_KEY,model:process.env.GEMINI_MODEL}):null);
  const app=express();app.disable('x-powered-by');app.set('trust proxy',config.trustProxyHops);
  app.use(helmet({contentSecurityPolicy:{directives:{defaultSrc:["'none'"],frameAncestors:["'none'"]}},frameguard:{action:'deny'}}));
  app.use((req,res,next)=>{
@@ -23,9 +25,12 @@ export function createHttpApp({config,firebase=null,logger=()=>{}}){
  app.get('/health',(req,res)=>res.json({status:'ok'}));
  const limiter=options=>rateLimit({windowMs:60000,standardHeaders:'draft-7',legacyHeaders:false,
   handler:(req,res)=>reject(res,429,'RATE_LIMITED'),...options});
+ const automatic=req=>Boolean(imports)&&req.path.startsWith('/excel-imports');
  // Global bound runs first, so an attacker rotating IPs cannot grow the per-IP store unboundedly.
- app.use('/v1/admin',limiter({limit:config.globalLimit,keyGenerator:()=> 'service'}));
- app.use('/v1/admin',limiter({limit:config.ipLimit}));
+ app.use('/v1/admin',limiter({limit:config.globalLimit,keyGenerator:()=> 'service',skip:automatic}));
+ app.use('/v1/admin',limiter({limit:config.ipLimit,skip:automatic}));
+ app.use('/v1/admin',limiter({limit:180,keyGenerator:()=> 'automatic-service',skip:req=>!automatic(req)}));
+ app.use('/v1/admin',limiter({limit:100,skip:req=>!automatic(req)}));
  let authPending=0;
  async function bounded(operation){
   if(authPending>=config.maxAuthPending)throw new HttpError(503,'SERVICE_BUSY');
@@ -61,7 +66,8 @@ export function createHttpApp({config,firebase=null,logger=()=>{}}){
   }catch(error){forwardAuthError(error,res,next);}
  });
  // Firebase operations that time out keep their concurrency slot until they actually settle.
- app.use('/v1/admin',limiter({limit:config.uidLimit,keyGenerator:(req,res)=>res.locals.principal.uid}));
+ app.use('/v1/admin',limiter({limit:config.uidLimit,keyGenerator:(req,res)=>res.locals.principal.uid,skip:automatic}));
+ app.use('/v1/admin',limiter({limit:90,keyGenerator:(req,res)=>res.locals.principal.uid,skip:req=>!automatic(req)}));
  // Per-user throttling precedes Firestore so rejected repetitions do not consume profile reads.
  app.use('/v1/admin',async(req,res,next)=>{
   try{
@@ -71,7 +77,7 @@ export function createHttpApp({config,firebase=null,logger=()=>{}}){
    });if(!finished(res))next();
   }catch(error){forwardAuthError(error,res,next);}
  });
- app.get('/v1/admin/status',(req,res)=>res.json({mode:'SAFE_PREVIEW',inventoryWritesEnabled:false,capabilities:['status','prepare-proposal']}));
+ app.get('/v1/admin/status',(req,res)=>res.json({mode:imports?'AUTOMATIC_IMPORT':'SAFE_PREVIEW',inventoryWritesEnabled:Boolean(imports),capabilities:['status','prepare-proposal',...(imports?['automatic-import']:[])]}));
  let preparing=false;
  app.post('/v1/admin/imports/prepare',async(req,res,next)=>{
   if(preparing)return reject(res,503,'PREPARATION_BUSY');preparing=true;
@@ -81,7 +87,25 @@ export function createHttpApp({config,firebase=null,logger=()=>{}}){
    if(!finished(res))res.type('application/json').send(json);
   }catch(error){next(error);}finally{preparing=false;}
  });
- // No start/recover/execute/stock/classification-apply route exists. No engine or privileged write API is injected.
+ if(imports){
+  let uploading=false;
+  app.post('/v1/admin/excel-imports',async(req,res,next)=>{
+   if(uploading)return reject(res,503,'PREPARATION_BUSY');uploading=true;
+   try{
+    const files=await readProposalUpload(req,config,res.locals.signal,{automatic:true});let options;
+    try{options=JSON.parse(files.contract.toString('utf8'));}catch{throw new HttpError(422,'INVALID_MAPPING');}
+    if(!options||typeof options!=='object'||Array.isArray(options)||options.mappings&&typeof options.mappings!=='object')throw new HttpError(422,'INVALID_MAPPING');
+    const source=await readSourceWorker(files.excel,files.filename,options.mappings??{},config.prepareTimeoutMs);
+    if(source.mappingRequired.length){if(!finished(res))res.json({status:'MAPPING_REQUIRED',mappingRequired:source.mappingRequired});return;}
+    if(!source.products.length)throw new HttpError(422,'NO_PRODUCTS');
+    const result=await imports.create(source,res.locals.principal);if(!finished(res))res.json(result);
+   }catch(error){next(error);}finally{uploading=false;}
+  });
+  app.get('/v1/admin/excel-imports/:id',async(req,res,next)=>{try{const result=await imports.view(req.params.id,res.locals.principal,Number(req.query.offset??0));if(!finished(res))res.json(result);}catch(error){next(error);}});
+  for(const action of ['advance','confirm'])app.post(`/v1/admin/excel-imports/:id/${action}`,async(req,res,next)=>{
+   try{const result=await imports[action](req.params.id,res.locals.principal);if(!finished(res))res.json(result);}catch(error){next(error);}
+  });
+ }
  app.use((req,res)=>reject(res,404,'NOT_FOUND'));
  app.use((error,req,res,next)=>{
   if(res.headersSent||finished(res))return;

@@ -3,6 +3,7 @@ import { pathToFileURL } from 'node:url';
 import { readHttpConfig } from './http-config.mjs';
 import { createReadOnlyFirebase } from './http-firebase.mjs';
 import { createHttpApp } from './http-app.mjs';
+import { probeGemini } from './gemini-probe.mjs';
 
 export function createHttpServer(options){
  const server=http.createServer({maxHeaderSize:16384},createHttpApp(options));
@@ -18,7 +19,11 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
  try{
   const settings=readHttpConfig();firebase=createReadOnlyFirebase(settings);
   server=createHttpServer({config:settings.config,firebase,logger:entry=>console.log(JSON.stringify(entry))});
-  server.listen(settings.config.port,'0.0.0.0',()=>console.log(JSON.stringify({event:'listening',port:settings.config.port})));
+  server.listen(settings.config.port,'0.0.0.0',()=>{
+   console.log(JSON.stringify({event:'listening',port:settings.config.port}));
+   if(process.env.VERIFY_GEMINI_ON_STARTUP==='true')void probeGemini({apiKey:process.env.GEMINI_API_KEY,model:process.env.GEMINI_MODEL})
+    .then(result=>console.log(JSON.stringify({event:'gemini_probe',...result})));
+  });
   server.on('error',()=>{console.error(JSON.stringify({event:'startup_failed',code:'SERVER_UNAVAILABLE'}));process.exit(1);});
   let stopping=false;
   const stop=()=>{

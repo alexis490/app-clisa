@@ -2,7 +2,7 @@ import Busboy from '@fastify/busboy';
 import { HttpError } from './http-proposal.mjs';
 
 /** Two bounded memory streams. No disk/temp directory or filename-derived path. */
-export function readProposalUpload(req,config,signal){
+export function readProposalUpload(req,config,signal,{automatic=false}={}){
  if(!/^multipart\/form-data\s*;/i.test(req.headers['content-type']??''))throw new HttpError(415,'MULTIPART_REQUIRED');
  return new Promise((resolve,reject)=>{
   let parser,settled=false,wireBytes=0;const result={},seen=new Set(),maxWire=config.excelBytes+config.contractBytes+65536;
@@ -18,7 +18,8 @@ export function readProposalUpload(req,config,signal){
    }
    seen.add(name);const chunks=[];let length=0;
    const cap=name==='excel'?config.excelBytes:config.contractBytes;
-   if(!filename.toLowerCase().endsWith(name==='excel'?'.xlsx':'.json')){file.resume();return fail(new HttpError(415,'INVALID_UPLOAD_TYPE'));}
+   if(!(name==='excel'&&automatic?/\.(xlsx|xls|csv)$/i.test(filename):filename.toLowerCase().endsWith(name==='excel'?'.xlsx':'.json'))){file.resume();return fail(new HttpError(415,'INVALID_UPLOAD_TYPE'));}
+   if(name==='excel'&&automatic)result.filename=filename;
    file.on('limit',()=>fail(new HttpError(413,'UPLOAD_TOO_LARGE')));
    file.on('data',chunk=>{if(settled)return;length+=chunk.length;if(length>cap)fail(new HttpError(413,'UPLOAD_TOO_LARGE'));else chunks.push(chunk);});
    file.on('end',()=>{if(!settled)result[name]=Buffer.concat(chunks,length);});
@@ -28,7 +29,7 @@ export function readProposalUpload(req,config,signal){
   parser.on('finish',()=>{
    if(settled)return;
    if(seen.size!==2||!result.contract?.length||!result.excel?.length)return fail(new HttpError(400,'MISSING_UPLOAD_PARTS'));
-   if(result.excel.length<4||result.excel.readUInt32LE(0)!==0x04034b50)return fail(new HttpError(415,'XLSX_REQUIRED'));
+   if(!automatic&&(result.excel.length<4||result.excel.readUInt32LE(0)!==0x04034b50))return fail(new HttpError(415,'XLSX_REQUIRED'));
    settled=true;cleanup();resolve(result);
   });
   req.on('data',wire);req.once('aborted',abort);req.once('error',abort);signal.addEventListener('abort',abort,{once:true});

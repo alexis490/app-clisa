@@ -16,6 +16,8 @@ services:
         value: production
       - key: INVENTORY_WRITES_ENABLED
         value: "false"
+      - key: IMPORT_SYNC_ENABLED
+        value: "false"
       - key: REQUIRE_HTTPS
         value: "true"
       - key: TRUST_PROXY_HOPS
