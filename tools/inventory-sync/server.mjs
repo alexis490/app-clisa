@@ -22,7 +22,8 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   server.listen(settings.config.port,'0.0.0.0',()=>{
    console.log(JSON.stringify({event:'listening',port:settings.config.port}));
    if(process.env.VERIFY_GEMINI_ON_STARTUP==='true')void probeGemini({apiKey:process.env.GEMINI_API_KEY,model:process.env.GEMINI_MODEL})
-    .then(result=>console.log(JSON.stringify({event:'gemini_probe',...result})));
+    .then(result=>console.log(JSON.stringify({event:'gemini_probe',...result,
+     automaticImportEnabled:settings.config.automaticImportEnabled&&Boolean(firebase?.inventoryDb),firebaseConfigured:Boolean(firebase)})));
   });
   server.on('error',()=>{console.error(JSON.stringify({event:'startup_failed',code:'SERVER_UNAVAILABLE'}));process.exit(1);});
   let stopping=false;
