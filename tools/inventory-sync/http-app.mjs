@@ -18,9 +18,13 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
  app.use((req,res,next)=>{
   res.locals.requestId=randomUUID();res.set('Cache-Control','no-store');res.set('X-Request-Id',res.locals.requestId);
   const start=Date.now(),controller=new AbortController();res.locals.signal=controller.signal;
+  const route=req.path==='/health'?'health':req.path==='/v1/admin/status'?'admin-status':req.path==='/v1/admin/excel-imports'?'excel-upload':/^\/v1\/admin\/excel-imports\/[^/]+(?:\/(?:advance|confirm))?$/.test(req.path)?'excel-job':'other';
+  res.locals.phase='authorization';
+  const event=(name,extra={})=>{if(route!=='health')logger({event:name,requestId:res.locals.requestId,route,method:req.method,phase:res.locals.phase,durationMs:Date.now()-start,...extra});};
+  event('http_request_started');
   const timer=setTimeout(()=>{if(!finished(res)){res.set('Connection','close');reject(res,504,'REQUEST_TIMEOUT');controller.abort();}},config.requestTimeoutMs);timer.unref();
-  res.once('finish',()=>{clearTimeout(timer);if(req.path!=='/health')logger({event:'http_request',requestId:res.locals.requestId,method:req.method,status:res.statusCode,durationMs:Date.now()-start});});
-  res.once('close',()=>{clearTimeout(timer);controller.abort();});next();
+  res.once('finish',()=>{clearTimeout(timer);event('http_request',{status:res.statusCode});});
+  res.once('close',()=>{clearTimeout(timer);if(!res.writableFinished)event('http_request_interrupted');controller.abort();});next();
  });
  app.get('/health',(req,res)=>res.json({status:'ok'}));
  const limiter=options=>rateLimit({windowMs:60000,standardHeaders:'draft-7',legacyHeaders:false,
@@ -92,12 +96,15 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
   app.post('/v1/admin/excel-imports',async(req,res,next)=>{
    if(uploading)return reject(res,503,'PREPARATION_BUSY');uploading=true;
    try{
+    res.locals.phase='receiving-excel';
     const files=await readProposalUpload(req,config,res.locals.signal,{automatic:true});let options;
     try{options=JSON.parse(files.contract.toString('utf8'));}catch{throw new HttpError(422,'INVALID_MAPPING');}
     if(!options||typeof options!=='object'||Array.isArray(options)||options.mappings&&typeof options.mappings!=='object')throw new HttpError(422,'INVALID_MAPPING');
+    res.locals.phase='reading-excel';
     const source=await readSourceWorker(files.excel,files.filename,options.mappings??{},config.prepareTimeoutMs);
     if(source.mappingRequired.length){if(!finished(res))res.json({status:'MAPPING_REQUIRED',mappingRequired:source.mappingRequired});return;}
     if(!source.products.length)throw new HttpError(422,'NO_PRODUCTS');
+    res.locals.phase='saving-analysis';
     const result=await imports.create(source,res.locals.principal);if(!finished(res))res.json(result);
    }catch(error){next(error);}finally{uploading=false;}
   });
