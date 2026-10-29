@@ -11,5 +11,6 @@ export function createReadOnlyFirebase({config,account}){
  const auth=getAuth(app),db=getFirestore(app);
  return Object.freeze({verifyIdToken:token=>auth.verifyIdToken(token,true),getUser:uid=>auth.getUser(uid),
   readProfile:async uid=>{const doc=await db.doc(`usuarios/${uid}`).get();return doc.exists?{role:doc.get('role'),estado:doc.get('estado')}:null;},
+  ...(config.automaticImportEnabled?{inventoryDb:db}:{}),
   close:async()=>{await db.terminate();await deleteApp(app);}});
 }

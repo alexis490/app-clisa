@@ -17,6 +17,7 @@ export function readHttpConfig(env=process.env){
   if(account?.type!=='service_account'||account.project_id!==projectId||typeof account.client_email!=='string'||!account.client_email.endsWith('.iam.gserviceaccount.com')||typeof account.private_key!=='string'||!account.private_key.includes('-----BEGIN PRIVATE KEY-----'))fail();
  }
  const config={port:integer('PORT',10000,1,65535),trustProxyHops:integer('TRUST_PROXY_HOPS',render?1:0,0,1),
+  automaticImportEnabled:env.IMPORT_SYNC_ENABLED==='true',
   requireHttps:render||env.REQUIRE_HTTPS==='true',requestTimeoutMs:integer('REQUEST_TIMEOUT_MS',30000,1000,60000),
   authTimeoutMs:integer('AUTH_TIMEOUT_MS',5000,500,10000),prepareTimeoutMs:integer('PREPARATION_TIMEOUT_MS',15000,100,20000),
   excelBytes:integer('MAX_EXCEL_BYTES',EXCEL_LIMIT,1024,EXCEL_LIMIT),contractBytes:integer('MAX_CONTRACT_BYTES',CONTRACT_LIMIT,1024,CONTRACT_LIMIT),
