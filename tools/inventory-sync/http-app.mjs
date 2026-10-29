@@ -100,13 +100,14 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
     const files=await readProposalUpload(req,config,res.locals.signal,{automatic:true});let options;
     try{options=JSON.parse(files.contract.toString('utf8'));}catch{throw new HttpError(422,'INVALID_MAPPING');}
     if(!options||typeof options!=='object'||Array.isArray(options)||options.mappings&&typeof options.mappings!=='object')throw new HttpError(422,'INVALID_MAPPING');
+    if(Object.hasOwn(options,'reviewBeforeClassification')&&typeof options.reviewBeforeClassification!=='boolean')throw new HttpError(422,'INVALID_OPTIONS');
     res.locals.phase='reading-excel';
     const source=await readSourceWorker(files.excel,files.filename,options.mappings??{},config.prepareTimeoutMs,formatOnly);
     if(formatOnly){if(!finished(res))res.json(source);return;}
     if(source.mappingRequired.length){if(!finished(res))res.json({status:'MAPPING_REQUIRED',mappingRequired:source.mappingRequired});return;}
     if(!source.products.length)throw new HttpError(422,'NO_PRODUCTS');
     res.locals.phase='saving-analysis';
-    const result=await imports.create(source,res.locals.principal);if(!finished(res))res.json(result);
+    const result=await imports.create(source,res.locals.principal,{reviewBeforeClassification:options.reviewBeforeClassification===true});if(!finished(res))res.json(result);
    }catch(error){next(error);}finally{uploading=false;}
   };
   app.post('/v1/admin/excel-format',receiveExcel(true));

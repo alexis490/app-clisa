@@ -34,16 +34,18 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
    result[key]=page.docs.filter(d=>typeof d.get('nombre')==='string').map(d=>({id:d.id,name:d.get('nombre'),active:d.get('activo')===true}));
   }return result;
  }
- async function create(source,actor){
+ async function create(source,actor,{reviewBeforeClassification=false}={}){
   const ref=jobRef(randomUUID());let cats={categories:[],brands:[]},catalogWarning=null;
-  try{cats=await catalog();}catch{catalogWarning='No se pudo completar el catálogo; clasificación pendiente.';}
-  const initial={uid:actor.uid,role:actor.role,fileSha256:source.fileSha256,filename:source.filename,bytes:source.bytes,rowCount:source.rowCount,total:source.products.length,issueCount:source.issues.length,status:'STAGING',cursor:0,summary:emptyCounters(),preview:emptyCounters(),catalog:cats,catalogWarning,createdAt:FieldValue.serverTimestamp(),confirmed:false};
+  if(!reviewBeforeClassification)try{cats=await catalog();}catch{catalogWarning='No se pudo completar el catálogo; clasificación pendiente.';}
+  const oversized=p=>p.serials.length>1000||Buffer.byteLength(JSON.stringify(p))>400000;
+  const analysis={rowsRead:source.rowCount,validProducts:source.products.filter(p=>!p.critical).length,inventoryTarget:source.products.filter(p=>!p.critical&&!oversized(p)).length,inventoryChecked:0,productsCompared:0,seriesTotal:source.products.reduce((n,p)=>n+p.serials.length,0),seriesProcessed:0,conflictsChecked:0,excludedProducts:0};
+  const initial={uid:actor.uid,role:actor.role,fileSha256:source.fileSha256,filename:source.filename,bytes:source.bytes,rowCount:source.rowCount,total:source.products.length,issueCount:source.issues.length,status:'STAGING',cursor:0,summary:emptyCounters(),preview:emptyCounters(),catalog:cats,catalogWarning,analysis,reviewBeforeClassification,createdAt:FieldValue.serverTimestamp(),confirmed:false};
   await ref.create(initial);
   for(const batch of chunks(source.products.map((p,i)=>({p,i})),200)){
    const write=db.batch();for(const {p,i} of batch){
     const incidents=source.issues.filter(e=>e.productCode===p.code&&(p.code!==null||e.sheet===p.sheet&&e.row===p.row));
     // A hostile oversized group must not exceed Firestore's document limit or block other products.
-    const tooLarge=p.serials.length>1000||Buffer.byteLength(JSON.stringify(p))>400000;
+    const tooLarge=oversized(p);
     const safeSource=tooLarge?{...p,critical:true,serials:[],serialCount:p.serials.length}:p;
     if(tooLarge)incidents.push({productCode:p.code,productName:p.name,sheet:p.sheet,row:p.row,serial:null,type:'PRODUCT_LIMIT',description:'El producto excede el tamaño seguro de una transacción.',reason:'Producto excluido íntegramente; dividir el archivo no cambia este límite por producto.'});
     write.create(units(ref).doc(index(i)),{source:safeSource,issues:incidents.slice(0,100),issueCount:incidents.length,receipt:null});
@@ -74,19 +76,23 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
   const ref=jobRef(id),token=await lock(ref,actor);
   try{
    const job=await own(ref,actor);
-   if(['COMPLETED','PARTIAL','PREVIEW'].includes(job.status))return await view(id,actor);
+   if(['COMPLETED','PARTIAL','PREVIEW','REVIEW_READY'].includes(job.status))return await view(id,actor);
    check(['COMPARISON','CLASSIFICATION','SYNCING'].includes(job.status),'IMPORT_NOT_READY');
    let end=Math.min(job.cursor+(job.status==='SYNCING'?5:20),job.total);const started=Date.now();
    if(job.status==='COMPARISON'){
+    const analysis=job.analysis?{...job.analysis}:null;let preview=job.preview;
     for(let i=job.cursor;i<end;i++){
      const uref=units(ref).doc(index(i)),u=(await uref.get()).data();let input,plan;
      try{input=await inspect(u.source);plan=planProduct(u.source,input.products,input.entries,input.serialMatches,null);}
      catch{plan={code:u.source.code,name:u.source.name,sheet:u.source.sheet,row:u.source.row,excluded:true,reason:'No se pudo verificar el inventario de este producto.',operations:[]};}
      if(input&&Buffer.byteLength(JSON.stringify({source:u.source,input,plan}))>600000){input=null;plan={code:u.source.code,name:u.source.name,sheet:u.source.sheet,row:u.source.row,excluded:true,reason:'La propuesta excede el tamaño seguro de un documento; producto excluido íntegramente.',operations:[]};}
      await uref.update(input?{input,plan}:{plan});
+     if(analysis){analysis.productsCompared++;analysis.conflictsChecked++;analysis.seriesProcessed+=u.source.serialCount??u.source.serials.length;if(!u.source.critical)analysis.inventoryChecked++;if(plan.excluded)analysis.excludedProducts++;}
+     if(job.reviewBeforeClassification)preview=plus(preview,countersFor(plan));
      if(Date.now()-started>12000){end=i+1;break;}
     }
-    await ref.update({cursor:end===job.total?0:end,status:end===job.total?'CLASSIFICATION':'COMPARISON'});
+    const completed=end===job.total;
+    await ref.update({cursor:completed&&!job.reviewBeforeClassification?0:end,status:completed?(job.reviewBeforeClassification?'REVIEW_READY':'CLASSIFICATION'):'COMPARISON',...(analysis?{analysis}:{}),...(job.reviewBeforeClassification?{preview}:{})});
    }else if(job.status==='CLASSIFICATION'){
     const rows=[];for(let i=job.cursor;i<end;i++){const uref=units(ref).doc(index(i)),u=(await uref.get()).data();rows.push({uref,u});}
     let rules;try{rules=parseRules(await readFile(new URL('./classification-rules.tsv',import.meta.url),'utf8'));}catch{rules={aliases:[]};}
@@ -159,7 +165,7 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
   const page=await units(ref).orderBy('__name__').startAt(index(offset)).limit(10).get();
   const items=page.docs.map(d=>{const u=d.data(),c=u.plan?.classification;return {code:u.source.code,name:u.source.name,sheet:u.source.sheet,row:u.source.row,series:u.source.serialCount??u.source.serials.length,stock:u.source.stock,issues:u.issues,issueCount:u.issueCount,plan:u.plan?{excluded:u.plan.excluded,reason:u.plan.reason??null,classification:c?{...c,categoryName:job.catalog.categories.find(e=>e.id===c.fields.categoriaId)?.name??null,brandName:job.catalog.brands.find(e=>e.id===c.fields.marcaId)?.name??null}:null,counts:countersFor(u.plan),operations:u.plan.operations.map(o=>({type:o.type,path:o.path,fields:o.fields,serial:o.fields.codigo??u.input?.entries.find(e=>e.path===o.path)?.data.codigo??null,quantity:o.fields.cantidad??null,beforeQuantity:u.input?.entries.find(e=>e.path===o.path)?.data.cantidad??null}))}:null,receipt:u.receipt??null};});
   const diagnostic=offset===0?await ref.collection('incidencias').get():null;
-  return {id,status:job.status,confirmed:job.confirmed,filename:job.filename,bytes:job.bytes,rowCount:job.rowCount,fileSha256:job.fileSha256,total:job.total,cursor:job.cursor,issueCount:job.issueCount,catalogWarning:job.catalogWarning,preview:job.preview,summary:job.summary,items,allIssues:diagnostic?.docs.flatMap(d=>d.get('items'))??[],unassociatedIssues:diagnostic?.docs.flatMap(d=>d.get('items')).filter(e=>e.productCode===null)??[],nextOffset:offset+items.length<job.total?offset+items.length:null};
+  return {id,status:job.status,confirmed:job.confirmed,filename:job.filename,bytes:job.bytes,rowCount:job.rowCount,fileSha256:job.fileSha256,total:job.total,cursor:job.cursor,issueCount:job.issueCount,analysis:job.analysis??null,catalogWarning:job.catalogWarning,preview:job.preview,summary:job.summary,items,allIssues:diagnostic?.docs.flatMap(d=>d.get('items'))??[],unassociatedIssues:diagnostic?.docs.flatMap(d=>d.get('items')).filter(e=>e.productCode===null)??[],nextOffset:offset+items.length<job.total?offset+items.length:null};
  }
  return {create,advance,confirm,view};
 }
