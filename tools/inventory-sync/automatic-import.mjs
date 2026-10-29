@@ -13,9 +13,9 @@ const check=(ok,code='IMPORT_CHANGED')=>{if(!ok)throw new HttpError(409,code);};
 const plus=(a,b)=>Object.fromEntries(Object.keys(emptyCounters()).map(k=>[k,(a[k]??0)+(b[k]??0)]));
 const path='importaciones_excel';
 
-export function readSourceWorker(bytes,filename,mappings,timeoutMs=15000){
+export function readSourceWorker(bytes,filename,mappings,timeoutMs=15000,formatOnly=false){
  return new Promise((resolve,reject)=>{
-  const worker=new Worker(new URL('./source-worker.mjs',import.meta.url),{workerData:{bytes,filename,mappings},env:{},resourceLimits:{maxOldGenerationSizeMb:128,maxYoungGenerationSizeMb:16}});
+  const worker=new Worker(new URL('./source-worker.mjs',import.meta.url),{workerData:{bytes,filename,mappings,formatOnly},env:{},resourceLimits:{maxOldGenerationSizeMb:128,maxYoungGenerationSizeMb:16}});
   let done=false;const end=(error,value)=>{if(done)return;done=true;clearTimeout(timer);worker.terminate();error?reject(error):resolve(value);};
   const timer=setTimeout(()=>end(new HttpError(422,'SOURCE_TIMEOUT')),timeoutMs);
   worker.once('message',m=>m.error?end(new HttpError(422,m.error)):end(null,m.source));
