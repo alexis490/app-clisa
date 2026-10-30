@@ -18,7 +18,7 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
  app.use((req,res,next)=>{
   res.locals.requestId=randomUUID();res.set('Cache-Control','no-store');res.set('X-Request-Id',res.locals.requestId);
   const start=Date.now(),controller=new AbortController();res.locals.signal=controller.signal;
-  const route=req.path==='/health'?'health':req.path==='/v1/admin/status'?'admin-status':req.path==='/v1/admin/excel-format'?'excel-format':req.path==='/v1/admin/excel-imports'?'excel-upload':/^\/v1\/admin\/excel-imports\/[^/]+(?:\/(?:advance|confirm))?$/.test(req.path)?'excel-job':'other';
+  const route=req.path==='/health'?'health':req.path==='/v1/admin/status'?'admin-status':req.path==='/v1/admin/excel-format'?'excel-format':req.path==='/v1/admin/excel-imports'?'excel-upload':/^\/v1\/admin\/excel-imports\/[^/]+(?:\/(?:advance|review|classify|confirm))?$/.test(req.path)?'excel-job':'other';
   res.locals.phase='authorization';
   const event=(name,extra={})=>{if(route!=='health')logger({event:name,requestId:res.locals.requestId,route,method:req.method,phase:res.locals.phase,durationMs:Date.now()-start,...extra});};
   event('http_request_started');
@@ -113,7 +113,7 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
   app.post('/v1/admin/excel-format',receiveExcel(true));
   app.post('/v1/admin/excel-imports',receiveExcel(false));
   app.get('/v1/admin/excel-imports/:id',async(req,res,next)=>{try{const result=await imports.view(req.params.id,res.locals.principal,Number(req.query.offset??0));if(!finished(res))res.json(result);}catch(error){next(error);}});
-  for(const action of ['advance','confirm'])app.post(`/v1/admin/excel-imports/:id/${action}`,async(req,res,next)=>{
+  for(const action of ['advance','review','classify','confirm'])app.post(`/v1/admin/excel-imports/:id/${action}`,async(req,res,next)=>{
    try{const result=await imports[action](req.params.id,res.locals.principal);if(!finished(res))res.json(result);}catch(error){next(error);}
   });
  }

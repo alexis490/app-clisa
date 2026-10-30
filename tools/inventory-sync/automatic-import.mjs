@@ -6,6 +6,7 @@ import { parseRules } from './classification.mjs';
 import { classifyBatch } from './automatic-classification.mjs';
 import { document,version,planProduct,countersFor,emptyCounters } from './automatic-plan.mjs';
 import { HttpError } from './http-proposal.mjs';
+import { reviewAccumulator,productRecordRows } from './review-report.mjs';
 
 const chunks=(items,n)=>Array.from({length:Math.ceil(items.length/n)},(_,i)=>items.slice(i*n,(i+1)*n));
 const index=i=>String(i).padStart(5,'0');
@@ -48,7 +49,7 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
     const tooLarge=oversized(p);
     const safeSource=tooLarge?{...p,critical:true,serials:[],serialCount:p.serials.length}:p;
     if(tooLarge)incidents.push({productCode:p.code,productName:p.name,sheet:p.sheet,row:p.row,serial:null,type:'PRODUCT_LIMIT',description:'El producto excede el tamaño seguro de una transacción.',reason:'Producto excluido íntegramente; dividir el archivo no cambia este límite por producto.'});
-    write.create(units(ref).doc(index(i)),{source:safeSource,issues:incidents.slice(0,100),issueCount:incidents.length,receipt:null});
+    write.create(units(ref).doc(index(i)),{source:safeSource,recordRowCount:productRecordRows(p).size,issues:incidents.slice(0,100),issueCount:incidents.length,receipt:null});
    }await write.commit();
   }
   // Keep unassociated diagnostics separately; never silently lose them.
@@ -115,6 +116,39 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
    tx.update(ref,{confirmed:true,status:'SYNCING',cursor:0,summary:emptyCounters(),confirmedAt:FieldValue.serverTimestamp()});
   });return view(id,actor);
  }
+ async function review(id,actor){
+  const ref=jobRef(id),token=await lock(ref,actor);
+  try{
+   const job=await own(ref,actor);check(job.status==='REVIEW_READY'&&job.reviewBeforeClassification===true,'REVIEW_NOT_READY');
+   if(job.review)return await view(id,actor);
+   const diagnostic=await ref.collection('incidencias').get();
+   const original=diagnostic.docs.filter(d=>!d.id.startsWith('review-')).flatMap(d=>d.get('items'));
+   const accumulator=reviewAccumulator(job,original);
+   for(let offset=0;offset<job.total;offset+=50){
+    const page=await units(ref).orderBy('__name__').startAt(index(offset)).limit(50).select('source','plan.excluded','plan.reason','input.products','recordRowCount').get();
+    for(const d of page.docs)accumulator.add(d.data());
+   }
+   let absent=null;
+   try{const inventory=await db.collection('productos').select('codigo').limit(5001).get();
+    if(inventory.size<=5000)absent=inventory.docs.filter(d=>typeof d.get('codigo')==='string'&&d.get('codigo').trim()&&!accumulator.codes.has(d.get('codigo'))).length;
+   }catch{ /* Unknown is displayed as unavailable, never as zero. */ }
+   const {report,extraIssues}=accumulator.finish(absent);
+   const write=db.batch();for(const [i,items] of chunks(extraIssues,100).entries())write.set(ref.collection('incidencias').doc(`review-${index(i)}`),{items});
+   write.update(ref,{review:report});await write.commit();return await view(id,actor);
+  }finally{await unlock(ref,token);}
+ }
+ async function classify(id,actor){
+  const ref=jobRef(id),token=await lock(ref,actor);
+  try{
+   const job=await own(ref,actor);check(job.reviewBeforeClassification===true,'REVIEW_REQUIRED');
+   if(['CLASSIFICATION','PREVIEW','SYNCING','COMPLETED','PARTIAL'].includes(job.status))return await view(id,actor);
+   check(job.status==='REVIEW_READY'&&job.review&&job.review.validProducts>0&&!job.confirmed,'REVIEW_REQUIRED');
+   let cats={categories:[],brands:[]},catalogWarning=null;
+   try{cats=await catalog();}catch{catalogWarning='No se pudo completar el catálogo; clasificación pendiente.';}
+   await ref.update({status:'CLASSIFICATION',cursor:0,preview:emptyCounters(),catalog:cats,catalogWarning,classificationRequestedAt:FieldValue.serverTimestamp()});
+   return await view(id,actor);
+  }finally{await unlock(ref,token);}
+ }
  async function execute(ref,i,actor){
   const uref=units(ref).doc(index(i));
   try{
@@ -165,7 +199,7 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
   const page=await units(ref).orderBy('__name__').startAt(index(offset)).limit(10).get();
   const items=page.docs.map(d=>{const u=d.data(),c=u.plan?.classification;return {code:u.source.code,name:u.source.name,sheet:u.source.sheet,row:u.source.row,series:u.source.serialCount??u.source.serials.length,stock:u.source.stock,issues:u.issues,issueCount:u.issueCount,plan:u.plan?{excluded:u.plan.excluded,reason:u.plan.reason??null,classification:c?{...c,categoryName:job.catalog.categories.find(e=>e.id===c.fields.categoriaId)?.name??null,brandName:job.catalog.brands.find(e=>e.id===c.fields.marcaId)?.name??null}:null,counts:countersFor(u.plan),operations:u.plan.operations.map(o=>({type:o.type,path:o.path,fields:o.fields,serial:o.fields.codigo??u.input?.entries.find(e=>e.path===o.path)?.data.codigo??null,quantity:o.fields.cantidad??null,beforeQuantity:u.input?.entries.find(e=>e.path===o.path)?.data.cantidad??null}))}:null,receipt:u.receipt??null};});
   const diagnostic=offset===0?await ref.collection('incidencias').get():null;
-  return {id,status:job.status,confirmed:job.confirmed,filename:job.filename,bytes:job.bytes,rowCount:job.rowCount,fileSha256:job.fileSha256,total:job.total,cursor:job.cursor,issueCount:job.issueCount,analysis:job.analysis??null,catalogWarning:job.catalogWarning,preview:job.preview,summary:job.summary,items,allIssues:diagnostic?.docs.flatMap(d=>d.get('items'))??[],unassociatedIssues:diagnostic?.docs.flatMap(d=>d.get('items')).filter(e=>e.productCode===null)??[],nextOffset:offset+items.length<job.total?offset+items.length:null};
+  return {id,status:job.status,confirmed:job.confirmed,filename:job.filename,bytes:job.bytes,rowCount:job.rowCount,fileSha256:job.fileSha256,total:job.total,cursor:job.cursor,issueCount:job.issueCount,analysis:job.analysis??null,review:job.review??null,reviewBeforeClassification:job.reviewBeforeClassification===true,catalogWarning:job.catalogWarning,preview:job.preview,summary:job.summary,items,allIssues:diagnostic?.docs.flatMap(d=>d.get('items'))??[],unassociatedIssues:diagnostic?.docs.flatMap(d=>d.get('items')).filter(e=>e.productCode===null)??[],nextOffset:offset+items.length<job.total?offset+items.length:null};
  }
- return {create,advance,confirm,view};
+ return {create,advance,review,classify,confirm,view};
 }
