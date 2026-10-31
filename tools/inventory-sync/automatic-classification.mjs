@@ -30,8 +30,8 @@ export async function classifyBatch(products,catalog,rules,{apiKey,model,fetcher
   for(const p of proposals){if(!p||seen.has(p.code))return result;seen.add(p.code);}
   for(const row of missing){
    const proposed=proposals.find(p=>p.code===row.code);if(!proposed)continue;
-   for(const [key,entries] of [['categoriaId',catalog.categories],['marcaId',catalog.brands]])if(!row.fields[key]&&valid(entries,proposed[key]))row.fields[key]=proposed[key];
-   row.source='reglas y Gemini';row.pending=['categoriaId','marcaId','descripcion'].filter(k=>!row.fields[k]);
+   for(const [key,entries] of [['categoriaId',catalog.categories],['marcaId',catalog.brands]])if(!row.fields[key]&&valid(entries,proposed[key])){row.fields[key]=proposed[key];row.source='reglas y Gemini';}
+   row.pending=['categoriaId','marcaId','descripcion'].filter(k=>!row.fields[k]);
   }
  }catch{/* Missing or invalid AI output never prevents valid inventory synchronization. */}
  return result;

@@ -99,8 +99,13 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
     let rules;try{rules=parseRules(await readFile(new URL('./classification-rules.tsv',import.meta.url),'utf8'));}catch{rules={aliases:[]};}
     const classified=await classifyBatch(rows.filter(r=>!r.u.plan.excluded).map(({u})=>({...u.input.products[0]?.data,code:u.source.code,name:u.source.name})),job.catalog,rules,{apiKey,model,fetcher});
     let preview=job.preview;
-    for(const {uref,u} of rows){const c=classified.find(c=>c.code===u.source.code);const plan=u.plan.excluded?u.plan:planProduct(u.source,u.input.products,u.input.entries,u.input.serialMatches,c);preview=plus(preview,countersFor(plan));await uref.update({plan});}
-    await ref.update({cursor:end===job.total?0:end,status:end===job.total?'PREVIEW':'CLASSIFICATION',preview});
+    // Counters describe durable results, never simulated stages or Gemini requests.
+    // Legacy jobs resumed midway cannot reconstruct previous origins from a page.
+    const progress=job.classificationProgress?{...job.classificationProgress}:job.cursor===0?{processed:0,byRules:0,byAi:0,pending:0,excluded:0,rulesProcessed:0,aiProcessed:0}:null;
+    for(const {uref,u} of rows){const c=classified.find(c=>c.code===u.source.code);const plan=u.plan.excluded?u.plan:planProduct(u.source,u.input.products,u.input.entries,u.input.serialMatches,c);preview=plus(preview,countersFor(plan));await uref.update({plan});
+     if(progress){if(plan.excluded)progress.excluded++;else{progress.processed++;const ai=c?.source==='reglas y Gemini';progress[ai?'aiProcessed':'rulesProcessed']++;if(c?.pending.length)progress.pending++;else progress[ai?'byAi':'byRules']++;}}
+    }
+    await ref.update({cursor:end===job.total?0:end,status:end===job.total?'PREVIEW':'CLASSIFICATION',preview,...(progress?{classificationProgress:progress}:{})});
    }else{
     for(let i=job.cursor;i<end;i++)await execute(ref,i,actor);
     if(end===job.total){const now=await own(ref,actor);await ref.update({status:now.summary.syncErrors?'PARTIAL':'COMPLETED',finishedAt:FieldValue.serverTimestamp()});}
@@ -145,7 +150,7 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
    check(job.status==='REVIEW_READY'&&job.review&&job.review.validProducts>0&&!job.confirmed,'REVIEW_REQUIRED');
    let cats={categories:[],brands:[]},catalogWarning=null;
    try{cats=await catalog();}catch{catalogWarning='No se pudo completar el catálogo; clasificación pendiente.';}
-   await ref.update({status:'CLASSIFICATION',cursor:0,preview:emptyCounters(),catalog:cats,catalogWarning,classificationRequestedAt:FieldValue.serverTimestamp()});
+   await ref.update({status:'CLASSIFICATION',cursor:0,preview:emptyCounters(),classificationProgress:{processed:0,byRules:0,byAi:0,pending:0,excluded:0,rulesProcessed:0,aiProcessed:0},catalog:cats,catalogWarning,classificationRequestedAt:FieldValue.serverTimestamp()});
    return await view(id,actor);
   }finally{await unlock(ref,token);}
  }
@@ -199,7 +204,7 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
   const page=await units(ref).orderBy('__name__').startAt(index(offset)).limit(10).get();
   const items=page.docs.map(d=>{const u=d.data(),c=u.plan?.classification;return {code:u.source.code,name:u.source.name,sheet:u.source.sheet,row:u.source.row,series:u.source.serialCount??u.source.serials.length,stock:u.source.stock,issues:u.issues,issueCount:u.issueCount,plan:u.plan?{excluded:u.plan.excluded,reason:u.plan.reason??null,classification:c?{...c,categoryName:job.catalog.categories.find(e=>e.id===c.fields.categoriaId)?.name??null,brandName:job.catalog.brands.find(e=>e.id===c.fields.marcaId)?.name??null}:null,counts:countersFor(u.plan),operations:u.plan.operations.map(o=>({type:o.type,path:o.path,fields:o.fields,serial:o.fields.codigo??u.input?.entries.find(e=>e.path===o.path)?.data.codigo??null,quantity:o.fields.cantidad??null,beforeQuantity:u.input?.entries.find(e=>e.path===o.path)?.data.cantidad??null}))}:null,receipt:u.receipt??null};});
   const diagnostic=offset===0?await ref.collection('incidencias').get():null;
-  return {id,status:job.status,confirmed:job.confirmed,filename:job.filename,bytes:job.bytes,rowCount:job.rowCount,fileSha256:job.fileSha256,total:job.total,cursor:job.cursor,issueCount:job.issueCount,analysis:job.analysis??null,review:job.review??null,reviewBeforeClassification:job.reviewBeforeClassification===true,catalogWarning:job.catalogWarning,preview:job.preview,summary:job.summary,items,allIssues:diagnostic?.docs.flatMap(d=>d.get('items'))??[],unassociatedIssues:diagnostic?.docs.flatMap(d=>d.get('items')).filter(e=>e.productCode===null)??[],nextOffset:offset+items.length<job.total?offset+items.length:null};
+  return {id,status:job.status,confirmed:job.confirmed,filename:job.filename,bytes:job.bytes,rowCount:job.rowCount,fileSha256:job.fileSha256,total:job.total,cursor:job.cursor,issueCount:job.issueCount,analysis:job.analysis??null,review:job.review??null,classificationProgress:job.classificationProgress??null,reviewBeforeClassification:job.reviewBeforeClassification===true,catalogWarning:job.catalogWarning,preview:job.preview,summary:job.summary,items,allIssues:diagnostic?.docs.flatMap(d=>d.get('items'))??[],unassociatedIssues:diagnostic?.docs.flatMap(d=>d.get('items')).filter(e=>e.productCode===null)??[],nextOffset:offset+items.length<job.total?offset+items.length:null};
  }
  return {create,advance,review,classify,confirm,view};
 }
