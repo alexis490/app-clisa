@@ -7,7 +7,7 @@ import { classifyBatch } from './automatic-classification.mjs';
 import { document,version,planProduct,countersFor,emptyCounters } from './automatic-plan.mjs';
 import { HttpError } from './http-proposal.mjs';
 import { reviewAccumulator,productRecordRows } from './review-report.mjs';
-import { hash } from './canonical.mjs';
+import { sha } from './canonical.mjs';
 import { historyCollection,historyRecord,historyView,validEmail } from './import-history.mjs';
 
 const chunks=(items,n)=>Array.from({length:Math.ceil(items.length/n)},(_,i)=>items.slice(i*n,(i+1)*n));
@@ -42,7 +42,7 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
   if(!reviewBeforeClassification)try{cats=await catalog();}catch{catalogWarning='No se pudo completar el catálogo; clasificación pendiente.';}
   const oversized=p=>p.serials.length>1000||Buffer.byteLength(JSON.stringify(p))>400000;
   const analysis={rowsRead:source.rowCount,validProducts:source.products.filter(p=>!p.critical).length,inventoryTarget:source.products.filter(p=>!p.critical&&!oversized(p)).length,inventoryChecked:0,productsCompared:0,seriesTotal:source.products.reduce((n,p)=>n+p.serials.length,0),seriesProcessed:0,conflictsChecked:0,excludedProducts:0};
-  const sourceSignature=hash({products:source.products,issues:source.issues});
+  const sourceSignature=sha(Buffer.from(JSON.stringify({products:source.products,issues:source.issues})));
   const initial={sourceSignature,uid:actor.uid,role:actor.role,fileSha256:source.fileSha256,filename:source.filename,bytes:source.bytes,rowCount:source.rowCount,total:source.products.length,issueCount:source.issues.length,status:'STAGING',cursor:0,summary:emptyCounters(),preview:emptyCounters(),catalog:cats,catalogWarning,analysis,reviewBeforeClassification,createdAt:FieldValue.serverTimestamp(),confirmed:false};
   const token=randomUUID();
   const stage=await db.runTransaction(async tx=>{
