@@ -115,6 +115,7 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
   app.post('/v1/admin/excel-format',receiveExcel(true));
   app.post('/v1/admin/excel-imports',receiveExcel(false));
   app.get('/v1/admin/excel-imports/:id',async(req,res,next)=>{try{const result=await imports.view(req.params.id,res.locals.principal,Number(req.query.offset??0));if(!finished(res))res.json(result);}catch(error){next(error);}});
+  app.get('/v1/admin/excel-imports/:id/export',async(req,res,next)=>{try{const result=await imports.exportPage(req.params.id,res.locals.principal,req.query.section??'products',Number(req.query.offset??0));if(!finished(res))res.json(result);}catch(error){next(error);}});
   for(const action of ['advance','review','classify','confirm'])app.post(`/v1/admin/excel-imports/:id/${action}`,async(req,res,next)=>{
    try{const result=await imports[action](req.params.id,res.locals.principal);if(!finished(res))res.json(result);}catch(error){next(error);}
   });

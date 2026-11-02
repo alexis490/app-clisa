@@ -9,6 +9,7 @@ import { HttpError } from './http-proposal.mjs';
 import { reviewAccumulator,productRecordRows } from './review-report.mjs';
 import { sha } from './canonical.mjs';
 import { historyCollection,historyRecord,historyView,validEmail } from './import-history.mjs';
+import { exportUnit,exportIssue } from './import-export.mjs';
 
 const chunks=(items,n)=>Array.from({length:Math.ceil(items.length/n)},(_,i)=>items.slice(i*n,(i+1)*n));
 const index=i=>String(i).padStart(5,'0');
@@ -159,7 +160,8 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
    const original=diagnostic.docs.filter(d=>!d.id.startsWith('review-')).flatMap(d=>d.get('items'));
    const accumulator=reviewAccumulator(job,original);
    for(let offset=0;offset<job.total;offset+=50){
-    const page=await units(ref).orderBy('__name__').startAt(index(offset)).limit(50).select('source','plan.excluded','plan.reason','input.products','recordRowCount').get();
+    let endOffset=offset;
+   const page=await units(ref).orderBy('__name__').startAt(index(offset)).limit(50).select('source','plan.excluded','plan.reason','input.products','recordRowCount').get();
     for(const d of page.docs)accumulator.add(d.data());
    }
    let absent=null;
@@ -236,5 +238,36 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
   const history=['COMPLETED','PARTIAL'].includes(job.status)?await db.collection(historyCollection).doc(id).get():null;
   return {id,status:job.status,confirmed:job.confirmed,filename:job.filename,bytes:job.bytes,rowCount:job.rowCount,fileSha256:job.fileSha256,total:job.total,cursor:job.cursor,issueCount:job.issueCount,analysis:job.analysis??null,review:job.review??null,history:historyView(history?.exists?history.data():null),classificationProgress:job.classificationProgress??null,reviewBeforeClassification:job.reviewBeforeClassification===true,catalogWarning:job.catalogWarning,preview:job.preview,summary:job.summary,items,allIssues:diagnostic?.docs.flatMap(d=>d.get('items'))??[],unassociatedIssues:diagnostic?.docs.flatMap(d=>d.get('items')).filter(e=>e.productCode===null)??[],nextOffset:offset+items.length<job.total?offset+items.length:null};
  }
- return {create,advance,review,classify,confirm,view};
+ async function exportPage(id,actor,section='products',offset=0){
+  const ref=jobRef(id),job=await own(ref,actor);
+  check(['COMPLETED','PARTIAL'].includes(job.status)&&job.confirmed===true,'EXPORT_NOT_READY');
+  check(['products','issues'].includes(section)&&Number.isInteger(offset)&&offset>=0&&offset<=(section==='products'?job.total:1000),'INVALID_OFFSET');
+  const history=await db.collection(historyCollection).doc(id).get();
+  const metadata={id,status:job.status,total:job.total,cursor:job.cursor,confirmed:job.confirmed,filename:job.filename,rowCount:job.rowCount,
+   summary:Object.fromEntries(Object.keys(emptyCounters()).filter(k=>Object.hasOwn(job.summary??{},k)).map(k=>[k,job.summary[k]])),preview:{},items:[],history:historyView(history.exists?history.data():null)};
+  const data={products:[],operations:[],issues:[]};let bytes=0,consumed=0,complete=true,nextOffset=null;
+  if(section==='products'){
+   let endOffset=offset;
+   const page=await units(ref).orderBy('__name__').startAt(index(offset)).limit(50)
+    .select('source.code','source.name','source.sheet','source.row','source.stock','source.serialCount','input.products','plan.operations','plan.excluded','plan.reason','plan.productId','receipt','issues').get();
+   // A gap in old/corrupted evidence is reported, never filled with fabricated rows.
+   for(const d of page.docs){
+    const position=Number(d.id);if(!Number.isInteger(position)||d.id!==index(position)||position>=job.total){complete=false;continue;}
+    if(position!==endOffset)complete=false;
+    const row=exportUnit(d.data(),`${id}/productos/${d.id}`),size=Buffer.byteLength(JSON.stringify(row));
+    check(size<=3*1024*1024,'EXPORT_ROW_LIMIT');
+    if(consumed&&bytes+size>3*1024*1024)break;
+    data.products.push(row.product);data.operations.push(...row.operations);data.issues.push(...row.issues);bytes+=size;consumed++;endOffset=position+1;
+   }
+   if(endOffset<job.total){if(consumed)nextOffset=endOffset;else complete=false;}
+  }else{
+   const page=await ref.collection('incidencias').orderBy('__name__').offset(offset).limit(10).get();
+   for(const d of page.docs){const rows=(d.get('items')??[]).map(exportIssue),size=Buffer.byteLength(JSON.stringify(rows));check(size<=3*1024*1024,'EXPORT_ROW_LIMIT');
+    if(consumed&&bytes+size>3*1024*1024)break;data.issues.push(...rows);bytes+=size;consumed++;
+   }
+   if(consumed<page.size||page.size===10)nextOffset=offset+consumed;
+  }
+  return {schemaVersion:1,section,offset,nextOffset,complete,job:metadata,data};
+ }
+ return {create,advance,review,classify,confirm,view,exportPage};
 }
