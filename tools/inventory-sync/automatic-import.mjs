@@ -244,6 +244,7 @@ export function createAutomaticImport({db,apiKey,model,fetcher}){
   check(['products','issues'].includes(section)&&Number.isInteger(offset)&&offset>=0&&offset<=(section==='products'?job.total:1000),'INVALID_OFFSET');
   const history=await db.collection(historyCollection).doc(id).get();
   const metadata={id,status:job.status,total:job.total,cursor:job.cursor,confirmed:job.confirmed,filename:job.filename,rowCount:job.rowCount,
+   completedAt:job.finishedAt?.toDate?.().toISOString()??null,responsibleUser:validEmail(job.importUserEmail)?job.importUserEmail:null,
    summary:Object.fromEntries(Object.keys(emptyCounters()).filter(k=>Object.hasOwn(job.summary??{},k)).map(k=>[k,job.summary[k]])),preview:{},items:[],history:historyView(history.exists?history.data():null)};
   const data={products:[],operations:[],issues:[]};let bytes=0,consumed=0,complete=true,nextOffset=null;
   if(section==='products'){
