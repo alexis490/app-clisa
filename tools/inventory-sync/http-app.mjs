@@ -65,7 +65,8 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
    if(!adminClaims(claims))throw new HttpError(403,'FORBIDDEN');
    const current=await firebase.getUser(claims.uid);
    if(current.disabled||!adminClaims(current.customClaims)||current.customClaims.role!==claims.role)throw new HttpError(403,'FORBIDDEN');
-   return {uid:claims.uid,role:claims.role};
+   // Email is authoritative Auth user data, never a contract/profile/token override.
+   return {uid:claims.uid,role:claims.role,email:typeof current.email==='string'?current.email:null};
    });if(!finished(res)){res.locals.principal=principal;next();}
   }catch(error){forwardAuthError(error,res,next);}
  });
@@ -101,13 +102,14 @@ export function createHttpApp({config,firebase=null,logger=()=>{},automaticImpor
     try{options=JSON.parse(files.contract.toString('utf8'));}catch{throw new HttpError(422,'INVALID_MAPPING');}
     if(!options||typeof options!=='object'||Array.isArray(options)||options.mappings&&typeof options.mappings!=='object')throw new HttpError(422,'INVALID_MAPPING');
     if(Object.hasOwn(options,'reviewBeforeClassification')&&typeof options.reviewBeforeClassification!=='boolean')throw new HttpError(422,'INVALID_OPTIONS');
+    if(Object.hasOwn(options,'importId')&&(typeof options.importId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(options.importId)))throw new HttpError(422,'INVALID_IMPORT');
     res.locals.phase='reading-excel';
     const source=await readSourceWorker(files.excel,files.filename,options.mappings??{},config.prepareTimeoutMs,formatOnly);
     if(formatOnly){if(!finished(res))res.json(source);return;}
     if(source.mappingRequired.length){if(!finished(res))res.json({status:'MAPPING_REQUIRED',mappingRequired:source.mappingRequired});return;}
     if(!source.products.length)throw new HttpError(422,'NO_PRODUCTS');
     res.locals.phase='saving-analysis';
-    const result=await imports.create(source,res.locals.principal,{reviewBeforeClassification:options.reviewBeforeClassification===true});if(!finished(res))res.json(result);
+    const result=await imports.create(source,res.locals.principal,{reviewBeforeClassification:options.reviewBeforeClassification===true,...(options.importId?{importId:options.importId}:{})});if(!finished(res))res.json(result);
    }catch(error){next(error);}finally{uploading=false;}
   };
   app.post('/v1/admin/excel-format',receiveExcel(true));

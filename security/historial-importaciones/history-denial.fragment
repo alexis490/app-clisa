@@ -1,0 +1,6 @@
+    // Audit records are written exclusively by the authorized import backend.
+    // Android obtains its own record through the authenticated job response.
+    match /historial_importaciones/{document=**} {
+      allow read, write: if false;
+    }
+
