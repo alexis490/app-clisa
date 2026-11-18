@@ -24,3 +24,18 @@ local.properties
 **/*.key
 **/*.p12
 .render-smoke/
+.npm-cache/
+docs/importacion-maestro/local-fixtures/
+
+# Local dependencies, device settings and generated test output.
+node_modules/
+*.log
+/.idea/deviceManager.xml
+/outputs/*
+!/outputs/cambio-id-resumen.svg
+!/outputs/ejemplo-resumen-id-corto.png
+/docs/importacion-maestro/prueba-100-build/
+/docs/importacion-maestro/source-analysis.json
+/security/historial-importaciones/preflight/
+/security/historial-importaciones/pre-deploy/
+/security/historial-importaciones/post-deploy/

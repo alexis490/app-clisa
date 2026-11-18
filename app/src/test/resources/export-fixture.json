@@ -1,0 +1,207 @@
+[
+  {
+    "schemaVersion": 1,
+    "section": "products",
+    "offset": 0,
+    "nextOffset": null,
+    "complete": true,
+    "job": {
+      "id": "be4cfc43-cb74-43f3-8483-031aab2b4982",
+      "status": "PARTIAL",
+      "total": 4,
+      "cursor": 4,
+      "confirmed": true,
+      "filename": "stock.xlsx",
+      "rowCount": 4043,
+      "summary": {
+        "productsCreated": 1,
+        "productsUpdated": 1,
+        "productsClassified": 0,
+        "classificationPending": 2,
+        "seriesCreated": 1,
+        "seriesUpdated": 1,
+        "seriesZeroed": 0,
+        "productsUnchanged": 0,
+        "productsOmitted": 1,
+        "syncErrors": 1
+      },
+      "preview": {},
+      "items": [],
+      "history": {
+        "idImportacion": "be4cfc43-cb74-43f3-8483-031aab2b4982",
+        "archivo": "stock.xlsx",
+        "fecha": "2026-11-02T03:02:16.600Z",
+        "usuarioUid": "export-admin",
+        "usuario": "export-admin@example.test",
+        "destino": "Firebase Firestore",
+        "estado": "COMPLETADO_CON_OBSERVACIONES"
+      }
+    },
+    "data": {
+      "products": [
+        {
+          "code": "( AD80HW )",
+          "name": "Monitor HUAWEI DISPLAY 23.8\" ( AD80HW ) | FHD | HDMI - VGA | IPS | 5MS | 60HZ.",
+          "store": null,
+          "previousExists": true,
+          "beforeStock": 2,
+          "newStock": 0,
+          "difference": -2,
+          "type": "UPDATE_PRODUCT",
+          "state": "COMPLETADO"
+        },
+        {
+          "code": "0-761345-10024-3",
+          "name": "Case Antec CX200 ELITE, ST 5ARC 2GL, Black, 05 Cooler RGB, Vidrio templado, S/Fuente.",
+          "store": null,
+          "previousExists": false,
+          "beforeStock": null,
+          "newStock": 1,
+          "difference": null,
+          "type": "CREATE_PRODUCT",
+          "state": "COMPLETADO"
+        },
+        {
+          "code": "0-761345-100618",
+          "name": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente.",
+          "store": null,
+          "previousExists": null,
+          "beforeStock": null,
+          "newStock": null,
+          "difference": null,
+          "type": "OMITIR_PRODUCTO",
+          "state": "OMITIDO"
+        },
+        {
+          "code": "0-761345-10066-3",
+          "name": "Case Antec AX20 ELITE MT 4AR GL, Black, 03 Cooler RGB, Vidrio templado, S/Fuente.",
+          "store": null,
+          "previousExists": false,
+          "beforeStock": null,
+          "newStock": null,
+          "difference": null,
+          "type": "CREATE_PRODUCT",
+          "state": "FALLIDO"
+        }
+      ],
+      "operations": [
+        {
+          "collection": "productos",
+          "id": "existing",
+          "type": "UPDATE_PRODUCT",
+          "state": "COMPLETADO",
+          "error": null
+        },
+        {
+          "collection": "existencias",
+          "id": "existing",
+          "type": "UPDATE_EXISTENCE",
+          "state": "COMPLETADO",
+          "error": null
+        },
+        {
+          "collection": "productos",
+          "id": "p_v1_046db8584f22c8b5e3eff949bd560e602f11af78150979232bf0e9f4ebe42f9a",
+          "type": "CREATE_PRODUCT",
+          "state": "COMPLETADO",
+          "error": null
+        },
+        {
+          "collection": "existencias",
+          "id": "e_v1_f49a234089f19aba3f47dc9365019ed81bcdc8ffccf90b5dc325769a8826e688",
+          "type": "CREATE_EXISTENCE",
+          "state": "COMPLETADO",
+          "error": null
+        },
+        {
+          "collection": "importaciones_excel",
+          "id": "be4cfc43-cb74-43f3-8483-031aab2b4982/productos/00002",
+          "type": "OMITIR_PRODUCTO",
+          "state": "OMITIDO",
+          "error": "Producto con incidencias críticas de origen."
+        },
+        {
+          "collection": "productos",
+          "id": "p_v1_3155a95d06d154ae0f5db15fd66ac52cf12d1de7f672edcd9c10e47dd2f5bc22",
+          "type": "CREATE_PRODUCT",
+          "state": "FALLIDO",
+          "error": "INVENTORY_CHANGED"
+        },
+        {
+          "collection": "existencias",
+          "id": "e_v1_81d7a3e6b211862a952b645cef6ad4f6805eb4dbb143b3f742d9847fa46a308e",
+          "type": "CREATE_EXISTENCE",
+          "state": "FALLIDO",
+          "error": "INVENTORY_CHANGED"
+        }
+      ],
+      "issues": [
+        {
+          "sheet": "stock.production.lot",
+          "row": 7,
+          "code": "0-761345-100618",
+          "name": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente.",
+          "serial": null,
+          "type": "INVALID_QUANTITY",
+          "description": "Cantidad negativa de prueba",
+          "reason": "Producto apartado"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "section": "issues",
+    "offset": 0,
+    "nextOffset": null,
+    "complete": true,
+    "job": {
+      "id": "be4cfc43-cb74-43f3-8483-031aab2b4982",
+      "status": "PARTIAL",
+      "total": 4,
+      "cursor": 4,
+      "confirmed": true,
+      "filename": "stock.xlsx",
+      "rowCount": 4043,
+      "summary": {
+        "productsCreated": 1,
+        "productsUpdated": 1,
+        "productsClassified": 0,
+        "classificationPending": 2,
+        "seriesCreated": 1,
+        "seriesUpdated": 1,
+        "seriesZeroed": 0,
+        "productsUnchanged": 0,
+        "productsOmitted": 1,
+        "syncErrors": 1
+      },
+      "preview": {},
+      "items": [],
+      "history": {
+        "idImportacion": "be4cfc43-cb74-43f3-8483-031aab2b4982",
+        "archivo": "stock.xlsx",
+        "fecha": "2026-11-02T03:02:16.600Z",
+        "usuarioUid": "export-admin",
+        "usuario": "export-admin@example.test",
+        "destino": "Firebase Firestore",
+        "estado": "COMPLETADO_CON_OBSERVACIONES"
+      }
+    },
+    "data": {
+      "products": [],
+      "operations": [],
+      "issues": [
+        {
+          "sheet": "stock.production.lot",
+          "row": 7,
+          "code": "0-761345-100618",
+          "name": "Case Antec AX51 MT 3AR GL, Black, 03 Cooler ARGB, Vidrio templado, S/Fuente.",
+          "serial": null,
+          "type": "INVALID_QUANTITY",
+          "description": "Cantidad negativa de prueba",
+          "reason": "Producto apartado"
+        }
+      ]
+    }
+  }
+]

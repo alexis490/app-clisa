@@ -76,6 +76,16 @@ test('HTTP Emulator expired token is rejected',async()=>{
  const p=tokens.ADMIN.split('.'),claims=JSON.parse(Buffer.from(p[1],'base64url'));claims.exp=1;p[1]=Buffer.from(JSON.stringify(claims)).toString('base64url');
  assert.equal((await fetch(url+'/v1/admin/status',{headers:{Authorization:'Bearer '+p.join('.')}})).status,401);
 });
+test('HTTP Emulator accepts the exact multipart produced by the Android HTTPS client',async()=>{
+ const wire=JSON.parse(await readFile(new URL('../../../docs/importacion-paso4b-final/android-multipart.json',import.meta.url),'utf8'));
+ const before=await rt.db.doc('productos/api-preserve').get();
+ const r=await fetch(url+'/v1/admin/imports/prepare',{method:'POST',headers:{...h('ADMIN'),'Content-Type':wire.contentType},body:Buffer.from(wire.bodyBase64,'base64')});
+ assert.equal(r.status,200,await r.clone().text());const data=await r.json();
+ assert.equal(data.authorization,false);assert.equal(data.inventoryWritesEnabled,false);
+ assert.equal(data.proposal.plan.fileSha256,wire.fileSha256);assert.equal(data.proposal.preparation.originalPlanId,wire.originalPlanId);
+ assert.ok((await rt.db.doc('productos/api-preserve').get()).updateTime.isEqual(before.updateTime));
+ assert.equal((await rt.db.collection('importaciones').get()).size,0);
+});
 test('HTTP Emulator revoked token is rejected with checkRevoked enabled',async()=>{
  await new Promise(r=>setTimeout(r,1100));await rt.auth.revokeRefreshTokens('HTTP_ADMIN');
  assert.equal((await fetch(url+'/v1/admin/status',{headers:h('ADMIN')})).status,401);

@@ -18,10 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,7 +47,6 @@ private val Background = Color(0xFF020E21)
 fun UsersScreen(onBack: () -> Unit, authenticated: Boolean) {
     val view = LocalView.current
     val context = LocalContext.current
-    val clipboard = LocalClipboardManager.current
     DisposableEffect(view) {
         val controller = (context as? Activity)?.let { WindowCompat.getInsetsController(it.window, view) }
         val status = controller?.isAppearanceLightStatusBars
@@ -153,10 +150,6 @@ fun UsersScreen(onBack: () -> Unit, authenticated: Boolean) {
                             if (appliedQuery.isNotEmpty() && page?.hasMore == true) Text("La búsqueda incluye las páginas cargadas. Carga más para revisar las siguientes.", color = Muted, style = MaterialTheme.typography.bodySmall)
                         }
                     }
-                    Button(onClick = { notice = "Crear cuentas y asignarles permisos requiere conectar un servicio administrativo de Firebase Auth. Esta pantalla no crea perfiles incompletos ni cambia tu sesión." },
-                        enabled = access?.canManage == true && !loading, modifier = Modifier.fillMaxWidth().padding(12.dp).heightIn(min = 48.dp), shape = RoundedCornerShape(12.dp)) {
-                        UserSymbol("add", White, null); Spacer(Modifier.width(10.dp)); Text("Agregar usuario")
-                    }
                 } else {
                     val user = selected!!
                     Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -185,7 +178,7 @@ fun UsersScreen(onBack: () -> Unit, authenticated: Boolean) {
                                 }
                             }
                             Surface(Modifier.padding(12.dp), shape = RoundedCornerShape(10.dp), color = Color(0xFF032858), border = BorderStroke(1.dp, Blue)) {
-                                Text("El rol mostrado pertenece al perfil. Los permisos efectivos dependen del token de Firebase Auth y de las reglas publicadas.\n\nLa creación de cuentas y los cambios de rol necesitan un servicio administrativo.",
+                                Text("El rol define las funciones a las que puede acceder el usuario. Solo un administrador autorizado puede modificarlo.",
                                     color = Muted, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(12.dp))
                             }
                         }
@@ -212,18 +205,6 @@ fun UsersScreen(onBack: () -> Unit, authenticated: Boolean) {
                                 }
                             }
                             if (saving) LinearProgressIndicator(Modifier.fillMaxWidth())
-                        }
-                        UserCard {
-                            CardTitle("document", "Información adicional")
-                            Surface(Modifier.fillMaxWidth().padding(10.dp), shape = RoundedCornerShape(10.dp), color = Color(0xFF052345), border = BorderStroke(.5.dp, Border)) {
-                                Row(Modifier.padding(start = 12.dp, top = 10.dp, bottom = 10.dp), verticalAlignment = Alignment.CenterVertically) {
-                                    Column(Modifier.weight(1f)) {
-                                        Text("Correo electrónico", color = Muted, style = MaterialTheme.typography.bodySmall)
-                                        Text(user.email, color = Muted, style = MaterialTheme.typography.bodyMedium)
-                                    }
-                                    IconButton(onClick = { clipboard.setText(AnnotatedString(user.email)) }) { UserSymbol("copy", White, "Copiar correo") }
-                                }
-                            }
                         }
                         Spacer(Modifier.height(10.dp))
                     }

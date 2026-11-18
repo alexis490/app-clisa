@@ -91,6 +91,7 @@ private data class PendingPackage(val uid: String, val hash: String, val uri: Ur
                 Text("Plan ${plan.planId}\nSHA-256 ${plan.fileSha256}", style = MaterialTheme.typography.labelSmall)
                 Text(simulation ?: "Sin ejecución simulada importada. El Dry Run no escribe documentos.")
                 if (message != null) Text(message!!)
+                RenderImportActions(plan, excel, comparison, sourceUri, busy)
                 OutlinedButton(enabled = !busy && sourceUri != null, onClick = {
                     busy = true; message = null
                     scope.launch {

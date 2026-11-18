@@ -38,6 +38,19 @@ test('HTTP health is public, lightweight and does not reveal Firebase configurat
  const {url}=await running(t,{firebase:null});const r=await fetch(url+'/health');assert.equal(r.status,200);assert.deepEqual(await r.json(),{status:'ok'});
  assert.equal(r.headers.get('x-powered-by'),null);assert.equal(r.headers.get('cache-control'),'no-store');assert.equal(r.headers.get('x-content-type-options'),'nosniff');
 });
+
+test('HTTP records interrupted requests without exposing credentials or query values',async t=>{
+ let started;const begun=new Promise(resolve=>{started=resolve;});
+ const {url,logs}=await running(t,{firebase:fake({verifyIdToken:async()=>{
+   started();await new Promise(resolve=>setTimeout(resolve,100));return {uid:'ADMIN',role:'ADMIN',admin:true};
+ }})});
+ const controller=new AbortController();
+ const request=fetch(url+'/v1/admin/status?private=HIDDEN_QUERY',{headers,signal:controller.signal});
+ await begun;controller.abort();await assert.rejects(request);
+ for(let attempt=0;attempt<20&&!logs.some(e=>e.event==='http_request_interrupted');attempt++)await new Promise(resolve=>setTimeout(resolve,10));
+ assert.ok(logs.some(e=>e.event==='http_request_interrupted'&&e.route==='admin-status'&&e.phase==='authorization'));
+ assert.equal(JSON.stringify(logs).includes(token),false);assert.equal(JSON.stringify(logs).includes('HIDDEN_QUERY'),false);
+});
 test('HTTP status rejects absent token, wrong bearer syntax and query token',async t=>{
  const {url}=await running(t);for(const h of [{},{Authorization:'Basic '+token}])assert.equal((await fetch(url+'/v1/admin/status',{headers:h})).status,401);
  assert.equal((await fetch(url+'/v1/admin/status?token='+token)).status,401);

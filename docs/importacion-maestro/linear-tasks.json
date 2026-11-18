@@ -1,0 +1,314 @@
+[
+  {
+    "id": "T01",
+    "title": "Analizar la arquitectura actual del módulo.",
+    "linear": "ALE-6",
+    "url": "https://linear.app/alexis-hum/issue/ALE-6/t01-analizar-la-arquitectura-actual-del-modulo"
+  },
+  {
+    "id": "T02",
+    "title": "Identificar pantallas, servicios, endpoints y componentes reutilizables.",
+    "linear": "ALE-7",
+    "url": "https://linear.app/alexis-hum/issue/ALE-7/t02-identificar-pantallas-servicios-endpoints-y-componentes"
+  },
+  {
+    "id": "T03",
+    "title": "Inspeccionar la estructura de Firestore y el almacenamiento de series.",
+    "linear": "ALE-8",
+    "url": "https://linear.app/alexis-hum/issue/ALE-8/t03-inspeccionar-la-estructura-de-firestore-y-el-almacenamiento-de"
+  },
+  {
+    "id": "T04",
+    "title": "Identificar diferencias entre la implementación actual y los nuevos requisitos.",
+    "linear": "ALE-9",
+    "url": "https://linear.app/alexis-hum/issue/ALE-9/t04-identificar-diferencias-entre-la-implementacion-actual-y-los"
+  },
+  {
+    "id": "T05",
+    "title": "Documentar el plan técnico y sus dependencias.",
+    "linear": "ALE-10",
+    "url": "https://linear.app/alexis-hum/issue/ALE-10/t05-documentar-el-plan-tecnico-y-sus-dependencias"
+  },
+  {
+    "id": "T06",
+    "title": "Adaptar la lectura de XLSX, XLS y CSV.",
+    "linear": "ALE-11",
+    "url": "https://linear.app/alexis-hum/issue/ALE-11/t06-adaptar-la-lectura-de-xlsx-xls-y-csv"
+  },
+  {
+    "id": "T07",
+    "title": "Implementar detección automática y asignación de columnas.",
+    "linear": "ALE-12",
+    "url": "https://linear.app/alexis-hum/issue/ALE-12/t07-implementar-deteccion-automatica-y-asignacion-de-columnas"
+  },
+  {
+    "id": "T08",
+    "title": "Distinguir filas de resumen y filas de series/lotes.",
+    "linear": "ALE-13",
+    "url": "https://linear.app/alexis-hum/issue/ALE-13/t08-distinguir-filas-de-resumen-y-filas-de-serieslotes"
+  },
+  {
+    "id": "T09",
+    "title": "Implementar validaciones y detección de incidencias.",
+    "linear": "ALE-14",
+    "url": "https://linear.app/alexis-hum/issue/ALE-14/t09-implementar-validaciones-y-deteccion-de-incidencias"
+  },
+  {
+    "id": "T10",
+    "title": "Separar productos válidos y productos omitidos.",
+    "linear": "ALE-15",
+    "url": "https://linear.app/alexis-hum/issue/ALE-15/t10-separar-productos-validos-y-productos-omitidos"
+  },
+  {
+    "id": "T11",
+    "title": "Comparar productos válidos con Firestore.",
+    "linear": "ALE-16",
+    "url": "https://linear.app/alexis-hum/issue/ALE-16/t11-comparar-productos-validos-con-firestore"
+  },
+  {
+    "id": "T12",
+    "title": "Identificar productos nuevos y existentes.",
+    "linear": "ALE-17",
+    "url": "https://linear.app/alexis-hum/issue/ALE-17/t12-identificar-productos-nuevos-y-existentes"
+  },
+  {
+    "id": "T13",
+    "title": "Identificar series nuevas, modificadas y ausentes.",
+    "linear": "ALE-18",
+    "url": "https://linear.app/alexis-hum/issue/ALE-18/t13-identificar-series-nuevas-modificadas-y-ausentes"
+  },
+  {
+    "id": "T14",
+    "title": "Calcular el stock final sin duplicar resúmenes.",
+    "linear": "ALE-19",
+    "url": "https://linear.app/alexis-hum/issue/ALE-19/t14-calcular-el-stock-final-sin-duplicar-resumenes"
+  },
+  {
+    "id": "T15",
+    "title": "Generar la propuesta de cambios.",
+    "linear": "ALE-20",
+    "url": "https://linear.app/alexis-hum/issue/ALE-20/t15-generar-la-propuesta-de-cambios"
+  },
+  {
+    "id": "T16",
+    "title": "Conservar categoría, marca y descripción existentes.",
+    "linear": "ALE-21",
+    "url": "https://linear.app/alexis-hum/issue/ALE-21/t16-conservar-categoria-marca-y-descripcion-existentes"
+  },
+  {
+    "id": "T17",
+    "title": "Aplicar reglas automáticas de clasificación.",
+    "linear": "ALE-22",
+    "url": "https://linear.app/alexis-hum/issue/ALE-22/t17-aplicar-reglas-automaticas-de-clasificacion"
+  },
+  {
+    "id": "T18",
+    "title": "Integrar o adaptar Gemini desde Node.js.",
+    "linear": "ALE-23",
+    "url": "https://linear.app/alexis-hum/issue/ALE-23/t18-integrar-o-adaptar-gemini-desde-nodejs"
+  },
+  {
+    "id": "T19",
+    "title": "Validar las propuestas de clasificación.",
+    "linear": "ALE-24",
+    "url": "https://linear.app/alexis-hum/issue/ALE-24/t19-validar-las-propuestas-de-clasificacion"
+  },
+  {
+    "id": "T20",
+    "title": "Permitir sincronizar productos válidos con clasificación pendiente.",
+    "linear": "ALE-25",
+    "url": "https://linear.app/alexis-hum/issue/ALE-25/t20-permitir-sincronizar-productos-validos-con-clasificacion-pendiente"
+  },
+  {
+    "id": "T21",
+    "title": "Adaptar la creación y actualización de productos.",
+    "linear": "ALE-26",
+    "url": "https://linear.app/alexis-hum/issue/ALE-26/t21-adaptar-la-creacion-y-actualizacion-de-productos"
+  },
+  {
+    "id": "T22",
+    "title": "Adaptar la actualización de series existentes.",
+    "linear": "ALE-27",
+    "url": "https://linear.app/alexis-hum/issue/ALE-27/t22-adaptar-la-actualizacion-de-series-existentes"
+  },
+  {
+    "id": "T23",
+    "title": "Implementar creación de series nuevas.",
+    "linear": "ALE-28",
+    "url": "https://linear.app/alexis-hum/issue/ALE-28/t23-implementar-creacion-de-series-nuevas"
+  },
+  {
+    "id": "T24",
+    "title": "Establecer cantidad cero en series ausentes del alcance válido.",
+    "linear": "ALE-29",
+    "url": "https://linear.app/alexis-hum/issue/ALE-29/t24-establecer-cantidad-cero-en-series-ausentes-del-alcance-valido"
+  },
+  {
+    "id": "T25",
+    "title": "Proteger completamente los productos omitidos.",
+    "linear": "ALE-30",
+    "url": "https://linear.app/alexis-hum/issue/ALE-30/t25-proteger-completamente-los-productos-omitidos"
+  },
+  {
+    "id": "T26",
+    "title": "Implementar escrituras consistentes e importaciones idempotentes.",
+    "linear": "ALE-31",
+    "url": "https://linear.app/alexis-hum/issue/ALE-31/t26-implementar-escrituras-consistentes-e-importaciones-idempotentes"
+  },
+  {
+    "id": "T27",
+    "title": "Devolver resultados verificables de sincronización.",
+    "linear": "ALE-32",
+    "url": "https://linear.app/alexis-hum/issue/ALE-32/t27-devolver-resultados-verificables-de-sincronizacion"
+  },
+  {
+    "id": "T28",
+    "title": "Adaptar la pantalla de selección de archivo.",
+    "linear": "ALE-33",
+    "url": "https://linear.app/alexis-hum/issue/ALE-33/t28-adaptar-la-pantalla-de-seleccion-de-archivo"
+  },
+  {
+    "id": "T29",
+    "title": "Implementar el progreso automático de cuatro etapas.",
+    "linear": "ALE-34",
+    "url": "https://linear.app/alexis-hum/issue/ALE-34/t29-implementar-el-progreso-automatico-de-cuatro-etapas"
+  },
+  {
+    "id": "T30",
+    "title": "Adaptar la vista previa.",
+    "linear": "ALE-35",
+    "url": "https://linear.app/alexis-hum/issue/ALE-35/t30-adaptar-la-vista-previa"
+  },
+  {
+    "id": "T31",
+    "title": "Implementar la confirmación única.",
+    "linear": "ALE-36",
+    "url": "https://linear.app/alexis-hum/issue/ALE-36/t31-implementar-la-confirmacion-unica"
+  },
+  {
+    "id": "T32",
+    "title": "Adaptar el progreso de sincronización.",
+    "linear": "ALE-37",
+    "url": "https://linear.app/alexis-hum/issue/ALE-37/t32-adaptar-el-progreso-de-sincronizacion"
+  },
+  {
+    "id": "T33",
+    "title": "Implementar el resumen final.",
+    "linear": "ALE-38",
+    "url": "https://linear.app/alexis-hum/issue/ALE-38/t33-implementar-el-resumen-final"
+  },
+  {
+    "id": "T34",
+    "title": "Adaptar las vistas de incidencias y clasificación.",
+    "linear": "ALE-39",
+    "url": "https://linear.app/alexis-hum/issue/ALE-39/t34-adaptar-las-vistas-de-incidencias-y-clasificacion"
+  },
+  {
+    "id": "T35",
+    "title": "Verificar fidelidad al mockup aprobado.",
+    "linear": "ALE-40",
+    "url": "https://linear.app/alexis-hum/issue/ALE-40/t35-verificar-fidelidad-al-mockup-aprobado"
+  },
+  {
+    "id": "T36",
+    "title": "Verificar comunicación Android–Render.",
+    "linear": "ALE-41",
+    "url": "https://linear.app/alexis-hum/issue/ALE-41/t36-verificar-comunicacion-android-render"
+  },
+  {
+    "id": "T37",
+    "title": "Probar la importación de productos nuevos.",
+    "linear": "ALE-42",
+    "url": "https://linear.app/alexis-hum/issue/ALE-42/t37-probar-la-importacion-de-productos-nuevos"
+  },
+  {
+    "id": "T38",
+    "title": "Probar la actualización de productos existentes.",
+    "linear": "ALE-43",
+    "url": "https://linear.app/alexis-hum/issue/ALE-43/t38-probar-la-actualizacion-de-productos-existentes"
+  },
+  {
+    "id": "T39",
+    "title": "Probar series nuevas, modificadas y ausentes.",
+    "linear": "ALE-44",
+    "url": "https://linear.app/alexis-hum/issue/ALE-44/t39-probar-series-nuevas-modificadas-y-ausentes"
+  },
+  {
+    "id": "T40",
+    "title": "Probar exclusión de productos con incidencias.",
+    "linear": "ALE-45",
+    "url": "https://linear.app/alexis-hum/issue/ALE-45/t40-probar-exclusion-de-productos-con-incidencias"
+  },
+  {
+    "id": "T41",
+    "title": "Probar clasificación con reglas, Gemini y fallos de IA.",
+    "linear": "ALE-46",
+    "url": "https://linear.app/alexis-hum/issue/ALE-46/t41-probar-clasificacion-con-reglas-gemini-y-fallos-de-ia"
+  },
+  {
+    "id": "T42",
+    "title": "Probar reimportación sin duplicados.",
+    "linear": "ALE-47",
+    "url": "https://linear.app/alexis-hum/issue/ALE-47/t42-probar-reimportacion-sin-duplicados"
+  },
+  {
+    "id": "T43",
+    "title": "Probar permisos y seguridad.",
+    "linear": "ALE-48",
+    "url": "https://linear.app/alexis-hum/issue/ALE-48/t43-probar-permisos-y-seguridad"
+  },
+  {
+    "id": "T44",
+    "title": "Evaluar consumo de Firestore y rendimiento.",
+    "linear": "ALE-49",
+    "url": "https://linear.app/alexis-hum/issue/ALE-49/t44-evaluar-consumo-de-firestore-y-rendimiento"
+  },
+  {
+    "id": "T45",
+    "title": "Ejecutar pruebas de regresión.",
+    "linear": "ALE-50",
+    "url": "https://linear.app/alexis-hum/issue/ALE-50/t45-ejecutar-pruebas-de-regresion"
+  },
+  {
+    "id": "T46",
+    "title": "Verificar compilación y funcionamiento integral.",
+    "linear": "ALE-51",
+    "url": "https://linear.app/alexis-hum/issue/ALE-51/t46-verificar-compilacion-y-funcionamiento-integral"
+  },
+  {
+    "id": "T47",
+    "title": "Revisar el estado final de todas las tareas.",
+    "linear": "ALE-52",
+    "url": "https://linear.app/alexis-hum/issue/ALE-52/t47-revisar-el-estado-final-de-todas-las-tareas"
+  },
+  {
+    "id": "T48",
+    "title": "Documentar archivos y componentes modificados.",
+    "linear": "ALE-53",
+    "url": "https://linear.app/alexis-hum/issue/ALE-53/t48-documentar-archivos-y-componentes-modificados"
+  },
+  {
+    "id": "T49",
+    "title": "Documentar errores o limitaciones pendientes.",
+    "linear": "ALE-54",
+    "url": "https://linear.app/alexis-hum/issue/ALE-54/t49-documentar-errores-o-limitaciones-pendientes"
+  },
+  {
+    "id": "T50",
+    "title": "Entregar instrucciones de despliegue y verificación final.",
+    "linear": "ALE-55",
+    "url": "https://linear.app/alexis-hum/issue/ALE-55/t50-entregar-instrucciones-de-despliegue-y-verificacion-final"
+  },
+  {
+    "id": "T51",
+    "title": "Corregir fidelidad al mockup original aprobado",
+    "linear": "ALE-56",
+    "url": "https://linear.app/alexis-hum/issue/ALE-56/t51-corregir-fidelidad-de-importar-excel-al-mockup-original-aprobado"
+  },
+  {
+    "id": "T52",
+    "title": "Diagnosticar rechazo del Excel de 175 KB",
+    "linear": "ALE-57",
+    "url": "https://linear.app/alexis-hum/issue/ALE-57/t52-diagnosticar-rechazo-de-stockproductionlot123xlsx-y-compatibilidad"
+  }
+]

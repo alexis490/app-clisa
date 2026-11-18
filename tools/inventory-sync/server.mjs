@@ -10,7 +10,9 @@ export function createHttpServer(options){
  server.requestTimeout=options.config.requestTimeoutMs;
  server.headersTimeout=Math.min(10000,options.config.requestTimeoutMs);
  server.keepAliveTimeout=5000;server.maxRequestsPerSocket=100;
- server.setTimeout(Math.min(10000,options.config.requestTimeoutMs),socket=>socket.destroy());
+ // A parsed upload may spend the full request budget preparing durable plans.
+ // Do not silently destroy its connection at the former ten-second idle cutoff.
+ server.setTimeout(options.config.requestTimeoutMs,socket=>socket.destroy());
  server.on('clientError',(error,socket)=>{if(socket.writable)socket.end('HTTP/1.1 400 Bad Request\r\nConnection: close\r\nContent-Length: 0\r\n\r\n');});
  return server;
 }

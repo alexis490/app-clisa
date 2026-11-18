@@ -1,5 +1,17 @@
 # CLISA — API segura para Render
 
+## Actualización Importar Excel — 29/10/2026
+
+Estado remoto actualizado: la versión automática está desplegada y habilitada en el servicio existente, con autorización explícita del usuario. Gemini fue verificado desde Render mediante una petición sintética. Ver [resultado del despliegue](../../docs/importacion-maestro/DESPLIEGUE_RENDER.md) para fuente, configuración y alcance de las pruebas remotas.
+
+El flujo nuevo se documenta en [la entrega y configuración](../../docs/importacion-maestro/ENTREGA.md), con seguimiento en [TASKS.md](../../TASKS.md). `IMPORT_SYNC_ENABLED=true` habilita un canal separado de importación automática sobre los mismos servicios Render, Firebase Auth y Firestore. Su valor predeterminado es `false`; las rutas y garantías SAFE_PREVIEW descritas abajo corresponden al modo anterior, que continúa disponible con el canal automático desactivado. `INVENTORY_WRITES_ENABLED` continúa siendo una variable del modo anterior y debe permanecer `false`.
+
+El canal nuevo valida los bytes en el servidor, aparta productos críticos, conserva identidades y metadatos válidos, prepara cambios por alcance y requiere una confirmación antes de escribir inventario. Guarda propuestas y recibos técnicos en `importaciones_excel`, con transacciones por producto y reanudación mediante solicitudes cortas. No reutiliza las puertas de auditoría del recorrido antiguo. El motor CLI anterior conserva su restricción a Emulator.
+
+La configuración nueva **no se desplegó** durante las pruebas; los resultados de escritura se verifican únicamente en Emulator. Gemini requiere `GEMINI_API_KEY` y `GEMINI_MODEL` solo en Render. Si no están configurados o falla la IA, el stock válido continúa y la clasificación queda pendiente.
+
+Cliente Android integrado el 25 de octubre de 2026: ver [conexión Android → Render](../../docs/importacion-paso4b-final/CONEXION_ANDROID_RENDER.md). No cambian los endpoints ni se habilita ejecución de inventario.
+
 Backend: `tools/inventory-sync`. Esta carpeta contiene el servidor HTTP y el motor 4B existente. La API funciona en modo **SAFE_PREVIEW**, sin rutas de ejecución de inventario. No requiere una computadora encendida después de desplegarse; el despliegue real todavía no se realizó.
 
 ## Configuración de Render

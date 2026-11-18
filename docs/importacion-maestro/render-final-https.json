@@ -1,0 +1,12 @@
+[
+  {
+    "path": "/health",
+    "status": 200,
+    "body": "{\"status\":\"ok\"}"
+  },
+  {
+    "path": "/v1/admin/status",
+    "status": 401,
+    "body": "{\"error\":{\"code\":\"UNAUTHENTICATED\"},\"requestId\":\"306ae580-dd16-413a-8da6-8b6242a11381\"}"
+  }
+]

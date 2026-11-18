@@ -72,7 +72,7 @@ internal fun ImportStageIndicator(step: Int, modifier: Modifier = Modifier) {
             drawLine(FlowBorder, Offset(size.width * .1f, size.height / 2), Offset(size.width * .9f, size.height / 2), strokeWidth = 1.dp.toPx())
         }
         Row(Modifier.fillMaxWidth()) {
-            listOf("Seleccionar", "Analizar", "Revisar", "Sincronizar", "Clasificar").forEachIndexed { index, label ->
+            listOf("Seleccionar", "Analizar", "Revisar", "Sincronizar", "Resultados").forEachIndexed { index, label ->
                 val current = index + 1 == step
                 Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                     Surface(shape = CircleShape, color = if (current) FlowGreen else Color(0xFF00152D),
@@ -89,7 +89,8 @@ internal fun ImportStageIndicator(step: Int, modifier: Modifier = Modifier) {
 
 @Composable
 internal fun ImportSelectionScreen(fileName: String, fileBytes: Long?, report: ExcelInventory?, error: String?,
-    comparisonReady: Boolean, onBack: () -> Unit, onPick: () -> Unit, onClear: () -> Unit, onAnalyze: () -> Unit, safetyContent: @Composable () -> Unit = {}) {
+    comparisonReady: Boolean, onBack: () -> Unit, onPick: () -> Unit, onClear: () -> Unit, onAnalyze: () -> Unit, safetyContent: @Composable () -> Unit = {},
+    connectionContent: (@Composable () -> Unit)? = null) {
     var showDetails by rememberSaveable { mutableStateOf(false) }
     ImportFlowFrame("Importar inventario", "Revisa tus productos y existencias\ndesde Excel", 1, onBack) {
         LazyColumn(Modifier.weight(1f).testTag("import-selection"), contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
@@ -119,6 +120,7 @@ internal fun ImportSelectionScreen(fileName: String, fileBytes: Long?, report: E
                 }
             }
             if (fileName.isNotEmpty()) item { SelectedExcelCard(fileName, fileBytes, onClear) }
+            connectionContent?.let { connection -> item { connection() } }
             if (report != null) item { safetyContent() }
             item {
                 FlowCard {

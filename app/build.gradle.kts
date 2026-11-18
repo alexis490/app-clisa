@@ -20,6 +20,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BACKEND_BASE_URL", "\"https://app-clisa.onrender.com/\"")
     }
 
     buildTypes {
@@ -35,10 +36,17 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
 dependencies {
+    implementation("com.squareup.okhttp3:okhttp:5.5.1")
+    testImplementation("com.squareup.okhttp3:mockwebserver:5.5.1")
+    testImplementation("com.squareup.okhttp3:okhttp-tls:5.5.1")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:5.5.1")
+    androidTestImplementation("com.squareup.okhttp3:okhttp-tls:5.5.1")
+    testImplementation("org.json:json:20260814")
     implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")

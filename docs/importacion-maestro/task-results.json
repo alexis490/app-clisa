@@ -1,0 +1,366 @@
+{
+  "T01": {
+    "state": "done",
+    "files": "docs/importacion-maestro/PLAN.md",
+    "dependencies": "Ninguna",
+    "tests": "Inspección estática cruzada; HTTP base 29/29",
+    "result": "Esquema, reutilización y diferencias documentados"
+  },
+  "T02": {
+    "state": "done",
+    "files": "docs/importacion-maestro/PLAN.md",
+    "dependencies": "Ninguna",
+    "tests": "Inspección estática cruzada; HTTP base 29/29",
+    "result": "Esquema, reutilización y diferencias documentados"
+  },
+  "T03": {
+    "state": "done",
+    "files": "docs/importacion-maestro/PLAN.md",
+    "dependencies": "Ninguna",
+    "tests": "Inspección estática cruzada; HTTP base 29/29",
+    "result": "Esquema, reutilización y diferencias documentados"
+  },
+  "T04": {
+    "state": "done",
+    "files": "docs/importacion-maestro/PLAN.md",
+    "dependencies": "Ninguna",
+    "tests": "Inspección estática cruzada; HTTP base 29/29",
+    "result": "Esquema, reutilización y diferencias documentados"
+  },
+  "T05": {
+    "state": "done",
+    "files": "docs/importacion-maestro/PLAN.md",
+    "dependencies": "Ninguna",
+    "tests": "Inspección estática cruzada; HTTP base 29/29",
+    "result": "Esquema, reutilización y diferencias documentados"
+  },
+  "T06": {
+    "state": "done",
+    "files": "source-reader.mjs; source-worker.mjs; test/automatic.test.mjs",
+    "dependencies": "T01–T05",
+    "tests": "17 pruebas de lector/planificador/IA aprobadas en rate-and-final.log",
+    "result": "XLSX/XLS/CSV, mapeo y validación con Excel autorizado; sin modificar original"
+  },
+  "T07": {
+    "state": "done",
+    "files": "source-reader.mjs; source-worker.mjs; test/automatic.test.mjs",
+    "dependencies": "T01–T05",
+    "tests": "17 pruebas de lector/planificador/IA aprobadas en rate-and-final.log",
+    "result": "XLSX/XLS/CSV, mapeo y validación con Excel autorizado; sin modificar original"
+  },
+  "T08": {
+    "state": "done",
+    "files": "source-reader.mjs; source-worker.mjs; test/automatic.test.mjs",
+    "dependencies": "T01–T05",
+    "tests": "17 pruebas de lector/planificador/IA aprobadas en rate-and-final.log",
+    "result": "XLSX/XLS/CSV, mapeo y validación con Excel autorizado; sin modificar original"
+  },
+  "T09": {
+    "state": "done",
+    "files": "source-reader.mjs; source-worker.mjs; test/automatic.test.mjs",
+    "dependencies": "T01–T05",
+    "tests": "17 pruebas de lector/planificador/IA aprobadas en rate-and-final.log",
+    "result": "XLSX/XLS/CSV, mapeo y validación con Excel autorizado; sin modificar original"
+  },
+  "T10": {
+    "state": "done",
+    "files": "source-reader.mjs; source-worker.mjs; test/automatic.test.mjs",
+    "dependencies": "T01–T05",
+    "tests": "17 pruebas de lector/planificador/IA aprobadas en rate-and-final.log",
+    "result": "XLSX/XLS/CSV, mapeo y validación con Excel autorizado; sin modificar original"
+  },
+  "T11": {
+    "state": "done",
+    "files": "automatic-plan.mjs; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Unitarias y Firestore Emulator: rate-and-final.log (63/63 total)",
+    "result": "Consultas por alcance, identidad real, propuesta sin escrituras de inventario y stock sin doble resumen"
+  },
+  "T12": {
+    "state": "done",
+    "files": "automatic-plan.mjs; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Unitarias y Firestore Emulator: rate-and-final.log (63/63 total)",
+    "result": "Consultas por alcance, identidad real, propuesta sin escrituras de inventario y stock sin doble resumen"
+  },
+  "T13": {
+    "state": "done",
+    "files": "automatic-plan.mjs; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Unitarias y Firestore Emulator: rate-and-final.log (63/63 total)",
+    "result": "Consultas por alcance, identidad real, propuesta sin escrituras de inventario y stock sin doble resumen"
+  },
+  "T14": {
+    "state": "done",
+    "files": "automatic-plan.mjs; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Unitarias y Firestore Emulator: rate-and-final.log (63/63 total)",
+    "result": "Consultas por alcance, identidad real, propuesta sin escrituras de inventario y stock sin doble resumen"
+  },
+  "T15": {
+    "state": "done",
+    "files": "automatic-plan.mjs; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Unitarias y Firestore Emulator: rate-and-final.log (63/63 total)",
+    "result": "Consultas por alcance, identidad real, propuesta sin escrituras de inventario y stock sin doble resumen"
+  },
+  "T16": {
+    "state": "done",
+    "files": "automatic-classification.mjs; classification-rules.tsv; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Reglas, IA simulada válida/inválida/fallida, preservación y catálogo desactivado: aprobadas",
+    "result": "Conserva metadatos válidos; IDs reales; inventario continúa con clasificación pendiente; Gemini real requiere configuración"
+  },
+  "T17": {
+    "state": "done",
+    "files": "automatic-classification.mjs; classification-rules.tsv; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Reglas, IA simulada válida/inválida/fallida, preservación y catálogo desactivado: aprobadas",
+    "result": "Conserva metadatos válidos; IDs reales; inventario continúa con clasificación pendiente; Gemini real requiere configuración"
+  },
+  "T18": {
+    "state": "done",
+    "files": "automatic-classification.mjs; classification-rules.tsv; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Reglas, IA simulada válida/inválida/fallida, preservación y catálogo desactivado: aprobadas; conexión Gemini real OK desde Render",
+    "result": "Conserva metadatos válidos; IDs reales; inventario continúa con clasificación pendiente; Gemini real requiere configuración; clave existente preservada y modelo gemini-3.5-flash-lite configurado"
+  },
+  "T19": {
+    "state": "done",
+    "files": "automatic-classification.mjs; classification-rules.tsv; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Reglas, IA simulada válida/inválida/fallida, preservación y catálogo desactivado: aprobadas",
+    "result": "Conserva metadatos válidos; IDs reales; inventario continúa con clasificación pendiente; Gemini real requiere configuración"
+  },
+  "T20": {
+    "state": "done",
+    "files": "automatic-classification.mjs; classification-rules.tsv; automatic-import.mjs",
+    "dependencies": "T06–T10",
+    "tests": "Reglas, IA simulada válida/inválida/fallida, preservación y catálogo desactivado: aprobadas",
+    "result": "Conserva metadatos válidos; IDs reales; inventario continúa con clasificación pendiente; Gemini real requiere configuración"
+  },
+  "T21": {
+    "state": "done",
+    "files": "automatic-import.mjs; automatic-plan.mjs; http-*.mjs",
+    "dependencies": "T11–T20",
+    "tests": "Firestore Emulator: creación, actualización, ausencias, exclusión, atomicidad, reimportación, recuperación, concurrencia y 629 series; aprobadas",
+    "result": "Transacciones y recibos por producto; cantidades y errores reales; sin escrituras de producción"
+  },
+  "T22": {
+    "state": "done",
+    "files": "automatic-import.mjs; automatic-plan.mjs; http-*.mjs",
+    "dependencies": "T11–T20",
+    "tests": "Firestore Emulator: creación, actualización, ausencias, exclusión, atomicidad, reimportación, recuperación, concurrencia y 629 series; aprobadas",
+    "result": "Transacciones y recibos por producto; cantidades y errores reales; sin escrituras de producción"
+  },
+  "T23": {
+    "state": "done",
+    "files": "automatic-import.mjs; automatic-plan.mjs; http-*.mjs",
+    "dependencies": "T11–T20",
+    "tests": "Firestore Emulator: creación, actualización, ausencias, exclusión, atomicidad, reimportación, recuperación, concurrencia y 629 series; aprobadas",
+    "result": "Transacciones y recibos por producto; cantidades y errores reales; sin escrituras de producción"
+  },
+  "T24": {
+    "state": "done",
+    "files": "automatic-import.mjs; automatic-plan.mjs; http-*.mjs",
+    "dependencies": "T11–T20",
+    "tests": "Firestore Emulator: creación, actualización, ausencias, exclusión, atomicidad, reimportación, recuperación, concurrencia y 629 series; aprobadas",
+    "result": "Transacciones y recibos por producto; cantidades y errores reales; sin escrituras de producción"
+  },
+  "T25": {
+    "state": "done",
+    "files": "automatic-import.mjs; automatic-plan.mjs; http-*.mjs",
+    "dependencies": "T11–T20",
+    "tests": "Firestore Emulator: creación, actualización, ausencias, exclusión, atomicidad, reimportación, recuperación, concurrencia y 629 series; aprobadas",
+    "result": "Transacciones y recibos por producto; cantidades y errores reales; sin escrituras de producción"
+  },
+  "T26": {
+    "state": "done",
+    "files": "automatic-import.mjs; automatic-plan.mjs; http-*.mjs",
+    "dependencies": "T11–T20",
+    "tests": "Firestore Emulator: creación, actualización, ausencias, exclusión, atomicidad, reimportación, recuperación, concurrencia y 629 series; aprobadas",
+    "result": "Transacciones y recibos por producto; cantidades y errores reales; sin escrituras de producción"
+  },
+  "T27": {
+    "state": "done",
+    "files": "automatic-import.mjs; automatic-plan.mjs; http-*.mjs",
+    "dependencies": "T11–T20",
+    "tests": "Firestore Emulator: creación, actualización, ausencias, exclusión, atomicidad, reimportación, recuperación, concurrencia y 629 series; aprobadas",
+    "result": "Transacciones y recibos por producto; cantidades y errores reales; sin escrituras de producción"
+  },
+  "T28": {
+    "state": "done",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 unitarias Android; 10 de pantallas; capturas automatic-*.png inspeccionadas; compilación APK aprobada",
+    "result": "Flujo automático, confirmación única, detalles, incidencias, clasificación pendiente y resultados parciales; estilo adaptado al mockup"
+  },
+  "T29": {
+    "state": "done",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 unitarias Android; 10 de pantallas; capturas automatic-*.png inspeccionadas; compilación APK aprobada",
+    "result": "Flujo automático, confirmación única, detalles, incidencias, clasificación pendiente y resultados parciales; estilo adaptado al mockup"
+  },
+  "T30": {
+    "state": "done",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 unitarias Android; 10 de pantallas; capturas automatic-*.png inspeccionadas; compilación APK aprobada",
+    "result": "Flujo automático, confirmación única, detalles, incidencias, clasificación pendiente y resultados parciales; estilo adaptado al mockup"
+  },
+  "T31": {
+    "state": "done",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 unitarias Android; 10 de pantallas; capturas automatic-*.png inspeccionadas; compilación APK aprobada",
+    "result": "Flujo automático, confirmación única, detalles, incidencias, clasificación pendiente y resultados parciales; estilo adaptado al mockup"
+  },
+  "T32": {
+    "state": "done",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 unitarias Android; 10 de pantallas; capturas automatic-*.png inspeccionadas; compilación APK aprobada",
+    "result": "Flujo automático, confirmación única, detalles, incidencias, clasificación pendiente y resultados parciales; estilo adaptado al mockup"
+  },
+  "T33": {
+    "state": "done",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 unitarias Android; 10 de pantallas; capturas automatic-*.png inspeccionadas; compilación APK aprobada",
+    "result": "Flujo automático, confirmación única, detalles, incidencias, clasificación pendiente y resultados parciales; estilo adaptado al mockup"
+  },
+  "T34": {
+    "state": "done",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 unitarias Android; 10 de pantallas; capturas automatic-*.png inspeccionadas; compilación APK aprobada",
+    "result": "Flujo automático, confirmación única, detalles, incidencias, clasificación pendiente y resultados parciales; estilo adaptado al mockup"
+  },
+  "T35": {
+    "state": "progress",
+    "files": "AutomaticExcelImportAction.kt; ClisaBackendClient.kt; ImportExcelScreens.kt",
+    "dependencies": "T21–T27",
+    "tests": "305 JVM y 7 pruebas Android aprobadas; capturas mockup-*.png revisadas",
+    "result": "Reabierta por rechazo del diseño anterior. Composición principal corregida; faltan datos globales y edición individual 4B para cerrar fidelidad completa."
+  },
+  "T36": {
+    "state": "done",
+    "files": "ClisaBackendClient.kt; RenderLiveConnectionTest.kt; server.mjs; gemini-probe.mjs; DESPLIEGUE_RENDER.md",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "Commit remoto f96e653; deploy final dep-dbhqp44s728c73dcjjq0 live; Gemini real OK; Android TLS real 1/1; HTTPS final salud 200 y administración sin token 401",
+    "result": "TERMINADA: conexión Android–Render verificada; importación habilitada con autorización explícita; Gemini real probado con petición sintética. Sin importaciones o escrituras de prueba en producción"
+  },
+  "T37": {
+    "state": "done",
+    "files": "test/automatic*.test.mjs; AutomaticBackendClientTest.kt",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "rate-and-final.log: 63/63; backend-final.log: 196/196 de la suite completa anterior al ajuste de límites",
+    "result": "Casos de nuevos/existentes, series, exclusiones, reglas/Gemini simulado, reimportación y permisos verificados localmente"
+  },
+  "T38": {
+    "state": "done",
+    "files": "test/automatic*.test.mjs; AutomaticBackendClientTest.kt",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "rate-and-final.log: 63/63; backend-final.log: 196/196 de la suite completa anterior al ajuste de límites",
+    "result": "Casos de nuevos/existentes, series, exclusiones, reglas/Gemini simulado, reimportación y permisos verificados localmente"
+  },
+  "T39": {
+    "state": "done",
+    "files": "test/automatic*.test.mjs; AutomaticBackendClientTest.kt",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "rate-and-final.log: 63/63; backend-final.log: 196/196 de la suite completa anterior al ajuste de límites",
+    "result": "Casos de nuevos/existentes, series, exclusiones, reglas/Gemini simulado, reimportación y permisos verificados localmente"
+  },
+  "T40": {
+    "state": "done",
+    "files": "test/automatic*.test.mjs; AutomaticBackendClientTest.kt",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "rate-and-final.log: 63/63; backend-final.log: 196/196 de la suite completa anterior al ajuste de límites",
+    "result": "Casos de nuevos/existentes, series, exclusiones, reglas/Gemini simulado, reimportación y permisos verificados localmente"
+  },
+  "T41": {
+    "state": "done",
+    "files": "test/automatic*.test.mjs; AutomaticBackendClientTest.kt",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "rate-and-final.log: 63/63; backend-final.log: 196/196 de la suite completa anterior al ajuste de límites; Gemini real sintético y diagnóstico de arranque aprobados",
+    "result": "Casos de nuevos/existentes, series, exclusiones, reglas/Gemini simulado, reimportación y permisos verificados localmente"
+  },
+  "T42": {
+    "state": "done",
+    "files": "test/automatic*.test.mjs; AutomaticBackendClientTest.kt",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "rate-and-final.log: 63/63; backend-final.log: 196/196 de la suite completa anterior al ajuste de límites",
+    "result": "Casos de nuevos/existentes, series, exclusiones, reglas/Gemini simulado, reimportación y permisos verificados localmente"
+  },
+  "T43": {
+    "state": "done",
+    "files": "test/automatic*.test.mjs; AutomaticBackendClientTest.kt",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "rate-and-final.log: 63/63; backend-final.log: 196/196 de la suite completa anterior al ajuste de límites",
+    "result": "Casos de nuevos/existentes, series, exclusiones, reglas/Gemini simulado, reimportación y permisos verificados localmente"
+  },
+  "T44": {
+    "state": "done",
+    "files": "source-analysis.json; validate-authorized-source.mjs; automatic-import.mjs; http-app.mjs",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "Excel completo: 1814 grupos, 22762 series; lectura local ~0,8 s; cuotas HTTP y límites de tamaño probados",
+    "result": "1395 productos válidos de origen; 419 críticos apartados; estimación de consultas documentada, sin medición en producción"
+  },
+  "T45": {
+    "state": "done",
+    "files": "test/*.test.mjs; app/src/test; app/src/androidTest",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "Suite completa backend 196/196; suite posterior específica 63/63; Android 305 unitarias y 10 UI, sin fallos",
+    "result": "Regresión del motor, HTTP, lector, cliente y pantallas aprobada; cambios previos conservados"
+  },
+  "T46": {
+    "state": "done",
+    "files": "app/build/outputs/apk/debug/app-debug.apk; automatic-import.mjs",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "android-apk-final.log BUILD SUCCESSFUL; recorrido HTTP→Emulator de archivo derivado del Excel autorizado",
+    "result": "APK y funcionamiento integral local verificados. Validación remota depende de T36"
+  },
+  "T47": {
+    "state": "done",
+    "files": "TASKS.md; task-results.json; Linear ALE-5",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "Revisión cruzada de 50 identificadores, evidencias y estados",
+    "result": "50 tareas terminadas y verificadas; seguimiento actualizado con evidencia local y remota"
+  },
+  "T48": {
+    "state": "done",
+    "files": "docs/importacion-maestro/ENTREGA.md",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "Lista contrastada con git status y archivos de esta implementación",
+    "result": "Componentes nuevos y adaptados documentados; se distinguen cambios locales previos"
+  },
+  "T49": {
+    "state": "done",
+    "files": "docs/importacion-maestro/ENTREGA.md; TASKS.md",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "Revisión de límites, configuración, pruebas y estado remoto",
+    "result": "Límites y alcance remoto documentados: no hubo escrituras de inventario de prueba ni login administrativo real; distribución de APK fuera de este despliegue"
+  },
+  "T50": {
+    "state": "done",
+    "files": "ENTREGA.md; render.yaml; .env.example",
+    "dependencies": "Implementación y verificación precedente",
+    "tests": "Configuración contrastada con servidor y cliente compilados",
+    "result": "Backend desplegado y configurado en Render; instrucciones de configuración, APK y primera verificación de negocio entregadas"
+  },
+  "T51": {
+    "state": "progress",
+    "files": "InventoryImportDesign.kt; AutomaticExcelImportAction.kt; AutomaticImportScreensTest.kt",
+    "dependencies": "Mockup aprobado; ampliación futura del contrato para 4B y métricas",
+    "tests": "305 JVM y 7 Android aprobadas; 10 capturas verificadas",
+    "result": "Retirado diseño añadido; pantallas principales corregidas. Pendiente edición 4B y datos no expuestos. Error de carga en pausa."
+  },
+  "T52": {
+    "state": "progress",
+    "files": "ClisaBackendClient.kt; AutomaticUploadRuntimeTest.kt; automatic-http.test.mjs",
+    "dependencies": "Repetición autenticada desde sesión real",
+    "tests": "307 JVM; 6 HTTP; carga HTTPS aislada en emulador e Infinix aprobadas",
+    "result": "Excel reconocido. Compatibilidad de conexión corregida y APK compilado. Pendiente comprobar carga autenticada real, sin escrituras de inventario de prueba."
+  }
+}

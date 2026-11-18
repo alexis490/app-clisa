@@ -1,0 +1,158 @@
+{
+  "id": "6425082d-1e27-49d3-bf6e-1d9a3fd96a0b",
+  "status": "COMPLETED",
+  "confirmed": true,
+  "filename": "stock.xlsx",
+  "bytes": 179937,
+  "rowCount": 4043,
+  "fileSha256": "91d4f22cb9d359123a9b336826a9dcc4dd09214d013d12fdfa80ef0783f3700c",
+  "total": 1,
+  "cursor": 1,
+  "issueCount": 0,
+  "analysis": {
+    "rowsRead": 4043,
+    "validProducts": 1,
+    "inventoryTarget": 1,
+    "inventoryChecked": 1,
+    "productsCompared": 1,
+    "seriesTotal": 1,
+    "seriesProcessed": 1,
+    "conflictsChecked": 1,
+    "excludedProducts": 0
+  },
+  "review": null,
+  "history": {
+    "idImportacion": "6425082d-1e27-49d3-bf6e-1d9a3fd96a0b",
+    "archivo": "stock.xlsx",
+    "fecha": "2026-11-02T02:20:03.604Z",
+    "usuarioUid": "history-admin",
+    "usuario": "auth-admin@example.test",
+    "destino": "Firebase Firestore",
+    "estado": "COMPLETADO"
+  },
+  "classificationProgress": {
+    "processed": 1,
+    "byRules": 0,
+    "byAi": 0,
+    "pending": 1,
+    "excluded": 0,
+    "rulesProcessed": 1,
+    "aiProcessed": 0
+  },
+  "reviewBeforeClassification": false,
+  "catalogWarning": null,
+  "preview": {
+    "productsCreated": 1,
+    "productsUpdated": 0,
+    "productsClassified": 0,
+    "classificationPending": 1,
+    "seriesCreated": 1,
+    "seriesUpdated": 0,
+    "seriesZeroed": 0,
+    "productsUnchanged": 0,
+    "productsOmitted": 0,
+    "syncErrors": 0
+  },
+  "summary": {
+    "productsCreated": 1,
+    "productsUpdated": 0,
+    "productsClassified": 1,
+    "classificationPending": 0,
+    "seriesCreated": 1,
+    "seriesUpdated": 0,
+    "seriesZeroed": 0,
+    "productsUnchanged": 0,
+    "productsOmitted": 0,
+    "syncErrors": 0
+  },
+  "items": [
+    {
+      "code": "( AD80HW )",
+      "name": "Monitor HUAWEI DISPLAY 23.8\" ( AD80HW ) | FHD | HDMI - VGA | IPS | 5MS | 60HZ.",
+      "sheet": "stock.production.lot",
+      "row": 2,
+      "series": 1,
+      "stock": 0,
+      "issues": [],
+      "issueCount": 0,
+      "plan": {
+        "excluded": false,
+        "reason": null,
+        "classification": {
+          "code": "( AD80HW )",
+          "fields": {
+            "descripcion": "Monitor HUAWEI DISPLAY 23.8\" ( AD80HW ) | FHD | HDMI - VGA | IPS | 5MS | 60HZ."
+          },
+          "source": "reglas",
+          "pending": [],
+          "categoryName": null,
+          "brandName": null
+        },
+        "counts": {
+          "productsCreated": 1,
+          "productsUpdated": 0,
+          "productsClassified": 1,
+          "classificationPending": 0,
+          "seriesCreated": 1,
+          "seriesUpdated": 0,
+          "seriesZeroed": 0,
+          "productsUnchanged": 0,
+          "productsOmitted": 0,
+          "syncErrors": 0
+        },
+        "operations": [
+          {
+            "type": "CREATE_PRODUCT",
+            "path": "productos/p_v1_3dbab6b75270c4bb5d331b113b40ae1e6dc2851040526401ccf25fc6628d69bd",
+            "fields": {
+              "codigo": "( AD80HW )",
+              "nombre": "Monitor HUAWEI DISPLAY 23.8\" ( AD80HW ) | FHD | HDMI - VGA | IPS | 5MS | 60HZ.",
+              "stock": 0,
+              "estado": "ACTIVO",
+              "descripcion": "Monitor HUAWEI DISPLAY 23.8\" ( AD80HW ) | FHD | HDMI - VGA | IPS | 5MS | 60HZ."
+            },
+            "serial": "( AD80HW )",
+            "quantity": null,
+            "beforeQuantity": null
+          },
+          {
+            "type": "CREATE_EXISTENCE",
+            "path": "existencias/e_v1_e01d76b77e65949bcecc94d0d7ee4962ea6902119603f06284247f2c412e569b",
+            "fields": {
+              "productoId": "p_v1_3dbab6b75270c4bb5d331b113b40ae1e6dc2851040526401ccf25fc6628d69bd",
+              "codigoProducto": "( AD80HW )",
+              "codigo": "GSXUN21A12000236",
+              "cantidad": 0,
+              "estado": "SIN_STOCK"
+            },
+            "serial": "GSXUN21A12000236",
+            "quantity": 0,
+            "beforeQuantity": null
+          }
+        ]
+      },
+      "receipt": {
+        "status": "APPLIED",
+        "counts": {
+          "productsCreated": 1,
+          "productsUpdated": 0,
+          "productsClassified": 1,
+          "classificationPending": 0,
+          "seriesCreated": 1,
+          "seriesUpdated": 0,
+          "seriesZeroed": 0,
+          "productsUnchanged": 0,
+          "productsOmitted": 0,
+          "syncErrors": 0
+        },
+        "at": {
+          "_seconds": 1793586003,
+          "_nanoseconds": 591000000
+        }
+      }
+    }
+  ],
+  "allIssues": [],
+  "unassociatedIssues": [],
+  "nextOffset": null
+}

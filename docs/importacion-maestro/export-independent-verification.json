@@ -1,0 +1,15 @@
+{
+  "sheets": [
+    "Resumen general",
+    "Productos actualizados",
+    "Incidencias omitidas",
+    "Resultados de sincronización"
+  ],
+  "rows": {
+    "Resumen general": 20,
+    "Productos actualizados": 5,
+    "Incidencias omitidas": 2,
+    "Resultados de sincronización": 8
+  },
+  "formulas": 0
+}

@@ -25,7 +25,7 @@ private data class ReadExcelFile(val name: String, val bytes: Long, val report: 
 
 /** UI coordinator: same local reader and read-only comparison, presented as the three implemented steps. */
 @Composable
-internal fun ExcelImportAction(modifier: Modifier = Modifier) {
+internal fun ExcelImportLegacyAction(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var reading by remember { mutableStateOf(false) }
@@ -177,6 +177,7 @@ internal fun ExcelImportAction(modifier: Modifier = Modifier) {
                 onPick = { picker.launch(arrayOf("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/octet-stream", "application/zip")) },
                 onClear = { fileSha256 = null; fileName = ""; fileBytes = null; result = null; comparison = null; preview = null; error = null; compareError = null; showPreview = false },
                 onAnalyze = { analyze() },
+                connectionContent = { RenderImportActions(null, null, null, null, reading || comparing, onlyCheck = true) },
                 safetyContent = { Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     IssueReviewEntry(issueCatalog, issueJournal) { showIssues = true }
                     ImportFinalEntry(dryRun != null) { showFinal = true }

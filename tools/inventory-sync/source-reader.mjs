@@ -21,7 +21,7 @@ export function readInventory(bytes,filename,mappings={}){
  const book=XLSX.read(extension==='csv'?new TextDecoder('utf-8',{fatal:true}).decode(bytes):bytes,{type:extension==='csv'?'string':'buffer',cellNF:true,cellFormula:true,raw:extension==='csv',sheetRows:250002});
  if(book.SheetNames.length>20)throw Error('SHEET_LIMIT');
  const products=[],issues=[],mappingRequired=[];let rowCount=0;
- const issue=(p,sheet,row,type,description,serial=null)=>{const value={productCode:p?.code??null,productName:p?.name??null,serial,sheet,row,type,description,reason:'No se pueden determinar existencias inequívocas.'};issues.push(value);if(p)p.critical=true;};
+ const issue=(p,sheet,row,type,description,serial=null,details={})=>{const value={productCode:p?.code??null,productName:p?.name??null,serial,sheet,row,type,description,reason:'No se pueden determinar existencias inequívocas.',...details};issues.push(value);if(p)p.critical=true;};
  for(const sheet of book.SheetNames){
   const ws=book.Sheets[sheet];if(!ws['!ref'])continue;
   const range=XLSX.utils.decode_range(ws['!ref']);if(range.e.r>=250000||range.e.c>1023)throw Error('ROW_COLUMN_LIMIT');
@@ -48,7 +48,7 @@ export function readInventory(bytes,filename,mappings={}){
     grouped=true;current={code:heading?.code??null,name:heading?.name??suffix[1],reportedQuantity:q,reportedSerialCount:suffix?Number(suffix[2]):null,serials:[],...location};products.push(current);
     if(!validCode(current.code)||!current.name.trim())issue(current,sheet,r+1,'IDENTITY','Código o nombre obligatorio ausente.');
     if(code.trim()&&code!==current.code)issue(current,sheet,r+1,'REFERENCE_MISMATCH','La referencia interna difiere del código del encabezado.');
-    if(texts[qi].trim()&&q===null)issue(current,sheet,r+1,'INVALID_QUANTITY','Cantidad de resumen inválida.');
+    if(texts[qi].trim()&&q===null)issue(current,sheet,r+1,'INVALID_QUANTITY','Cantidad de resumen inválida.',null,{negative:Number(cells[qi]?.v)<0});
     if(cells.some(c=>c?.f||c?.t==='e'))issue(current,sheet,r+1,'CELL_FORMAT','Fórmula o error de celda: exporta valores.');
     continue;
    }
@@ -66,7 +66,7 @@ export function readInventory(bytes,filename,mappings={}){
    // Numeric identifiers beyond Excel precision are never silently accepted.
    if([ci,si].some(i=>cells[i]?.t==='n'&&(!Number.isSafeInteger(cells[i].v)||Math.abs(cells[i].v)>=1e15)))issue(owner,sheet,r+1,'IDENTIFIER_PRECISION','Identificador numérico sin precisión garantizada; expórtalo como texto.',serial);
    if(!validCode(serial))issue(owner,sheet,r+1,'INVALID_SERIAL','Serie/lote vacío o con espacios exteriores.',serial);
-   if(q===null)issue(owner,sheet,r+1,'INVALID_QUANTITY','Cantidad negativa, fraccionaria o inválida.',serial);
+   if(q===null)issue(owner,sheet,r+1,'INVALID_QUANTITY','Cantidad negativa, fraccionaria o inválida.',serial,{negative:Number(cells[qi]?.v)<0});
    owner.serials.push({code:serial,quantity:q,...location});
   }
   if(!columns){mappingRequired.push({sheet,rows:Array.from({length:Math.min(10,range.e.r-range.s.r+1)},(_,n)=>({row:range.s.r+n+1,values:Array.from({length:Math.min(30,range.e.c+1)},(_,c)=>cellText(ws[XLSX.utils.encode_cell({r:range.s.r+n,c})]))}))});}

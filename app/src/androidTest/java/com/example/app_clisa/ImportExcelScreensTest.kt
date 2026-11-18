@@ -29,12 +29,15 @@ class ImportExcelScreensTest {
             .executeShellCommand("screencap -p /sdcard/Download/$name")).use { it.readBytes() }
     }
     @Test fun importButtonOpensSelectionPanelBeforeFilePicker() {
-        ui.setContent { AppclisaTheme { ExcelImportAction() } }
+        ui.setContent { AppclisaTheme { ExcelImportLegacyAction() } }
         ui.onNodeWithText("Importar Excel").performClick()
         ui.onNodeWithText("Importar inventario").assertExists()
         ui.onNodeWithTag("import-pick").assertIsEnabled()
         ui.onNodeWithTag("import-analyze").assertIsNotEnabled()
         ui.onAllNodesWithText("Sin verificar").assertCountEquals(4)
+        ui.onNodeWithTag("import-selection").performScrollToNode(hasTestTag("render-check"))
+        ui.onNodeWithTag("render-check").assertIsEnabled()
+        ui.onNodeWithTag("render-prepare").assertDoesNotExist()
     }
     @Test fun emptySelectionCannotAnalyzeAndCallbacksRemainAvailable() {
         var picked = 0
