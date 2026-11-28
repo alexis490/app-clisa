@@ -66,15 +66,17 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         else if (auth.currentUser != null) execute { checkAccess() }
     }
 
-    private fun execute(block: suspend () -> Unit) {
-        if (state.busy) return
+    private fun execute(block: suspend () -> Unit) = executeWithCompletion(block) {}
+
+    private fun executeWithCompletion(block: suspend () -> Unit, onComplete: () -> Unit) {
+        if (state.busy) { onComplete(); return }
         state = state.copy(busy = true, message = null)
         viewModelScope.launch {
             try { block() }
             catch (e: CancellationException) { throw e }
             catch (e: GetCredentialCancellationException) { /* User closed the account picker. */ }
             catch (e: Exception) { stopMonitoring(); state = state.copy(profile = null, message = readableError(e)) }
-            finally { state = state.copy(busy = false) }
+            finally { state = state.copy(busy = false); onComplete() }
         }
     }
 
@@ -130,8 +132,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun refreshAccess() {
-        if (state.profile != null) execute { checkAccess() }
+    fun refreshAccess(onComplete: () -> Unit = {}) {
+        if (state.profile != null) executeWithCompletion({ checkAccess() }, onComplete)
+        else onComplete()
     }
 
     fun authorize(module: AppModule, onAllowed: () -> Unit) = execute {

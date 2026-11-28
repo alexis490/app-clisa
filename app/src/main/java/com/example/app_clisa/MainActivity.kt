@@ -64,6 +64,7 @@ class MainActivity : ComponentActivity() {
                     RegisterScreen(onBack = { registering = false }, demo = demo)
                 } else if (showPanel) {
                     HomeScreen(onSignOut = { demo = false; registering = false; records = false; products = false; users = false; reports = false; authentication.signOut() },
+                        onRefresh = { onComplete -> if (demo) onComplete() else authentication.refreshAccess(onComplete) },
                         onRegister = { open(AppModule.REGISTER) { registering = true } },
                         onRecords = { open(AppModule.RECORDS) { records = true } },
                         onProducts = { open(AppModule.PRODUCTS) { products = true } },

@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,7 +63,8 @@ private enum class Feature(val title: String, val description: String, val accen
 }
 
 @Composable
-fun HomeScreen(onSignOut: () -> Unit, onRegister: () -> Unit = {}, userName: String = "Alexis", authenticated: Boolean = false, onRecords: () -> Unit = {}, onProducts: () -> Unit = {}, onUsers: () -> Unit = {}, onReports: () -> Unit = {}, role: String? = null) {
+@OptIn(ExperimentalMaterial3Api::class)
+fun HomeScreen(onSignOut: () -> Unit, onRefresh: ((() -> Unit) -> Unit) = { it() }, onRegister: () -> Unit = {}, userName: String = "Alexis", authenticated: Boolean = false, onRecords: () -> Unit = {}, onProducts: () -> Unit = {}, onUsers: () -> Unit = {}, onReports: () -> Unit = {}, role: String? = null) {
     val context = LocalContext.current
     val view = LocalView.current
     DisposableEffect(view) {
@@ -82,7 +84,9 @@ fun HomeScreen(onSignOut: () -> Unit, onRegister: () -> Unit = {}, userName: Str
     var profile by remember { mutableStateOf(false) }
     var now by remember { mutableStateOf(ZonedDateTime.now(ZoneId.of("America/Lima"))) }
     var liveCount by remember { mutableStateOf<Int?>(null) }
-    DisposableEffect(authenticated, now.toLocalDate()) {
+    var refreshing by remember { mutableStateOf(false) }
+    var refreshKey by remember { mutableIntStateOf(0) }
+    DisposableEffect(authenticated, now.toLocalDate(), refreshKey) {
         liveCount = null
         val start = now.toLocalDate().atStartOfDay(ZoneId.of("America/Lima"))
         val listener = if (authenticated) FirebaseFirestore.getInstance().collection("registros")
@@ -104,6 +108,13 @@ fun HomeScreen(onSignOut: () -> Unit, onRegister: () -> Unit = {}, userName: Str
     BackHandler { confirmExit = true }
     Box(Modifier.fillMaxSize().background(Navy)) {
         DashboardBackground(Modifier.matchParentSize())
+        PullToRefreshBox(isRefreshing = refreshing, onRefresh = {
+            if (!refreshing) {
+                refreshing = true
+                refreshKey++
+                onRefresh { refreshing = false }
+            }
+        }, modifier = Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).statusBarsPadding().navigationBarsPadding().padding(horizontal = 16.dp).padding(top = 14.dp, bottom = 16.dp)) {
             Column(Modifier.fillMaxWidth()) {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -167,6 +178,7 @@ fun HomeScreen(onSignOut: () -> Unit, onRegister: () -> Unit = {}, userName: Str
                     }
                 }
             }
+        }
         }
     }
     selected?.let { feature ->
